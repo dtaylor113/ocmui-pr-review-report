@@ -1,0 +1,104 @@
+name: "Pull Request Review Report"
+description: "Generate a report of open PRs and their review status"
+inputs:
+  owner:
+    description: "The repository owner or organization"
+    required: true
+  name:
+    description: "The repository name"
+    required: true
+  token:
+    description: "GitHub token for API access"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout ocmui-pr-review-report repository
+      uses: actions/checkout@v4
+      with:
+        repository: dtaylor113/ocmui-pr-review-report
+        path: ./ocmui-pr-review-report
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    # Fetch PR Review Data from GitHub API and store in JSON
+    - name: Fetch PR Review Data from GitHub API
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        OWNER: ${{ inputs.owner }}
+        REPO: ${{ inputs.name }}
+      run: |
+        echo "Attempting to access repository: $OWNER/$REPO"
+        gh api graphql --method POST -f query='
+          query {
+            repository(owner: "${{ inputs.owner }}", name: "${{ inputs.name }}") {
+              pullRequests(first: 50, states: OPEN) {
+                nodes {
+                  number
+                  title
+                  createdAt
+                  author {
+                    login
+                    ... on User {
+                      name
+                    }
+                  }
+                  reviewRequests(first: 10) {
+                    nodes {
+                      requestedReviewer {
+                        ... on User {
+                          login
+                          name
+                        }
+                        ... on Team {
+                          name
+                        }
+                      }
+                    }
+                  }
+                  reviews(first: 10) {
+                    nodes {
+                      state
+                      author {
+                        login
+                        ... on User {
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }' > ./pr_review_report.json
+
+    - name: Run PR Review Report Script
+      shell: bash
+      run: node ./ocmui-pr-review-report/scripts/process_pr_reviews.js
+
+    - name: Upload PR Review Report Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: pr-review-report
+        path: ./ocmui-pr-review-report/webpage/index.html
+
+    - name: Deploy Report to GitHub Pages
+      shell: bash
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git fetch origin gh-pages || git checkout --orphan gh-pages
+        git checkout gh-pages
+        mv ./ocmui-pr-review-report/webpage/index.html index.html
+        git add index.html
+        git commit -m "Update PR Review Report"
+        git push origin gh-pages
