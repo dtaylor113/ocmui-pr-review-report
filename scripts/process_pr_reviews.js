@@ -1,163 +1,151 @@
 const fs = require('fs'); // Ensure fs is required at the top
+
 let prData;
 
 const path = './pr_review_report.json';
 
-fs.readFile(path, 'utf8', (err, data) => {
-    if (err) {
-        console.error('Error reading file:', err);
-        return;
+if (process.env.PR_REPORT_PATH) {
+    // If environment variable is set, use synchronous loading
+    try {
+        const data = fs.readFileSync(process.env.PR_REPORT_PATH, 'utf8');
+        prData = JSON.parse(data);
+        processData();
+    } catch (err) {
+        console.error('Error reading or parsing file:', err);
+        process.exit(1);
     }
-    console.log('Processing data from pr_review_report.json...');
-    prData = JSON.parse(data);
-});
+} else {
+    // Original asynchronous code kept for backward compatibility
+    fs.readFile(path, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return;
+        }
+        console.log('Processing data from pr_review_report.json...');
+        prData = JSON.parse(data);
+        processData();
+    });
+}
 
+function processData() {
 // Data structures to track reviewers and their PRs
-const reviewers = {};
-const pendingReviewers = {};
+    const reviewers = {};
+    const pendingReviewers = {};
 
 // Map to store full names for each reviewer
-const reviewerNames = {};
+    const reviewerNames = {};
 
 // Map review states to readable format
-const reviewStateMap = {
-    APPROVED: 'approved',
-    CHANGES_REQUESTED: 'requested changes',
-    COMMENTED: 'commented',
-    DISMISSED: 'dismissed',
-    PENDING: 'pending',
-};
+    const reviewStateMap = {
+        APPROVED: 'approved',
+        CHANGES_REQUESTED: 'requested changes',
+        COMMENTED: 'commented',
+        DISMISSED: 'dismissed',
+        PENDING: 'pending',
+    };
 
 // Get last updated timestamp
-const lastUpdatedUTC = new Date();
+    const lastUpdatedUTC = new Date();
 
 // Number of approvals required to merge a PR (repo rule)
-const REQUIRED_APPROVALS = 3;
+    const REQUIRED_APPROVALS = 3;
 
 // Process each PR
-prData.data.repository.pullRequests.nodes.forEach((pr) => {
-    const prNumber = pr.number;
-    const prTitle = pr.title;
-    const prAuthor = pr.author?.login || 'Unknown';
+    prData.data.repository.pullRequests.nodes.forEach((pr) => {
+        const prNumber = pr.number;
+        const prTitle = pr.title;
+        const prAuthor = pr.author?.login || 'Unknown';
 
-    // Calculate # Days Open
-    const prCreatedDate = new Date(pr.createdAt);
-    const lastUpdatedDate = new Date(); // The last time this script ran
-    const daysOpen = Math.floor((lastUpdatedDate - prCreatedDate) / (1000 * 60 * 60 * 24)); // Convert ms to days
+        // Calculate # Days Open
+        const prCreatedDate = new Date(pr.createdAt);
+        const lastUpdatedDate = new Date(); // The last time this script ran
+        const daysOpen = Math.floor((lastUpdatedDate - prCreatedDate) / (1000 * 60 * 60 * 24)); // Convert ms to days
 
-    // Apply color coding for # Days Open
-    let color = '#d4d4d4'; // Default (white)
-    if (daysOpen > 6) color = 'red';
-    else if (daysOpen > 4) color = 'orange';
-    else if (daysOpen > 2) color = 'yellow';
+        // Apply color coding for # Days Open
+        let color = '#d4d4d4'; // Default (white)
+        if (daysOpen > 6) color = 'red';
+        else if (daysOpen > 4) color = 'orange';
+        else if (daysOpen > 2) color = 'yellow';
 
-    // Extract requested reviewers
-    const requestedReviewers =
-        pr.reviewRequests?.nodes
-            .map((req) => {
-                const reviewer = req.requestedReviewer;
-                if (!reviewer) return null;
+        // Extract requested reviewers
+        const requestedReviewers =
+            pr.reviewRequests?.nodes
+                .map((req) => {
+                    const reviewer = req.requestedReviewer;
+                    if (!reviewer) return null;
 
-                // Store the reviewer's full name if available
-                if (reviewer.name && reviewer.login) {
-                    reviewerNames[reviewer.login] = reviewer.name;
-                }
+                    // Store the reviewer's full name if available
+                    if (reviewer.name && reviewer.login) {
+                        reviewerNames[reviewer.login] = reviewer.name;
+                    }
 
-                return reviewer.login;
-            })
-            .filter(Boolean) || [];
+                    return reviewer.login;
+                })
+                .filter(Boolean) || [];
 
-    // Extract reviewers who have already provided feedback and their status
-    const reviewerStatus = {};
-    pr.reviews?.nodes.forEach((review) => {
-        const reviewer = review.author?.login;
-        // Skip if reviewer is the PR author (self-reviews)
-        if (!reviewer || reviewer === pr.author?.login) return;
+        // Extract reviewers who have already provided feedback and their status
+        const reviewerStatus = {};
+        pr.reviews?.nodes.forEach((review) => {
+            const reviewer = review.author?.login;
+            // Skip if reviewer is the PR author (self-reviews)
+            if (!reviewer || reviewer === pr.author?.login) return;
 
-        // Store the reviewer's full name if available
-        if (review.author?.name && review.author?.login) {
-            reviewerNames[review.author.login] = review.author.name;
-        }
+            // Store the reviewer's full name if available
+            if (review.author?.name && review.author?.login) {
+                reviewerNames[review.author.login] = review.author.name;
+            }
 
-        // Track the most significant state for each reviewer
-        // Priority: CHANGES_REQUESTED > APPROVED > COMMENTED > DISMISSED
-        const currentState = reviewerStatus[reviewer];
-        const newState = review.state;
+            // Track the most significant state for each reviewer
+            // Priority: CHANGES_REQUESTED > APPROVED > COMMENTED > DISMISSED
+            const currentState = reviewerStatus[reviewer];
+            const newState = review.state;
 
-        if (
-            !currentState ||
-            newState === 'CHANGES_REQUESTED' ||
-            (currentState !== 'CHANGES_REQUESTED' && newState === 'APPROVED') ||
-            (currentState !== 'CHANGES_REQUESTED' &&
-                currentState !== 'APPROVED' &&
-                newState === 'COMMENTED')
-        ) {
-            reviewerStatus[reviewer] = newState;
-        }
-    });
-
-    // Count the number of approvals
-    const approvalCount =
-        Object.values(reviewerStatus).filter((state) => state === 'APPROVED').length || 0;
-
-    // Determine PR status
-    let prStatus = 'needs_review';
-    if (approvalCount >= REQUIRED_APPROVALS) {
-        prStatus = 'ready_to_merge';
-    } else if (Object.values(reviewerStatus).includes('CHANGES_REQUESTED')) {
-        prStatus = 'changes_requested';
-    }
-
-    // Format reviewers with their status
-    const reviewersWithStatus = [];
-
-    // First add requested reviewers (who haven't reviewed yet)
-    requestedReviewers.forEach((reviewer) => {
-        if (!reviewerStatus[reviewer]) {
-            reviewersWithStatus.push(`${reviewer} (requested)`);
-        }
-    });
-
-    // Then add reviewers who have provided feedback
-    Object.entries(reviewerStatus).forEach(([reviewer, state]) => {
-        reviewersWithStatus.push(`${reviewer} (${reviewStateMap[state] || state.toLowerCase()})`);
-    });
-
-    // Track pending reviewers
-    requestedReviewers.forEach((reviewer) => {
-        if (!pendingReviewers[reviewer]) {
-            pendingReviewers[reviewer] = { pending: 0, prDetails: [] };
-        }
-        pendingReviewers[reviewer].pending += 1;
-        pendingReviewers[reviewer].prDetails.push({
-            number: prNumber,
-            title: prTitle,
-            author: prAuthor,
-            daysOpen,
-            daysOpenColor: color,
-            reviewers: reviewersWithStatus.join(', '),
-            approvals: approvalCount,
-            status: prStatus,
+            if (
+                !currentState ||
+                newState === 'CHANGES_REQUESTED' ||
+                (currentState !== 'CHANGES_REQUESTED' && newState === 'APPROVED') ||
+                (currentState !== 'CHANGES_REQUESTED' &&
+                    currentState !== 'APPROVED' &&
+                    newState === 'COMMENTED')
+            ) {
+                reviewerStatus[reviewer] = newState;
+            }
         });
-    });
 
-    // Track all reviewers (both requested and those who have reviewed)
-    const allReviewers = [...new Set([...requestedReviewers, ...Object.keys(reviewerStatus)])];
-    allReviewers.forEach((reviewer) => {
-        if (!reviewers[reviewer]) {
-            reviewers[reviewer] = { pending: 0, prDetails: [] };
+        // Count the number of approvals
+        const approvalCount =
+            Object.values(reviewerStatus).filter((state) => state === 'APPROVED').length || 0;
+
+        // Determine PR status
+        let prStatus = 'needs_review';
+        if (approvalCount >= REQUIRED_APPROVALS) {
+            prStatus = 'ready_to_merge';
+        } else if (Object.values(reviewerStatus).includes('CHANGES_REQUESTED')) {
+            prStatus = 'changes_requested';
         }
 
-        // If this reviewer is requested and hasn't reviewed yet, count as pending
-        const isPending = requestedReviewers.includes(reviewer) && !reviewerStatus[reviewer];
-        if (isPending) {
-            reviewers[reviewer].pending += 1;
-        }
+        // Format reviewers with their status
+        const reviewersWithStatus = [];
 
-        // If this PR doesn't already exist in this reviewer's list
-        const exists = reviewers[reviewer].prDetails.some((detail) => detail.number === prNumber);
-        if (!exists) {
-            reviewers[reviewer].prDetails.push({
+        // First add requested reviewers (who haven't reviewed yet)
+        requestedReviewers.forEach((reviewer) => {
+            if (!reviewerStatus[reviewer]) {
+                reviewersWithStatus.push(`${reviewer} (requested)`);
+            }
+        });
+
+        // Then add reviewers who have provided feedback
+        Object.entries(reviewerStatus).forEach(([reviewer, state]) => {
+            reviewersWithStatus.push(`${reviewer} (${reviewStateMap[state] || state.toLowerCase()})`);
+        });
+
+        // Track pending reviewers
+        requestedReviewers.forEach((reviewer) => {
+            if (!pendingReviewers[reviewer]) {
+                pendingReviewers[reviewer] = {pending: 0, prDetails: []};
+            }
+            pendingReviewers[reviewer].pending += 1;
+            pendingReviewers[reviewer].prDetails.push({
                 number: prNumber,
                 title: prTitle,
                 author: prAuthor,
@@ -166,15 +154,43 @@ prData.data.repository.pullRequests.nodes.forEach((pr) => {
                 reviewers: reviewersWithStatus.join(', '),
                 approvals: approvalCount,
                 status: prStatus,
-                isPending: isPending,
-                sortOrder: isPending ? 0 : 1, // Pending PRs will sort to the top
             });
-        }
+        });
+
+        // Track all reviewers (both requested and those who have reviewed)
+        const allReviewers = [...new Set([...requestedReviewers, ...Object.keys(reviewerStatus)])];
+        allReviewers.forEach((reviewer) => {
+            if (!reviewers[reviewer]) {
+                reviewers[reviewer] = {pending: 0, prDetails: []};
+            }
+
+            // If this reviewer is requested and hasn't reviewed yet, count as pending
+            const isPending = requestedReviewers.includes(reviewer) && !reviewerStatus[reviewer];
+            if (isPending) {
+                reviewers[reviewer].pending += 1;
+            }
+
+            // If this PR doesn't already exist in this reviewer's list
+            const exists = reviewers[reviewer].prDetails.some((detail) => detail.number === prNumber);
+            if (!exists) {
+                reviewers[reviewer].prDetails.push({
+                    number: prNumber,
+                    title: prTitle,
+                    author: prAuthor,
+                    daysOpen,
+                    daysOpenColor: color,
+                    reviewers: reviewersWithStatus.join(', '),
+                    approvals: approvalCount,
+                    status: prStatus,
+                    isPending: isPending,
+                    sortOrder: isPending ? 0 : 1, // Pending PRs will sort to the top
+                });
+            }
+        });
     });
-});
 
 // Generate HTML report
-let htmlContent = `<!DOCTYPE html>
+    let htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -507,9 +523,9 @@ let htmlContent = `<!DOCTYPE html>
     </script>
 </head>`;
 
-/** Page Title **/
+    /** Page Title **/
 
-htmlContent += `  
+    htmlContent += `  
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
@@ -603,59 +619,59 @@ htmlContent += `
     <div class="radio-container">
         <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label>`;
 
-/** Reviewer's radiobuttons with full names **/
+    /** Reviewer's radiobuttons with full names **/
 
-htmlContent += `<table style="margin-top: 8px; margin-bottom: 24px;">
+    htmlContent += `<table style="margin-top: 8px; margin-bottom: 24px;">
     <tr>`; // Start the first row
-let count = 0;
-Object.keys(reviewers).forEach((reviewer) => {
-    if (count % 4 === 0 && count !== 0) {
-        htmlContent += `</tr><tr>`; // Close the previous row and start a new one every 4 items
-    }
+    let count = 0;
+    Object.keys(reviewers).forEach((reviewer) => {
+        if (count % 4 === 0 && count !== 0) {
+            htmlContent += `</tr><tr>`; // Close the previous row and start a new one every 4 items
+        }
 
-    const pendingCount = reviewers[reviewer].pending;
-    // Get the full name for the reviewer, default to empty string if not available
-    const fullName = reviewerNames[reviewer] || '';
+        const pendingCount = reviewers[reviewer].pending;
+        // Get the full name for the reviewer, default to empty string if not available
+        const fullName = reviewerNames[reviewer] || '';
 
-    // Format as "Full Name (username)" if full name exists, otherwise just username
-    const displayName = fullName ? `${fullName} (${reviewer})` : reviewer;
+        // Format as "Full Name (username)" if full name exists, otherwise just username
+        const displayName = fullName ? `${fullName} (${reviewer})` : reviewer;
 
-    // Pending badge
-    const pendingBadge = pendingCount > 0 ? `<span class="pending-badge">${pendingCount}</span>` : '';
+        // Pending badge
+        const pendingBadge = pendingCount > 0 ? `<span class="pending-badge">${pendingCount}</span>` : '';
 
-    htmlContent += `<td style="text-align: left; padding: 2px;">
+        htmlContent += `<td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="${reviewer}" onclick="filterTable('${reviewer}')"> ${displayName} ${pendingBadge}</label>
     </td>`;
-    count++;
-});
+        count++;
+    });
 // Close the last row
-htmlContent += `</tr></table>`;
+    htmlContent += `</tr></table>`;
 
-/** Reviewers Table **/
+    /** Reviewers Table **/
 
-htmlContent += `</div>
+    htmlContent += `</div>
     <table class="reviewer-table">
         <tr>
             <th style="width: 28%;">Reviewer</th>
             <th># Reviews Requested (Pending)</th>
         </tr>`;
 
-/** Reviewer's PR Table with full names **/
+    /** Reviewer's PR Table with full names **/
 
 // Prepare reviewer data for the chart
-const chartData = [];
-Object.entries(reviewers).forEach(([reviewer, data]) => {
-    if (data.pending > 0) {
-        chartData.push({ reviewer, pending: data.pending });
-    }
+    const chartData = [];
+    Object.entries(reviewers).forEach(([reviewer, data]) => {
+        if (data.pending > 0) {
+            chartData.push({reviewer, pending: data.pending});
+        }
 
-    // Get the full name for the reviewer, default to empty string if not available
-    const fullName = reviewerNames[reviewer] || '';
+        // Get the full name for the reviewer, default to empty string if not available
+        const fullName = reviewerNames[reviewer] || '';
 
-    // Format as "Full Name (username)" if full name exists, otherwise just username
-    const displayName = fullName ? `${fullName} (${reviewer})` : reviewer;
+        // Format as "Full Name (username)" if full name exists, otherwise just username
+        const displayName = fullName ? `${fullName} (${reviewer})` : reviewer;
 
-    htmlContent += `<tr class="reviewer-row" data-reviewer="${reviewer}">
+        htmlContent += `<tr class="reviewer-row" data-reviewer="${reviewer}">
         <td>${displayName}</td>
         <td><span class="pending-count">${data.pending}</span></td>
     </tr>
@@ -672,33 +688,33 @@ Object.entries(reviewers).forEach(([reviewer, data]) => {
                   <th title="Status">Status</th>
                 </tr>`;
 
-    // Sort PR details to put pending reviews at the top
-    const sortedPRDetails = [...data.prDetails].sort((a, b) => a.sortOrder - b.sortOrder);
+        // Sort PR details to put pending reviews at the top
+        const sortedPRDetails = [...data.prDetails].sort((a, b) => a.sortOrder - b.sortOrder);
 
-    sortedPRDetails.forEach((pr) => {
-        // Set status class for styling
-        let statusClass = '';
-        let statusText = '';
+        sortedPRDetails.forEach((pr) => {
+            // Set status class for styling
+            let statusClass = '';
+            let statusText = '';
 
-        switch (pr.status) {
-            case 'ready_to_merge':
-                statusClass = 'ready-to-merge';
-                statusText = 'Ready to Merge';
-                break;
-            case 'changes_requested':
-                statusClass = 'changes-requested';
-                statusText = 'Changes Requested';
-                break;
-            case 'needs_review':
-            default:
-                statusClass = 'needs-review';
-                statusText = 'Needs Review';
-                break;
-        }
+            switch (pr.status) {
+                case 'ready_to_merge':
+                    statusClass = 'ready-to-merge';
+                    statusText = 'Ready to Merge';
+                    break;
+                case 'changes_requested':
+                    statusClass = 'changes-requested';
+                    statusText = 'Changes Requested';
+                    break;
+                case 'needs_review':
+                default:
+                    statusClass = 'needs-review';
+                    statusText = 'Needs Review';
+                    break;
+            }
 
-        const pendingClass = pr.isPending ? '' : ''; // Initially no highlight
-        // Add data-pending attribute to track pending status
-        htmlContent += `<tr class="pr-detail-row" data-status="${pr.status}" data-pending="${pr.isPending}">
+            const pendingClass = pr.isPending ? '' : ''; // Initially no highlight
+            // Add data-pending attribute to track pending status
+            htmlContent += `<tr class="pr-detail-row" data-status="${pr.status}" data-pending="${pr.isPending}">
       <td><a title="${pr.title}" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/${pr.number}">${pr.title}
           </a>
@@ -709,14 +725,14 @@ Object.entries(reviewers).forEach(([reviewer, data]) => {
       <td title="${pr.approvals}">${pr.approvals}/${REQUIRED_APPROVALS}</td>
       <td class="${statusClass}" title="${statusText}">${statusText}</td>
     </tr>`;
+        });
+
+        htmlContent += `</table>
+        </td>
+    </tr>`;
     });
 
     htmlContent += `</table>
-        </td>
-    </tr>`;
-});
-
-htmlContent += `</table>
 
     <script>
         // Variable to track current sort order
@@ -805,4 +821,10 @@ htmlContent += `</table>
 </body>
 </html>`;
 
-fs.writeFileSync('.github/workflows/index.html', htmlContent, 'utf8');
+    const path = require('path');
+    const outputDir = './webpage';
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+    }
+    fs.writeFileSync(path.join(outputDir, 'index.html'), htmlContent, 'utf8');
+}

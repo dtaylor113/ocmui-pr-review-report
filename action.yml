@@ -14,14 +14,18 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout working repository
+      uses: actions/checkout@v4
+      with:
+        path: main-repo
+
     - name: Checkout ocmui-pr-review-report repository
       uses: actions/checkout@v4
       with:
         repository: dtaylor113/ocmui-pr-review-report
-        path: ./ocmui-pr-review-report
-
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+        path: tool-repo
+        ref: main
+        token: ${{ inputs.token }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -79,26 +83,140 @@ runs:
               }
             }
           }
-        }' > ./pr_review_report.json
+        ' > ./tool-repo/pr_review_report.json
+        
+        # Ensure the file is completely written and verify its content
+        sync
+        cat ./tool-repo/pr_review_report.json > /dev/null
+        echo "JSON file has been saved and verified"
+
+    # Create a simple wrapper script that will call the original JS with proper environment
+    - name: Create wrapper script
+      shell: bash
+      run: |
+        cat > ./tool-repo/run_report.sh << 'EOF'
+        #!/bin/bash
+        set -e
+        cd $(dirname $0)
+        # Set a variable to ensure the script can find the JSON file in the current directory
+        export PR_REPORT_PATH="./pr_review_report.json"
+        # Create webpage directory if it doesn't exist
+        mkdir -p ./webpage
+        # Execute the Node.js script
+        node ./scripts/process_pr_reviews.js
+        EOF
+        
+        chmod +x ./tool-repo/run_report.sh
 
     - name: Run PR Review Report Script
       shell: bash
-      run: node ./ocmui-pr-review-report/scripts/process_pr_reviews.js
+      run: |
+        cd ./tool-repo
+        ./run_report.sh
 
+    # Upload the HTML report as an artifact (as a fallback)
     - name: Upload PR Review Report Artifact
       uses: actions/upload-artifact@v4
       with:
         name: pr-review-report
-        path: ./ocmui-pr-review-report/webpage/index.html
+        path: ./tool-repo/webpage/index.html
+        retention-days: 90
 
-    - name: Deploy Report to GitHub Pages
+    # Deploy to GitHub Pages via API with enhanced debugging
+    - name: Deploy to GitHub Pages via API
       shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
       run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
-        git fetch origin gh-pages || git checkout --orphan gh-pages
-        git checkout gh-pages
-        mv ./ocmui-pr-review-report/webpage/index.html index.html
-        git add index.html
-        git commit -m "Update PR Review Report"
-        git push origin gh-pages
+        # Read the HTML file content
+        HTML_CONTENT=$(cat ./tool-repo/webpage/index.html)
+        echo "File size: $(wc -c ./tool-repo/webpage/index.html | awk '{print $1}') bytes"
+        
+        # Encode content to base64
+        BASE64_CONTENT=$(echo "$HTML_CONTENT" | base64 -w 0)
+        
+        # Verify we have the token
+        if [ -z "$GH_TOKEN" ]; then
+          echo "Error: GH_TOKEN is empty"
+          exit 1
+        fi
+        
+        # Show first few characters of token (safely)
+        TOKEN_PREFIX=$(echo "$GH_TOKEN" | cut -c1-4)
+        echo "Token prefix: $TOKEN_PREFIX..."
+        
+        # Check if gh-pages branch exists
+        BRANCH_CHECK=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token $GH_TOKEN" \
+          "https://api.github.com/repos/dtaylor113/ocmui-pr-review-report/branches/gh-pages")
+        
+        echo "Branch check response code: $BRANCH_CHECK"
+        
+        if [ "$BRANCH_CHECK" != "200" ]; then
+          echo "Error: gh-pages branch not found or token doesn't have permission"
+          exit 1
+        fi
+        
+        # Get the latest commit SHA on gh-pages branch
+        LATEST_COMMIT_RESPONSE=$(curl -s -H "Authorization: token $GH_TOKEN" \
+          "https://api.github.com/repos/dtaylor113/ocmui-pr-review-report/branches/gh-pages")
+        
+        LATEST_COMMIT=$(echo "$LATEST_COMMIT_RESPONSE" | jq -r '.commit.sha // empty')
+        
+        echo "Latest commit response: $(echo "$LATEST_COMMIT_RESPONSE" | jq -c '{name:.name, commit_url:.commit.url}')"
+        echo "Latest commit on gh-pages: $LATEST_COMMIT"
+        
+        if [ -z "$LATEST_COMMIT" ]; then
+          echo "Error: Failed to get latest commit SHA"
+          echo "API Response: $LATEST_COMMIT_RESPONSE"
+          exit 1
+        fi
+        
+        # Check if file exists to determine if we need to create or update
+        FILE_CHECK_RESPONSE=$(curl -s -H "Authorization: token $GH_TOKEN" \
+          "https://api.github.com/repos/dtaylor113/ocmui-pr-review-report/contents/index.html?ref=gh-pages")
+        
+        FILE_SHA=$(echo "$FILE_CHECK_RESPONSE" | jq -r '.sha // empty')
+        
+        echo "File check status: $(if [ -n "$FILE_SHA" ]; then echo "Found with SHA: $FILE_SHA"; else echo "Not found"; fi)"
+        
+        # Prepare the request body
+        if [ -n "$FILE_SHA" ]; then
+          # Update existing file
+          echo "Updating existing file"
+          REQUEST_BODY=$(jq -n \
+            --arg message "Update PR Review Report for ${{ inputs.owner }}/${{ inputs.name }}" \
+            --arg content "$BASE64_CONTENT" \
+            --arg branch "gh-pages" \
+            --arg sha "$FILE_SHA" \
+            '{message: $message, content: $content, branch: $branch, sha: $sha}')
+        else
+          # Create new file
+          echo "Creating new file"
+          REQUEST_BODY=$(jq -n \
+            --arg message "Create PR Review Report for ${{ inputs.owner }}/${{ inputs.name }}" \
+            --arg content "$BASE64_CONTENT" \
+            --arg branch "gh-pages" \
+            '{message: $message, content: $content, branch: $branch}')
+        fi
+        
+        echo "Request body (excerpt): $(echo "$REQUEST_BODY" | jq 'del(.content)')"
+        
+        # Make the API call to create/update the file
+        echo "Making API call..."
+        RESPONSE=$(curl -v -X PUT \
+          -H "Authorization: token $GH_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d "$REQUEST_BODY" \
+          "https://api.github.com/repos/dtaylor113/ocmui-pr-review-report/contents/index.html" 2>&1)
+        
+        echo "API Response (first 1000 chars): $(echo "$RESPONSE" | head -c 1000)"
+        
+        # Check if the API call was successful
+        if echo "$RESPONSE" | grep -q "\"content\""; then
+          echo "Successfully deployed to GitHub Pages"
+          echo "Visit: https://dtaylor113.github.io/ocmui-pr-review-report/"
+        else
+          echo "Failed to deploy to GitHub Pages"
+          echo "Full API Response: $RESPONSE"
+          # Don't fail the workflow, as we have the artifact as a backup
+        fi
