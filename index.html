@@ -1,1 +1,1472 @@
-<html><body><h1>Test index file</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCMUI Open PRs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #121212; color: #ffffff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: none; padding: 8px; text-align: left; }
+        th { background-color: #333; }
+        .pr-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.1);
+            table-layout: fixed; /* Forces columns to respect set widths */
+            margin-left: 24px;
+            margin-top: 0px;
+        }
+        .pr-table th, .pr-table td {
+            border: none;
+            padding: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .pr-table th:nth-child(1),
+        .pr-table td:nth-child(1) { width: 35%; } /* PR link */
+        .pr-table th:nth-child(2),
+        .pr-table td:nth-child(2) { width: 10%; } /* Author */
+        .pr-table th:nth-child(3),
+        .pr-table td:nth-child(3) { width: 35%; } /* Reviewers */
+        .pr-table th:nth-child(4),
+        .pr-table td:nth-child(4) { width: 5%; } /* # Days Open */      
+        .pr-table th:nth-child(5),
+        .pr-table td:nth-child(5) { width: 5%; } /* # Approvals */
+        .pr-table th:nth-child(6),
+        .pr-table td:nth-child(6) { width: 10%; } /* Status */
+        .last-updated { font-size: 14px; font-style: italic; float: right; }
+        .hidden { display: none; }
+        .repo-title { font-family: "Courier New", Courier, monospace; font-size: 24px; font-weight: bold; }
+        .pr-link {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #1e90ff;
+        }
+        /* Status colors */
+        .needs-review { color: #ff9800; } /* Orange */
+        .changes-requested { color: #f44336; } /* Red */
+        .ready-to-merge { color: #4caf50; } /* Green */
+        
+        /* Filter controls */
+        .filter-controls {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #1e1e1e;
+            border-radius: 4px;
+        }
+        .filter-controls label {
+            margin-right: 15px;
+        }
+        
+        /* Pending review highlighting */
+        .pending-review {
+            border-left: 3px solid #ff9800; /* Orange left border only */
+        }
+        
+        /* Pending review badge */
+        .pending-badge {
+            display: inline-block;
+            background-color: #ff9800;
+            color: black;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 0px 4px;
+            border-radius: 3px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        
+        /* Ready to merge badge */
+        .merge-badge {
+            display: inline-block;
+            background-color: #4caf50;
+            color: black;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 0px 4px;
+            border-radius: 3px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        
+        /* Bigger pending count in main table */
+        .pending-count {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff9800;
+        }
+        
+        /* Legend styles */
+        .legend {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #1e1e1e;
+            border-radius: 4px;
+        }
+        .legend h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #444;
+            padding-bottom: 8px;
+        }
+        .legend-item {
+            margin-bottom: 12px;
+        }
+        .legend-item h4 {
+            margin: 0 0 6px 0;
+        }
+        .legend-grid {
+            display: flex;
+            width: 100%;
+            gap: 15px;
+        }
+        .legend-box {
+            flex: 1;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        .legend-sample {
+            display: inline-block;
+            width: 20px;
+            height: 12px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .legend-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        .legend-table th, .legend-table td {
+            padding: 5px 8px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        .legend-pending-sample {
+            display: inline-block;
+            border-left: 3px solid #ff9800;
+            padding: 4px 8px;
+            margin-bottom: 5px;
+        }
+        
+        /* Bar chart styling */
+        .chart-container {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: none;
+            background-color: rgba(30, 30, 30, 0.5);
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .chart-row {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .chart-label {
+            width: 150px;
+            text-align: right;
+            padding-right: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .chart-bar {
+            height: 24px;
+            background-color: #ff9800;
+            border-radius: 3px;
+            min-width: 2px;
+            transition: width 0.5s ease-in-out;
+            position: relative;
+        }
+        .chart-value {
+            position: absolute;
+            right: -30px;
+            top: 3px;
+            font-weight: bold;
+            color: #ff9800;
+        }
+    </style>
+    <script>
+        function filterTable(reviewer) {
+            let rows = document.querySelectorAll('.reviewer-row');
+            rows.forEach(row => {
+                row.style.display = (reviewer === 'all' || row.dataset.reviewer === reviewer) ? '' : 'none';
+            });
+        }
+        
+        function filterByStatus() {
+            const showAllPRs = document.getElementById('show-all-prs').checked;
+            const showReadyToMerge = document.getElementById('show-ready-to-merge').checked;
+            
+            let detailRows = document.querySelectorAll('tr.pr-detail-row');
+            let readyToMergeCount = 0;
+            
+            detailRows.forEach(row => {
+                const status = row.dataset.status;
+                const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
+                
+                // Count ready to merge PRs
+                if (status === 'ready_to_merge') {
+                    readyToMergeCount++;
+                }
+                
+                // If showing all PRs
+                if (showAllPRs) {
+                    // Show pending highlight only in "show all" mode
+                    if (isPending) {
+                        row.classList.add('pending-review');
+                    } else {
+                        row.classList.remove('pending-review');
+                    }
+                    
+                    // Apply ready to merge filter if needed
+                    if (status === 'ready_to_merge' && showReadyToMerge) {
+                        row.style.display = '';
+                    } else if (status !== 'ready_to_merge') {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                } 
+                // Only showing pending reviews
+                else {
+                    // Hide pending highlight in "pending only" mode
+                    row.classList.remove('pending-review');
+                    
+                    // Only show pending reviews
+                    if (isPending) {
+                        // Apply ready to merge filter if needed
+                        if (status === 'ready_to_merge' && showReadyToMerge) {
+                            row.style.display = '';
+                        } else if (status !== 'ready_to_merge') {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update the ready to merge badge
+            const readyToMergeBadge = document.getElementById('ready-to-merge-badge');
+            readyToMergeBadge.textContent = readyToMergeCount;
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const lastUpdatedElement = document.getElementById("lastUpdated");
+            const utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
+            if (utcTimestamp) {
+                var localDate = new Date(utcTimestamp);
+                lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
+            }
+            
+            // Set default to show pending reviews only, count ready to merge PRs
+            document.getElementById('show-all-prs').checked = false;
+            document.getElementById('show-ready-to-merge').checked = false;
+            
+            // Count ready to merge PRs for the badge
+            let readyToMergeCount = 0;
+            document.querySelectorAll('tr.pr-detail-row').forEach(row => {
+                if (row.dataset.status === 'ready_to_merge') {
+                    readyToMergeCount++;
+                }
+            });
+            document.getElementById('ready-to-merge-badge').textContent = readyToMergeCount;
+            
+            filterByStatus();
+        });
+        
+        function toggleDetails() {
+            const toggleChartCheckbox = document.getElementById('toggle-details');
+            const chartContainer = document.getElementById('chart-container');
+            const reviewerTable = document.querySelector('.reviewer-table');
+            const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
+            const radioContainer = document.querySelector('.radio-container');
+            
+            // When chart mode is enabled
+            if (toggleChartCheckbox.checked) {
+                // Show only the chart
+                chartContainer.style.display = 'block';
+                reviewerTable.style.display = 'none';
+                radioContainer.style.display = 'none';
+                
+                // Ensure PR details are hidden
+                prRowTables.forEach(prRowTable => {
+                    prRowTable.classList.add('hidden');
+                });
+            } else {
+                // Show the regular view
+                chartContainer.style.display = 'none';
+                reviewerTable.style.display = 'table';
+                radioContainer.style.display = 'block';
+                
+                // Show PR details
+                prRowTables.forEach(prRowTable => {
+                    prRowTable.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function toggleLegend() {
+            const legend = document.getElementById('legend');
+            if (legend.classList.contains('hidden')) {
+                legend.classList.remove('hidden');
+                document.getElementById('toggleLegendBtn').textContent = 'Hide Legend';
+            } else {
+                legend.classList.add('hidden');
+                document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
+            }
+        }
+    </script>
+</head>  
+<body>
+    <h2>
+      <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
+      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 04 2025 21:18:43 GMT+0000 (Coordinated Universal Time)"></span>
+    </h2>
+    
+    <div class="filter-controls">
+        <label><input type="checkbox" id="show-all-prs" onclick="filterByStatus()"> Show All PRs</label>
+        <label><input type="checkbox" id="show-ready-to-merge" onclick="filterByStatus()"> Ready to Merge <span id="ready-to-merge-badge" class="merge-badge">0</span></label>
+        <label><input type="checkbox" id="toggle-details" onClick="toggleDetails()"> Chart</label>
+        <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
+    </div>
+    
+    <!-- Legend positioned between filters and radio buttons -->
+    <div id="legend" class="legend hidden">
+      <h3>PR Review Report Legend</h3>
+      
+      <div class="legend-grid">
+        <div class="legend-box">
+          <h4>PR Status</h4>
+          <div class="legend-item">
+            <span class="legend-sample" style="background-color: #ff9800;"></span>
+            <span class="needs-review">Needs Review</span>: PR needs more reviews before it can be merged
+          </div>
+          <div class="legend-item">
+            <span class="legend-sample" style="background-color: #f44336;"></span>
+            <span class="changes-requested">Changes Requested</span>: PR needs code changes based on review feedback
+          </div>
+          <div class="legend-item">
+            <span class="legend-sample" style="background-color: #4caf50;"></span>
+            <span class="ready-to-merge">Ready to Merge</span>: PR has all required approvals (3) and can be merged
+          </div>
+        </div>
+        
+        <div class="legend-box">
+          <h4>Reviewer Status</h4>
+          <table class="legend-table">
+            <tr>
+              <th>Status</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><code>username (requested)</code></td>
+              <td>Reviewer has been requested but hasn't reviewed yet</td>
+            </tr>
+            <tr>
+              <td><code>username (approved)</code></td>
+              <td>Reviewer has approved the PR</td>
+            </tr>
+            <tr>
+              <td><code>username (commented)</code></td>
+              <td>Reviewer has commented but not approved or requested changes</td>
+            </tr>
+            <tr>
+              <td><code>username (requested changes)</code></td>
+              <td>Reviewer has requested changes that need to be addressed</td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="legend-box">
+          <h4>Visual Indicators</h4>
+          <div class="legend-item">
+            <div class="legend-pending-sample">PR requiring your review</div>
+            PRs that need your review are highlighted with an orange left border
+          </div>
+          <div class="legend-item">
+            <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews
+          </div>
+          <div class="legend-item">
+            <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the PR has been open
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bar chart container -->
+    <div id="chart-container" class="chart-container">
+        <h3>
+            Pending Reviews by Reviewer
+            <button id="toggle-sort" style="margin-left: 10px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 12px;">
+                Sort: Highest First
+            </button>
+            <button id="return-to-table" style="margin-left: 10px; background-color: #555; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 12px;">
+                Back to Table View
+            </button>
+        </h3>
+        <div id="horizontal-chart"></div>
+    </div>
+    
+    <div class="radio-container">
+        <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label><table style="margin-top: 8px; margin-bottom: 24px;">
+    <tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="pending-badge">2</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">1</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="jschuler" onclick="filterTable('jschuler')"> Joachim Schuler (jschuler) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">2</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">5</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="lizagilman" onclick="filterTable('lizagilman')"> lizagilman <span class="pending-badge">3</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">1</span></label>
+    </td></tr></table></div>
+    <table class="reviewer-table">
+        <tr>
+            <th style="width: 28%;">Reviewer</th>
+            <th># Reviews Requested (Pending)</th>
+        </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
+        <td>Lior Keren (LiorKGOW)</td>
+        <td><span class="pending-count">2</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="LiorKGOW">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5
+          </a>
+      </td>
+      <td title="renovate">renovate</td>
+      <td title="LiorKGOW (requested), Ginxo (approved)">LiorKGOW (requested), Ginxo (approved)</td>
+      <td title="56" style="color: red;">56</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
+          </a>
+      </td>
+      <td title="eliranmal">eliranmal</td>
+      <td title="kelvah (requested), LiorKGOW (requested), jmekkatt (requested)">kelvah (requested), LiorKGOW (requested), jmekkatt (requested)</td>
+      <td title="15" style="color: red;">15</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="Ginxo">
+        <td>Enrique Mingorance Cano (Ginxo)</td>
+        <td><span class="pending-count">3</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="Ginxo">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available
+          </a>
+      </td>
+      <td title="dtaylor113">dtaylor113</td>
+      <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)</td>
+      <td title="12" style="color: red;">12</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[Draft] New GitHub Page 'Open PRs' Report" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/197">[Draft] New GitHub Page 'Open PRs' Report
+          </a>
+      </td>
+      <td title="dtaylor113">dtaylor113</td>
+      <td title="Ginxo (requested), eliranmal (commented)">Ginxo (requested), eliranmal (commented)</td>
+      <td title="10" style="color: red;">10</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"
+          </a>
+      </td>
+      <td title="eliranmal">eliranmal</td>
+      <td title="Ginxo (requested), jmekkatt (requested), zherman0 (approved)">Ginxo (requested), jmekkatt (requested), zherman0 (approved)</td>
+      <td title="6" style="color: orange;">6</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5
+          </a>
+      </td>
+      <td title="renovate">renovate</td>
+      <td title="LiorKGOW (requested), Ginxo (approved)">LiorKGOW (requested), Ginxo (approved)</td>
+      <td title="56" style="color: red;">56</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
+      <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)</td>
+      <td title="39" style="color: red;">39</td>
+      <td title="0">0/3</td>
+      <td class="changes-requested" title="Changes Requested">Changes Requested</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14
+          </a>
+      </td>
+      <td title="renovate">renovate</td>
+      <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">jmekkatt (requested), apecha (requested), Ginxo (approved)</td>
+      <td title="35" style="color: red;">35</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected
+          </a>
+      </td>
+      <td title="LiorKGOW">LiorKGOW</td>
+      <td title="lizagilman (commented), Ginxo (commented)">lizagilman (commented), Ginxo (commented)</td>
+      <td title="27" style="color: red;">27</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="kelvah">
+        <td>roberto emanuel (kelvah)</td>
+        <td><span class="pending-count">2</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="kelvah">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
+          </a>
+      </td>
+      <td title="eliranmal">eliranmal</td>
+      <td title="kelvah (requested), LiorKGOW (requested), jmekkatt (requested)">kelvah (requested), LiorKGOW (requested), jmekkatt (requested)</td>
+      <td title="15" style="color: red;">15</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
+          </a>
+      </td>
+      <td title="lizagilman">lizagilman</td>
+      <td title="kelvah (requested), kdoberst (requested)">kelvah (requested), kdoberst (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
+      <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)</td>
+      <td title="39" style="color: red;">39</td>
+      <td title="0">0/3</td>
+      <td class="changes-requested" title="Changes Requested">Changes Requested</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI
+          </a>
+      </td>
+      <td title="Ginxo">Ginxo</td>
+      <td title="lizagilman (requested), kelvah (commented)">lizagilman (requested), kelvah (commented)</td>
+      <td title="20" style="color: red;">20</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+      <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)">dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="3">3/3</td>
+      <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="eliranmal">
+        <td>Lyn M (eliranmal)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="eliranmal">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="davidaznaur (requested), eliranmal (requested), zherman0 (approved)">davidaznaur (requested), eliranmal (requested), zherman0 (approved)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
+      <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)</td>
+      <td title="39" style="color: red;">39</td>
+      <td title="0">0/3</td>
+      <td class="changes-requested" title="Changes Requested">Changes Requested</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="[Draft] New GitHub Page 'Open PRs' Report" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/197">[Draft] New GitHub Page 'Open PRs' Report
+          </a>
+      </td>
+      <td title="dtaylor113">dtaylor113</td>
+      <td title="Ginxo (requested), eliranmal (commented)">Ginxo (requested), eliranmal (commented)</td>
+      <td title="10" style="color: red;">10</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-3101: Update OCP docs links to 4.18" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/208">OCMUI-3101: Update OCP docs links to 4.18
+          </a>
+      </td>
+      <td title="lizagilman">lizagilman</td>
+      <td title="apecha (requested), eliranmal (approved), dtaylor113 (approved)">apecha (requested), eliranmal (approved), dtaylor113 (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="jschuler">
+        <td>Joachim Schuler (jschuler)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="jschuler">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="jschuler (requested), DcooperRH (requested), dtaylor113 (approved)">jschuler (requested), DcooperRH (requested), dtaylor113 (approved)</td>
+      <td title="39" style="color: red;">39</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="DcooperRH">
+        <td>Dylan Cooper (DcooperRH)</td>
+        <td><span class="pending-count">2</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="DcooperRH">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="jschuler (requested), DcooperRH (requested), dtaylor113 (approved)">jschuler (requested), DcooperRH (requested), dtaylor113 (approved)</td>
+      <td title="39" style="color: red;">39</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="davidaznaur (requested), zherman0 (requested), DcooperRH (requested)">davidaznaur (requested), zherman0 (requested), DcooperRH (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
+          </a>
+      </td>
+      <td title="tlabaj">tlabaj</td>
+      <td title="kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)">kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="29" style="color: red;">29</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="25" style="color: red;">25</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
+      <td title="6" style="color: orange;">6</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (approved), DcooperRH (approved)">kdoberst (approved), DcooperRH (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+      <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)">dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="3">3/3</td>
+      <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (requested), DcooperRH (approved)">kdoberst (requested), DcooperRH (approved)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="dtaylor113">
+        <td>Dave Taylor (dtaylor113)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="dtaylor113">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog
+          </a>
+      </td>
+      <td title="Ginxo">Ginxo</td>
+      <td title="dtaylor113 (requested), davidaznaur (requested)">dtaylor113 (requested), davidaznaur (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="jschuler (requested), DcooperRH (requested), dtaylor113 (approved)">jschuler (requested), DcooperRH (requested), dtaylor113 (approved)</td>
+      <td title="39" style="color: red;">39</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-3101: Update OCP docs links to 4.18" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/208">OCMUI-3101: Update OCP docs links to 4.18
+          </a>
+      </td>
+      <td title="lizagilman">lizagilman</td>
+      <td title="apecha (requested), eliranmal (approved), dtaylor113 (approved)">apecha (requested), eliranmal (approved), dtaylor113 (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+      <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)">dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="3">3/3</td>
+      <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
+        <td>Jayakrishnan Mekkattillam (jmekkatt)</td>
+        <td><span class="pending-count">5</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="jmekkatt">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14
+          </a>
+      </td>
+      <td title="renovate">renovate</td>
+      <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">jmekkatt (requested), apecha (requested), Ginxo (approved)</td>
+      <td title="35" style="color: red;">35</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">jmekkatt (requested), davidaznaur (approved), kdoberst (approved)</td>
+      <td title="30" style="color: red;">30</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="25" style="color: red;">25</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
+          </a>
+      </td>
+      <td title="eliranmal">eliranmal</td>
+      <td title="kelvah (requested), LiorKGOW (requested), jmekkatt (requested)">kelvah (requested), LiorKGOW (requested), jmekkatt (requested)</td>
+      <td title="15" style="color: red;">15</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"
+          </a>
+      </td>
+      <td title="eliranmal">eliranmal</td>
+      <td title="Ginxo (requested), jmekkatt (requested), zherman0 (approved)">Ginxo (requested), jmekkatt (requested), zherman0 (approved)</td>
+      <td title="6" style="color: orange;">6</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="apecha">
+        <td>Ales Pecha (apecha)</td>
+        <td><span class="pending-count">3</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="apecha">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14
+          </a>
+      </td>
+      <td title="renovate">renovate</td>
+      <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">jmekkatt (requested), apecha (requested), Ginxo (approved)</td>
+      <td title="35" style="color: red;">35</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
+          </a>
+      </td>
+      <td title="tlabaj">tlabaj</td>
+      <td title="kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)">kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="29" style="color: red;">29</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3101: Update OCP docs links to 4.18" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/208">OCMUI-3101: Update OCP docs links to 4.18
+          </a>
+      </td>
+      <td title="lizagilman">lizagilman</td>
+      <td title="apecha (requested), eliranmal (approved), dtaylor113 (approved)">apecha (requested), eliranmal (approved), dtaylor113 (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
+        <td>David Aznaurov (davidaznaur)</td>
+        <td><span class="pending-count">3</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="davidaznaur">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog
+          </a>
+      </td>
+      <td title="Ginxo">Ginxo</td>
+      <td title="dtaylor113 (requested), davidaznaur (requested)">dtaylor113 (requested), davidaznaur (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="davidaznaur (requested), zherman0 (requested), DcooperRH (requested)">davidaznaur (requested), zherman0 (requested), DcooperRH (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="davidaznaur (requested), eliranmal (requested), zherman0 (approved)">davidaznaur (requested), eliranmal (requested), zherman0 (approved)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">jmekkatt (requested), davidaznaur (approved), kdoberst (approved)</td>
+      <td title="30" style="color: red;">30</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
+          </a>
+      </td>
+      <td title="tlabaj">tlabaj</td>
+      <td title="kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)">kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="29" style="color: red;">29</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs
+          </a>
+      </td>
+      <td title="DcooperRH">DcooperRH</td>
+      <td title="shivanthi-amara (requested), davidaznaur (commented), kdoberst (approved)">shivanthi-amara (requested), davidaznaur (commented), kdoberst (approved)</td>
+      <td title="25" style="color: red;">25</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="25" style="color: red;">25</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+      <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)">dtaylor113 (pending), DcooperRH (approved), kelvah (approved), davidaznaur (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="3">3/3</td>
+      <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP
+          </a>
+      </td>
+      <td title="DcooperRH">DcooperRH</td>
+      <td title="kdoberst (commented), davidaznaur (commented)">kdoberst (commented), davidaznaur (commented)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="kdoberst">
+        <td>Kim Doberstein (kdoberst)</td>
+        <td><span class="pending-count">3</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
+          </a>
+      </td>
+      <td title="tlabaj">tlabaj</td>
+      <td title="kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)">kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)</td>
+      <td title="29" style="color: red;">29</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
+          </a>
+      </td>
+      <td title="lizagilman">lizagilman</td>
+      <td title="kelvah (requested), kdoberst (requested)">kelvah (requested), kdoberst (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (requested), DcooperRH (approved)">kdoberst (requested), DcooperRH (approved)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster
+          </a>
+      </td>
+      <td title="zherman0">zherman0</td>
+      <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">jmekkatt (requested), davidaznaur (approved), kdoberst (approved)</td>
+      <td title="30" style="color: red;">30</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs
+          </a>
+      </td>
+      <td title="DcooperRH">DcooperRH</td>
+      <td title="shivanthi-amara (requested), davidaznaur (commented), kdoberst (approved)">shivanthi-amara (requested), davidaznaur (commented), kdoberst (approved)</td>
+      <td title="25" style="color: red;">25</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
+      <td title="6" style="color: orange;">6</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (approved), DcooperRH (approved)">kdoberst (approved), DcooperRH (approved)</td>
+      <td title="5" style="color: orange;">5</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP
+          </a>
+      </td>
+      <td title="DcooperRH">DcooperRH</td>
+      <td title="kdoberst (commented), davidaznaur (commented)">kdoberst (commented), davidaznaur (commented)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="lizagilman">
+        <td>lizagilman</td>
+        <td><span class="pending-count">3</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="lizagilman">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI
+          </a>
+      </td>
+      <td title="Ginxo">Ginxo</td>
+      <td title="lizagilman (requested), kelvah (commented)">lizagilman (requested), kelvah (commented)</td>
+      <td title="20" style="color: red;">20</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available
+          </a>
+      </td>
+      <td title="dtaylor113">dtaylor113</td>
+      <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)</td>
+      <td title="12" style="color: red;">12</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases
+          </a>
+      </td>
+      <td title="jmekkatt">jmekkatt</td>
+      <td title="lizagilman (requested), dragan000 (requested), shivanthi-amara (requested)">lizagilman (requested), dragan000 (requested), shivanthi-amara (requested)</td>
+      <td title="4" style="color: yellow;">4</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected
+          </a>
+      </td>
+      <td title="LiorKGOW">LiorKGOW</td>
+      <td title="lizagilman (commented), Ginxo (commented)">lizagilman (commented), Ginxo (commented)</td>
+      <td title="27" style="color: red;">27</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="shivanthi-amara">
+        <td>Lakshmi Shivanthi Amarachintha (shivanthi-amara)</td>
+        <td><span class="pending-count">3</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="shivanthi-amara">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs
+          </a>
+      </td>
+      <td title="DcooperRH">DcooperRH</td>
+      <td title="shivanthi-amara (requested), davidaznaur (commented), kdoberst (approved)">shivanthi-amara (requested), davidaznaur (commented), kdoberst (approved)</td>
+      <td title="25" style="color: red;">25</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available
+          </a>
+      </td>
+      <td title="dtaylor113">dtaylor113</td>
+      <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)</td>
+      <td title="12" style="color: red;">12</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases
+          </a>
+      </td>
+      <td title="jmekkatt">jmekkatt</td>
+      <td title="lizagilman (requested), dragan000 (requested), shivanthi-amara (requested)">lizagilman (requested), dragan000 (requested), shivanthi-amara (requested)</td>
+      <td title="4" style="color: yellow;">4</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="zherman0">
+        <td>Zac Herman (zherman0)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="zherman0">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="davidaznaur (requested), zherman0 (requested), DcooperRH (requested)">davidaznaur (requested), zherman0 (requested), DcooperRH (requested)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"
+          </a>
+      </td>
+      <td title="eliranmal">eliranmal</td>
+      <td title="Ginxo (requested), jmekkatt (requested), zherman0 (approved)">Ginxo (requested), jmekkatt (requested), zherman0 (approved)</td>
+      <td title="6" style="color: orange;">6</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="davidaznaur (requested), eliranmal (requested), zherman0 (approved)">davidaznaur (requested), eliranmal (requested), zherman0 (approved)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="dragan000">
+        <td>Denis Ragan (dragan000)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="dragan000">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="PR">PR</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases
+          </a>
+      </td>
+      <td title="jmekkatt">jmekkatt</td>
+      <td title="lizagilman (requested), dragan000 (requested), shivanthi-amara (requested)">lizagilman (requested), dragan000 (requested), shivanthi-amara (requested)</td>
+      <td title="4" style="color: yellow;">4</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
+    </tr></table>
+
+    <script>
+        // Variable to track current sort order
+        let sortAscending = false;
+        
+        // Draw the horizontal bar chart
+        function drawHorizontalChart() {
+            const chartContainer = document.getElementById('horizontal-chart');
+            chartContainer.innerHTML = ''; // Clear existing content
+            
+            // Get chart data
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":3},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":2},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":3},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1}];
+            
+            // Sort data by pending reviews based on current sort direction
+            if (sortAscending) {
+                chartData.sort((a, b) => a.pending - b.pending); // Ascending (lowest first)
+            } else {
+                chartData.sort((a, b) => b.pending - a.pending); // Descending (highest first)
+            }
+            
+            // Find the maximum value to calculate bar widths
+            const maxValue = Math.max(...chartData.map(item => item.pending));
+            const maxBarWidth = 800; // Maximum width for the bars in pixels
+            
+            // Create and append chart rows
+            chartData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'chart-row';
+                
+                const label = document.createElement('div');
+                label.className = 'chart-label';
+                
+                // Get the full name for the chart label if available
+                const fullName = {"LiorKGOW":"Lior Keren","Ginxo":"Enrique Mingorance Cano","kelvah":"roberto emanuel","eliranmal":"Lyn M","jschuler":"Joachim Schuler","DcooperRH":"Dylan Cooper","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","zherman0":"Zac Herman","dragan000":"Denis Ragan"}[item.reviewer] || '';
+                const displayName = fullName ? `${fullName} (${item.reviewer})` : item.reviewer;
+                
+                label.textContent = displayName;
+                label.title = displayName; // Add tooltip for truncated names
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.flex = '1';
+                
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                const width = (item.pending / maxValue) * maxBarWidth;
+                bar.style.width = width + 'px';
+                
+                const value = document.createElement('div');
+                value.className = 'chart-value';
+                value.textContent = item.pending;
+                
+                bar.appendChild(value);
+                barContainer.appendChild(bar);
+                
+                row.appendChild(label);
+                row.appendChild(barContainer);
+                
+                chartContainer.appendChild(row);
+            });
+        }
+        
+        // Function to toggle sort order
+        function toggleSortOrder() {
+            sortAscending = !sortAscending;
+            const toggleButton = document.getElementById('toggle-sort');
+            toggleButton.textContent = sortAscending ? 'Sort: Lowest First' : 'Sort: Highest First';
+            drawHorizontalChart();
+        }
+        
+        // Set up event handlers when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            drawHorizontalChart();
+            // Add click handler for sort toggle button
+            const toggleButton = document.getElementById('toggle-sort');
+            toggleButton.addEventListener('click', toggleSortOrder);
+            
+            // Add click handler for return to table button
+            const returnButton = document.getElementById('return-to-table');
+            returnButton.addEventListener('click', function() {
+                const toggleChartCheckbox = document.getElementById('toggle-details');
+                toggleChartCheckbox.checked = false;
+                toggleDetails();
+            });
+        });
+    </script>
+</body>
+</html>
