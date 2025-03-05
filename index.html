@@ -276,12 +276,8 @@
                     if (needsApproval) {
                         row.style.display = '';
                         reviewersWithVisiblePRs.add(reviewerRowId);
-                        // Add highlight if it's also pending
-                        if (isPending) {
-                            row.classList.add('pending-review');
-                        } else {
-                            row.classList.remove('pending-review');
-                        }
+                        // Add highlight for all PRs in this view to indicate they need approval
+                        row.classList.add('pending-review');
                     } else {
                         row.style.display = 'none';
                     }
@@ -386,11 +382,11 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 18:57:54 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 19:04:46 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
-        <label><input type="radio" name="prFilter" id="show-needs-approval" onclick="filterByStatus('needs_approval')" checked> Needs Approval</label>
+        <label><input type="radio" name="prFilter" id="show-needs-approval" onclick="filterByStatus('needs_approval')" checked> Reviews waiting for approval</label>
         <label><input type="radio" name="prFilter" id="show-pending" onclick="filterByStatus('pending')"> Reviews Pending</label>
         <label><input type="radio" name="prFilter" id="show-ready-to-merge" onclick="filterByStatus('ready_to_merge')"> Ready to Merge <span id="ready-to-merge-badge" class="merge-badge">0</span></label>
         <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')"> All</label>
@@ -513,7 +509,7 @@
     <table class="reviewer-table">
         <tr>
             <th style="width: 28%;">Reviewer</th>
-            <th># Reviews Requested (Pending)</th>
+            <th># Reviews waiting for approval</th>
         </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
         <td><span class="pending-count">2</span></td>
@@ -844,26 +840,6 @@
       <td title="25" style="color: red;">25</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
-      <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
-          </a>
-      </td>
-      <td title="davidaznaur">davidaznaur</td>
-      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
-      <td title="7" style="color: red;">7</td>
-      <td title="2">2/3</td>
-      <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
-      <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
-          </a>
-      </td>
-      <td title="davidaznaur">davidaznaur</td>
-      <td title="kdoberst (approved), DcooperRH (approved)">kdoberst (approved), DcooperRH (approved)</td>
-      <td title="6" style="color: orange;">6</td>
-      <td title="2">2/3</td>
-      <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
@@ -882,6 +858,26 @@
       <td title="davidaznaur">davidaznaur</td>
       <td title="jmekkatt (requested), DcooperRH (approved), kdoberst (approved)">jmekkatt (requested), DcooperRH (approved), kdoberst (approved)</td>
       <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
+      <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
+      <td title="7" style="color: red;">7</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
+      <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (approved), DcooperRH (approved)">kdoberst (approved), DcooperRH (approved)</td>
+      <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr></table>
@@ -1249,26 +1245,6 @@
       <td title="26" style="color: red;">26</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
-      <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
-          </a>
-      </td>
-      <td title="davidaznaur">davidaznaur</td>
-      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
-      <td title="7" style="color: red;">7</td>
-      <td title="2">2/3</td>
-      <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
-      <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
-          </a>
-      </td>
-      <td title="davidaznaur">davidaznaur</td>
-      <td title="kdoberst (approved), DcooperRH (approved)">kdoberst (approved), DcooperRH (approved)</td>
-      <td title="6" style="color: orange;">6</td>
-      <td title="2">2/3</td>
-      <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP
@@ -1307,6 +1283,26 @@
       <td title="davidaznaur">davidaznaur</td>
       <td title="eliranmal (requested), dtaylor113 (requested), kdoberst (approved), zherman0 (approved)">eliranmal (requested), dtaylor113 (requested), kdoberst (approved), zherman0 (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
+      <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
+      <td title="7" style="color: red;">7</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
+      <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (approved), DcooperRH (approved)">kdoberst (approved), DcooperRH (approved)</td>
+      <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr></table>
@@ -1627,7 +1623,7 @@
             const returnButton = document.getElementById('return-to-table');
             returnButton.addEventListener('click', function() {
                 document.getElementById('show-needs-approval').checked = true;
-                filterByStatus('needs_approval');
+                filterByStatus('needs_approval'); // Show reviews waiting for approval
             });
         });
     </script>
