@@ -364,7 +364,7 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 15:46:55 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 15:52:50 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -484,6 +484,8 @@
         <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="jloss-redhat" onclick="filterTable('jloss-redhat')"> Jason Loss (jloss-redhat) <span class="pending-badge">1</span></label>
     </td></tr></table></div>
     <table class="reviewer-table">
         <tr>
@@ -691,7 +693,7 @@
           </a>
       </td>
       <td title="kdoberst">kdoberst</td>
-      <td title="eliranmal (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), zherman0 (approved), davidaznaur (approved)</td>
+      <td title="eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1123,7 +1125,7 @@
           </a>
       </td>
       <td title="kdoberst">kdoberst</td>
-      <td title="eliranmal (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), zherman0 (approved), davidaznaur (approved)</td>
+      <td title="eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1391,7 +1393,7 @@
           </a>
       </td>
       <td title="kdoberst">kdoberst</td>
-      <td title="eliranmal (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), zherman0 (approved), davidaznaur (approved)</td>
+      <td title="eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1424,6 +1426,33 @@
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr></table>
         </td>
+    </tr><tr class="reviewer-row" data-reviewer="jloss-redhat">
+        <td>Jason Loss (jloss-redhat)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="jloss-redhat">
+        <td colspan="2">
+            <table class="pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
+          </a>
+      </td>
+      <td title="kdoberst">kdoberst</td>
+      <td title="eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)">eliranmal (requested), jloss-redhat (requested), zherman0 (approved), davidaznaur (approved)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr></table>
+        </td>
     </tr></table>
 
     <script>
@@ -1436,7 +1465,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":2},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":2},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1},{"reviewer":"jloss-redhat","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
@@ -1458,7 +1487,7 @@
                 label.className = 'chart-label';
                 
                 // Get the full name for the chart label if available
-                const fullName = {"LiorKGOW":"Lior Keren","Ginxo":"Enrique Mingorance Cano","kelvah":"roberto emanuel","eliranmal":"Lyn M","jschuler":"Joachim Schuler","DcooperRH":"Dylan Cooper","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","zherman0":"Zac Herman","dragan000":"Denis Ragan"}[item.reviewer] || '';
+                const fullName = {"LiorKGOW":"Lior Keren","Ginxo":"Enrique Mingorance Cano","kelvah":"roberto emanuel","eliranmal":"Lyn M","jschuler":"Joachim Schuler","DcooperRH":"Dylan Cooper","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","zherman0":"Zac Herman","dragan000":"Denis Ragan","jloss-redhat":"Jason Loss"}[item.reviewer] || '';
                 const displayName = fullName ? `${fullName} (${item.reviewer})` : item.reviewer;
                 
                 label.textContent = displayName;
