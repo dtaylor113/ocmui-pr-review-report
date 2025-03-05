@@ -364,7 +364,7 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 05:47:03 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 05:53:02 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -475,7 +475,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="lizagilman" onclick="filterTable('lizagilman')"> lizagilman <span class="pending-badge">3</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
@@ -634,9 +634,9 @@
           </a>
       </td>
       <td title="lizagilman">lizagilman</td>
-      <td title="kelvah (requested), kdoberst (requested)">kelvah (requested), kdoberst (requested)</td>
+      <td title="kelvah (requested), kdoberst (approved)">kelvah (requested), kdoberst (approved)</td>
       <td title="1" style="color: #d4d4d4;">1</td>
-      <td title="0">0/3</td>
+      <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
       <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
@@ -1121,7 +1121,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
         <td>Kim Doberstein (kdoberst)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">1</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
@@ -1143,16 +1143,6 @@
       <td title="kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)">kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)</td>
       <td title="29" style="color: red;">29</td>
       <td title="2">2/3</td>
-      <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-      <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
-          </a>
-      </td>
-      <td title="lizagilman">lizagilman</td>
-      <td title="kelvah (requested), kdoberst (requested)">kelvah (requested), kdoberst (requested)</td>
-      <td title="1" style="color: #d4d4d4;">1</td>
-      <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
       <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
@@ -1203,6 +1193,16 @@
       <td title="kdoberst (commented), davidaznaur (commented)">kdoberst (commented), davidaznaur (commented)</td>
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
+          </a>
+      </td>
+      <td title="lizagilman">lizagilman</td>
+      <td title="kelvah (requested), kdoberst (approved)">kelvah (requested), kdoberst (approved)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
       <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
@@ -1406,7 +1406,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":2},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":2},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
