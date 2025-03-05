@@ -100,6 +100,8 @@ runs:
         cd $(dirname $0)
         # Set a variable to ensure the script can find the JSON file in the current directory
         export PR_REPORT_PATH="./pr_review_report.json"
+        export PROJECT_OWNER="${{ inputs.owner }}"
+        export PROJECT_NAME="${{ inputs.name }}"
         # Create webpage directory if it doesn't exist
         mkdir -p ./webpage
         # Execute the Node.js script
