@@ -395,9 +395,24 @@ function processData() {
             });
         }
         
-        function filterByStatus() {
-            const showAllPRs = document.getElementById('show-all-prs').checked;
-            const showReadyToMerge = document.getElementById('show-ready-to-merge').checked;
+        function filterByStatus(filterType) {
+            // Hide chart if it's visible and we're switching to a non-chart filter
+            if (filterType !== 'chart') {
+                const chartContainer = document.getElementById('chart-container');
+                const reviewerTable = document.querySelector('.reviewer-table');
+                const radioContainer = document.querySelector('.radio-container');
+                
+                // Show the regular view
+                chartContainer.style.display = 'none';
+                reviewerTable.style.display = 'table';
+                radioContainer.style.display = 'block';
+                
+                // Show PR details
+                const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
+                prRowTables.forEach(prRowTable => {
+                    prRowTable.classList.remove('hidden');
+                });
+            }
             
             let detailRows = document.querySelectorAll('tr.pr-detail-row');
             let readyToMergeCount = 0;
@@ -411,39 +426,31 @@ function processData() {
                     readyToMergeCount++;
                 }
                 
-                // If showing all PRs
-                if (showAllPRs) {
-                    // Show pending highlight only in "show all" mode
+                // Apply the appropriate filter
+                if (filterType === 'all') {
+                    // Show all PRs with pending highlight
                     if (isPending) {
                         row.classList.add('pending-review');
                     } else {
                         row.classList.remove('pending-review');
                     }
-                    
-                    // Apply ready to merge filter if needed
-                    if (status === 'ready_to_merge' && showReadyToMerge) {
-                        row.style.display = '';
-                    } else if (status !== 'ready_to_merge') {
+                    row.style.display = '';
+                } 
+                else if (filterType === 'ready_to_merge') {
+                    // Only show ready to merge PRs
+                    if (status === 'ready_to_merge') {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';
                     }
-                } 
-                // Only showing pending reviews
-                else {
-                    // Hide pending highlight in "pending only" mode
+                    // No pending highlight needed in this view
                     row.classList.remove('pending-review');
-                    
+                }
+                else if (filterType === 'pending') {
                     // Only show pending reviews
                     if (isPending) {
-                        // Apply ready to merge filter if needed
-                        if (status === 'ready_to_merge' && showReadyToMerge) {
-                            row.style.display = '';
-                        } else if (status !== 'ready_to_merge') {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
-                        }
+                        row.classList.add('pending-review');
+                        row.style.display = '';
                     } else {
                         row.style.display = 'none';
                     }
@@ -463,10 +470,6 @@ function processData() {
                 lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
             }
             
-            // Set default to show pending reviews only, count ready to merge PRs
-            document.getElementById('show-all-prs').checked = false;
-            document.getElementById('show-ready-to-merge').checked = false;
-            
             // Count ready to merge PRs for the badge
             let readyToMergeCount = 0;
             document.querySelectorAll('tr.pr-detail-row').forEach(row => {
@@ -476,18 +479,19 @@ function processData() {
             });
             document.getElementById('ready-to-merge-badge').textContent = readyToMergeCount;
             
-            filterByStatus();
+            // Set default to show pending reviews (already checked in HTML)
+            filterByStatus('pending');
         });
         
         function toggleDetails() {
-            const toggleChartCheckbox = document.getElementById('toggle-details');
+            const chartRadio = document.getElementById('show-chart');
             const chartContainer = document.getElementById('chart-container');
             const reviewerTable = document.querySelector('.reviewer-table');
             const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
             const radioContainer = document.querySelector('.radio-container');
             
             // When chart mode is enabled
-            if (toggleChartCheckbox.checked) {
+            if (chartRadio.checked) {
                 // Show only the chart
                 chartContainer.style.display = 'block';
                 reviewerTable.style.display = 'none';
@@ -498,15 +502,16 @@ function processData() {
                     prRowTable.classList.add('hidden');
                 });
             } else {
-                // Show the regular view
-                chartContainer.style.display = 'none';
-                reviewerTable.style.display = 'table';
-                radioContainer.style.display = 'block';
+                // Get the currently selected filter (default to pending)
+                let selectedFilter = 'pending';
+                if (document.getElementById('show-all-prs').checked) {
+                    selectedFilter = 'all';
+                } else if (document.getElementById('show-ready-to-merge').checked) {
+                    selectedFilter = 'ready_to_merge';
+                }
                 
-                // Show PR details
-                prRowTables.forEach(prRowTable => {
-                    prRowTable.classList.remove('hidden');
-                });
+                // Apply the appropriate filter
+                filterByStatus(selectedFilter);
             }
         }
         
@@ -533,9 +538,10 @@ function processData() {
     </h2>
     
     <div class="filter-controls">
-        <label><input type="checkbox" id="show-all-prs" onclick="filterByStatus()"> Show All PRs</label>
-        <label><input type="checkbox" id="show-ready-to-merge" onclick="filterByStatus()"> Ready to Merge <span id="ready-to-merge-badge" class="merge-badge">0</span></label>
-        <label><input type="checkbox" id="toggle-details" onClick="toggleDetails()"> Chart</label>
+        <label><input type="radio" name="prFilter" id="show-pending" onclick="filterByStatus('pending')" checked> Reviews Pending</label>
+        <label><input type="radio" name="prFilter" id="show-ready-to-merge" onclick="filterByStatus('ready_to_merge')"> Ready to Merge <span id="ready-to-merge-badge" class="merge-badge">0</span></label>
+        <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')"> All</label>
+        <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
@@ -812,9 +818,8 @@ function processData() {
             // Add click handler for return to table button
             const returnButton = document.getElementById('return-to-table');
             returnButton.addEventListener('click', function() {
-                const toggleChartCheckbox = document.getElementById('toggle-details');
-                toggleChartCheckbox.checked = false;
-                toggleDetails();
+                document.getElementById('show-pending').checked = true;
+                filterByStatus('pending');
             });
         });
     </script>
