@@ -364,7 +364,7 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 17:21:50 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 17:30:46 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -465,7 +465,7 @@
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="jschuler" onclick="filterTable('jschuler')"> Joachim Schuler (jschuler) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -475,7 +475,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="lizagilman" onclick="filterTable('lizagilman')"> lizagilman <span class="pending-badge">3</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
@@ -748,7 +748,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="DcooperRH">
         <td>Dylan Cooper (DcooperRH)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">3</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="DcooperRH">
@@ -779,6 +779,16 @@
       <td title="kdoberst">kdoberst</td>
       <td title="davidaznaur (requested), zherman0 (requested), DcooperRH (requested)">davidaznaur (requested), zherman0 (requested), DcooperRH (requested)</td>
       <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="0">0/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (requested), DcooperRH (requested)">kdoberst (requested), DcooperRH (requested)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
@@ -1133,7 +1143,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
         <td>Kim Doberstein (kdoberst)</td>
-        <td><span class="pending-count">1</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
@@ -1155,6 +1165,16 @@
       <td title="kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)">kdoberst (requested), apecha (requested), davidaznaur (approved), DcooperRH (approved)</td>
       <td title="29" style="color: red;">29</td>
       <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="kdoberst (requested), DcooperRH (requested)">kdoberst (requested), DcooperRH (requested)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
       <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
@@ -1485,7 +1505,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":2},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"jloss-redhat","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"jloss-redhat","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
