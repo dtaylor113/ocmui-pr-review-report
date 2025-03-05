@@ -28,14 +28,14 @@ if (process.env.PR_REPORT_PATH) {
 }
 
 function processData() {
-// Data structures to track reviewers and their PRs
+    // Data structures to track reviewers and their PRs
     const reviewers = {};
     const pendingReviewers = {};
 
-// Map to store full names for each reviewer
+    // Map to store full names for each reviewer
     const reviewerNames = {};
 
-// Map review states to readable format
+    // Map review states to readable format
     const reviewStateMap = {
         APPROVED: 'approved',
         CHANGES_REQUESTED: 'requested changes',
@@ -44,13 +44,13 @@ function processData() {
         PENDING: 'pending',
     };
 
-// Get last updated timestamp
+    // Get last updated timestamp
     const lastUpdatedUTC = new Date();
 
-// Number of approvals required to merge a PR (repo rule)
+    // Number of approvals required to merge a PR (repo rule)
     const REQUIRED_APPROVALS = 3;
 
-// Process each PR
+    // Process each PR
     prData.data.repository.pullRequests.nodes.forEach((pr) => {
         const prNumber = pr.number;
         const prTitle = pr.title;
@@ -142,7 +142,7 @@ function processData() {
         // Track pending reviewers
         requestedReviewers.forEach((reviewer) => {
             if (!pendingReviewers[reviewer]) {
-                pendingReviewers[reviewer] = {pending: 0, prDetails: []};
+                pendingReviewers[reviewer] = { pending: 0, prDetails: [] };
             }
             pendingReviewers[reviewer].pending += 1;
             pendingReviewers[reviewer].prDetails.push({
@@ -161,7 +161,7 @@ function processData() {
         const allReviewers = [...new Set([...requestedReviewers, ...Object.keys(reviewerStatus)])];
         allReviewers.forEach((reviewer) => {
             if (!reviewers[reviewer]) {
-                reviewers[reviewer] = {pending: 0, prDetails: []};
+                reviewers[reviewer] = { pending: 0, prDetails: [] };
             }
 
             // If this reviewer is requested and hasn't reviewed yet, count as pending
@@ -189,13 +189,13 @@ function processData() {
         });
     });
 
-// Generate HTML report
+    // Generate HTML report
     let htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OCMUI Open PRs</title>
+    <title>${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME} Open Pull Requests</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #121212; color: #ffffff; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -559,7 +559,7 @@ function processData() {
     htmlContent += `  
 <body>
     <h2>
-      <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
+      <span class="repo-title">${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}</span> Open Pull Requests
       <span id="lastUpdated" class="last-updated" data-utc="${lastUpdatedUTC}"></span>
     </h2>
     
@@ -573,22 +573,22 @@ function processData() {
     
     <!-- Legend positioned between filters and radio buttons -->
     <div id="legend" class="legend hidden">
-      <h3>PR Review Report Legend</h3>
+      <h3>Pull Request Review Report Legend</h3>
       
       <div class="legend-grid">
         <div class="legend-box">
-          <h4>PR Status</h4>
+          <h4>Pull Request Status</h4>
           <div class="legend-item">
             <span class="legend-sample" style="background-color: #ff9800;"></span>
-            <span class="needs-review">Needs Review</span>: PR needs more reviews before it can be merged
+            <span class="needs-review">Needs Review</span>: Pull Request needs more reviews before it can be merged
           </div>
           <div class="legend-item">
             <span class="legend-sample" style="background-color: #f44336;"></span>
-            <span class="changes-requested">Changes Requested</span>: PR needs code changes based on review feedback
+            <span class="changes-requested">Changes Requested</span>: Pull Request needs code changes based on review feedback
           </div>
           <div class="legend-item">
             <span class="legend-sample" style="background-color: #4caf50;"></span>
-            <span class="ready-to-merge">Ready to Merge</span>: PR has all required approvals (${REQUIRED_APPROVALS}) and can be merged
+            <span class="ready-to-merge">Ready to Merge</span>: Pull Request has all required approvals (${REQUIRED_APPROVALS}) and can be merged
           </div>
         </div>
         
@@ -605,7 +605,7 @@ function processData() {
             </tr>
             <tr>
               <td><code>username (approved)</code></td>
-              <td>Reviewer has approved the PR</td>
+              <td>Reviewer has approved the Pull Request</td>
             </tr>
             <tr>
               <td><code>username (commented)</code></td>
@@ -621,14 +621,14 @@ function processData() {
         <div class="legend-box">
           <h4>Visual Indicators</h4>
           <div class="legend-item">
-            <div class="legend-pending-sample">PR requiring your review</div>
-            PRs that need your review are highlighted with an orange left border
+            <div class="legend-pending-sample">Pull Request requiring your review</div>
+            Pull Requests that need your review are highlighted with an orange left border
           </div>
           <div class="legend-item">
             <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews
           </div>
           <div class="legend-item">
-            <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the PR has been open
+            <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the Pull Request has been open
           </div>
         </div>
       </div>
@@ -676,7 +676,7 @@ function processData() {
     </td>`;
         count++;
     });
-// Close the last row
+    // Close the last row
     htmlContent += `</tr></table>`;
 
     /** Reviewers Table **/
@@ -690,11 +690,11 @@ function processData() {
 
     /** Reviewer's PR Table with full names **/
 
-// Prepare reviewer data for the chart
+    // Prepare reviewer data for the chart
     const chartData = [];
     Object.entries(reviewers).forEach(([reviewer, data]) => {
         if (data.pending > 0) {
-            chartData.push({reviewer, pending: data.pending});
+            chartData.push({ reviewer, pending: data.pending });
         }
 
         // Get the full name for the reviewer, default to empty string if not available
@@ -712,7 +712,7 @@ function processData() {
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="PR">PR</th>
+                  <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
@@ -748,7 +748,7 @@ function processData() {
             // Add data-pending attribute to track pending status
             htmlContent += `<tr class="pr-detail-row" data-status="${pr.status}" data-pending="${pr.isPending}">
       <td><a title="${pr.title}" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/${pr.number}">${pr.title}
+             href="https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pull/${pr.number}">${pr.title}
           </a>
       </td>
       <td title="${pr.author}">${pr.author}</td>
