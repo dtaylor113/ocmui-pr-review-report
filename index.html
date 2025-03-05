@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedHatInsights/uhc-portal Open Pull Requests</title>
+    <title>OCMUI Open PRs</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #121212; color: #ffffff; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -231,6 +231,7 @@
             detailRows.forEach(row => {
                 const status = row.dataset.status;
                 const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
+                const needsApproval = row.hasAttribute('data-needs-approval') && row.getAttribute('data-needs-approval') === 'true';
                 const reviewerRowId = row.closest('.pr-row-table').dataset.reviewer;
                 
                 // Count ready to merge PRs
@@ -270,6 +271,21 @@
                         row.style.display = 'none';
                     }
                 }
+                else if (filterType === 'needs_approval') {
+                    // Show PRs with review status other than 'approved'
+                    if (needsApproval) {
+                        row.style.display = '';
+                        reviewersWithVisiblePRs.add(reviewerRowId);
+                        // Add highlight if it's also pending
+                        if (isPending) {
+                            row.classList.add('pending-review');
+                        } else {
+                            row.classList.remove('pending-review');
+                        }
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
             });
             
             // Hide/show reviewer rows based on whether they have visible PRs
@@ -282,6 +298,10 @@
                     } 
                     // For Pending filter, hide reviewers without pending PRs
                     else if (filterType === 'pending') {
+                        row.style.display = reviewersWithVisiblePRs.has(reviewerId) ? '' : 'none';
+                    }
+                    // For Needs Approval filter, hide reviewers without PRs that need approval
+                    else if (filterType === 'needs_approval') {
                         row.style.display = reviewersWithVisiblePRs.has(reviewerId) ? '' : 'none';
                     }
                     // For All filter, show all reviewers
@@ -313,8 +333,8 @@
             });
             document.getElementById('ready-to-merge-badge').textContent = readyToMergeCount;
             
-            // Set default to show pending reviews (already checked in HTML)
-            filterByStatus('pending');
+            // Set default to show needs approval (already checked in HTML)
+            filterByStatus('needs_approval');
         });
         
         function toggleDetails() {
@@ -336,12 +356,14 @@
                     prRowTable.classList.add('hidden');
                 });
             } else {
-                // Get the currently selected filter (default to pending)
-                let selectedFilter = 'pending';
+                // Get the currently selected filter (default to needs_approval)
+                let selectedFilter = 'needs_approval';
                 if (document.getElementById('show-all-prs').checked) {
                     selectedFilter = 'all';
                 } else if (document.getElementById('show-ready-to-merge').checked) {
                     selectedFilter = 'ready_to_merge';
+                } else if (document.getElementById('show-pending').checked) {
+                    selectedFilter = 'pending';
                 }
                 
                 // Apply the appropriate filter
@@ -363,12 +385,13 @@
 </head>  
 <body>
     <h2>
-      <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 18:45:24 GMT+0000 (Coordinated Universal Time)"></span>
+      <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 05 2025 18:52:15 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
-        <label><input type="radio" name="prFilter" id="show-pending" onclick="filterByStatus('pending')" checked> Reviews Pending</label>
+        <label><input type="radio" name="prFilter" id="show-needs-approval" onclick="filterByStatus('needs_approval')" checked> Needs Approval</label>
+        <label><input type="radio" name="prFilter" id="show-pending" onclick="filterByStatus('pending')"> Reviews Pending</label>
         <label><input type="radio" name="prFilter" id="show-ready-to-merge" onclick="filterByStatus('ready_to_merge')"> Ready to Merge <span id="ready-to-merge-badge" class="merge-badge">0</span></label>
         <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')"> All</label>
         <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
@@ -377,22 +400,22 @@
     
     <!-- Legend positioned between filters and radio buttons -->
     <div id="legend" class="legend hidden">
-      <h3>Pull Request Review Report Legend</h3>
+      <h3>PR Review Report Legend</h3>
       
       <div class="legend-grid">
         <div class="legend-box">
-          <h4>Pull Request Status</h4>
+          <h4>PR Status</h4>
           <div class="legend-item">
             <span class="legend-sample" style="background-color: #ff9800;"></span>
-            <span class="needs-review">Needs Review</span>: Pull Request needs more reviews before it can be merged
+            <span class="needs-review">Needs Review</span>: PR needs more reviews before it can be merged
           </div>
           <div class="legend-item">
             <span class="legend-sample" style="background-color: #f44336;"></span>
-            <span class="changes-requested">Changes Requested</span>: Pull Request needs code changes based on review feedback
+            <span class="changes-requested">Changes Requested</span>: PR needs code changes based on review feedback
           </div>
           <div class="legend-item">
             <span class="legend-sample" style="background-color: #4caf50;"></span>
-            <span class="ready-to-merge">Ready to Merge</span>: Pull Request has all required approvals (3) and can be merged
+            <span class="ready-to-merge">Ready to Merge</span>: PR has all required approvals (3) and can be merged
           </div>
         </div>
         
@@ -409,7 +432,7 @@
             </tr>
             <tr>
               <td><code>username (approved)</code></td>
-              <td>Reviewer has approved the Pull Request</td>
+              <td>Reviewer has approved the PR</td>
             </tr>
             <tr>
               <td><code>username (commented)</code></td>
@@ -425,14 +448,14 @@
         <div class="legend-box">
           <h4>Visual Indicators</h4>
           <div class="legend-item">
-            <div class="legend-pending-sample">Pull Request requiring your review</div>
-            Pull Requests that need your review are highlighted with an orange left border
+            <div class="legend-pending-sample">PR requiring your review</div>
+            PRs that need your review are highlighted with an orange left border
           </div>
           <div class="legend-item">
             <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews
           </div>
           <div class="legend-item">
-            <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the Pull Request has been open
+            <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the PR has been open
           </div>
         </div>
       </div>
@@ -469,7 +492,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">5</span></label>
+        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">6</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -500,13 +523,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5
           </a>
@@ -516,7 +539,7 @@
       <td title="57" style="color: red;">57</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
           </a>
@@ -537,13 +560,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available
           </a>
@@ -553,7 +576,7 @@
       <td title="13" style="color: red;">13</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"
           </a>
@@ -563,7 +586,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5
           </a>
@@ -573,7 +596,7 @@
       <td title="57" style="color: red;">57</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change
           </a>
@@ -583,7 +606,7 @@
       <td title="40" style="color: red;">40</td>
       <td title="0">0/3</td>
       <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14
           </a>
@@ -593,7 +616,7 @@
       <td title="36" style="color: red;">36</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected
           </a>
@@ -614,13 +637,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
           </a>
@@ -630,7 +653,7 @@
       <td title="16" style="color: red;">16</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change
           </a>
@@ -640,7 +663,7 @@
       <td title="40" style="color: red;">40</td>
       <td title="0">0/3</td>
       <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI
           </a>
@@ -650,7 +673,7 @@
       <td title="21" style="color: red;">21</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
           </a>
@@ -660,7 +683,7 @@
       <td title="5" style="color: orange;">5</td>
       <td title="3">3/3</td>
       <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
           </a>
@@ -681,13 +704,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
           </a>
@@ -697,7 +720,7 @@
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="Release to Production - March 5 2025" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/225">Release to Production - March 5 2025
           </a>
@@ -707,7 +730,7 @@
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change
           </a>
@@ -717,7 +740,7 @@
       <td title="40" style="color: red;">40</td>
       <td title="0">0/3</td>
       <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3101: Update OCP docs links to 4.18" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/208">OCMUI-3101: Update OCP docs links to 4.18
           </a>
@@ -738,13 +761,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
           </a>
@@ -765,13 +788,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
           </a>
@@ -781,7 +804,7 @@
       <td title="39" style="color: red;">39</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd
           </a>
@@ -791,7 +814,7 @@
       <td title="1" style="color: #d4d4d4;">1</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query
           </a>
@@ -801,7 +824,7 @@
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
           </a>
@@ -811,7 +834,7 @@
       <td title="29" style="color: red;">29</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard
           </a>
@@ -821,7 +844,7 @@
       <td title="25" style="color: red;">25</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
       <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
           </a>
@@ -831,7 +854,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
       <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
           </a>
@@ -841,7 +864,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
           </a>
@@ -851,13 +874,13 @@
       <td title="5" style="color: orange;">5</td>
       <td title="3">3/3</td>
       <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded
           </a>
       </td>
       <td title="davidaznaur">davidaznaur</td>
-      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
+      <td title="jmekkatt (requested), DcooperRH (approved), kdoberst (approved)">jmekkatt (requested), DcooperRH (approved), kdoberst (approved)</td>
       <td title="1" style="color: #d4d4d4;">1</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -872,13 +895,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog
           </a>
@@ -888,7 +911,7 @@
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="Release to Production - March 5 2025" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/225">Release to Production - March 5 2025
           </a>
@@ -898,7 +921,7 @@
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
           </a>
@@ -908,7 +931,7 @@
       <td title="39" style="color: red;">39</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3101: Update OCP docs links to 4.18" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/208">OCMUI-3101: Update OCP docs links to 4.18
           </a>
@@ -918,7 +941,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
           </a>
@@ -932,20 +955,20 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
         <td>Jayakrishnan Mekkattillam (jmekkatt)</td>
-        <td><span class="pending-count">5</span></td>
+        <td><span class="pending-count">6</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="jmekkatt">
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14
           </a>
@@ -955,7 +978,7 @@
       <td title="36" style="color: red;">36</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster
           </a>
@@ -965,7 +988,7 @@
       <td title="31" style="color: red;">31</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard
           </a>
@@ -975,7 +998,7 @@
       <td title="25" style="color: red;">25</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
           </a>
@@ -985,7 +1008,7 @@
       <td title="16" style="color: red;">16</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"
           </a>
@@ -995,7 +1018,17 @@
       <td title="6" style="color: orange;">6</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
+      <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="jmekkatt (requested), DcooperRH (approved), kdoberst (approved)">jmekkatt (requested), DcooperRH (approved), kdoberst (approved)</td>
+      <td title="1" style="color: #d4d4d4;">1</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
           </a>
@@ -1016,13 +1049,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14
           </a>
@@ -1032,7 +1065,7 @@
       <td title="36" style="color: red;">36</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
           </a>
@@ -1042,7 +1075,7 @@
       <td title="29" style="color: red;">29</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-3101: Update OCP docs links to 4.18" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/208">OCMUI-3101: Update OCP docs links to 4.18
           </a>
@@ -1063,13 +1096,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog
           </a>
@@ -1079,7 +1112,7 @@
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd
           </a>
@@ -1089,7 +1122,7 @@
       <td title="1" style="color: #d4d4d4;">1</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster
           </a>
@@ -1099,7 +1132,7 @@
       <td title="31" style="color: red;">31</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
           </a>
@@ -1109,7 +1142,7 @@
       <td title="29" style="color: red;">29</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs
           </a>
@@ -1119,7 +1152,7 @@
       <td title="26" style="color: red;">26</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard
           </a>
@@ -1129,7 +1162,7 @@
       <td title="25" style="color: red;">25</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file
           </a>
@@ -1139,7 +1172,7 @@
       <td title="5" style="color: orange;">5</td>
       <td title="3">3/3</td>
       <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP
           </a>
@@ -1149,7 +1182,7 @@
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
           </a>
@@ -1170,13 +1203,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select
           </a>
@@ -1186,7 +1219,7 @@
       <td title="29" style="color: red;">29</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query
           </a>
@@ -1196,7 +1229,7 @@
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster
           </a>
@@ -1206,7 +1239,7 @@
       <td title="31" style="color: red;">31</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs
           </a>
@@ -1216,7 +1249,7 @@
       <td title="26" style="color: red;">26</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
       <td><a title="OCMUI-2977: removed cluster and application ingress buttons" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/205">OCMUI-2977: removed cluster and application ingress buttons
           </a>
@@ -1226,7 +1259,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
       <td><a title="OCMUI-2874: replaced unavailable with pf5 component" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/212">OCMUI-2874: replaced unavailable with pf5 component
           </a>
@@ -1236,7 +1269,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP
           </a>
@@ -1246,7 +1279,7 @@
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
           </a>
@@ -1256,17 +1289,17 @@
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded
           </a>
       </td>
       <td title="davidaznaur">davidaznaur</td>
-      <td title="DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), kdoberst (approved)</td>
+      <td title="jmekkatt (requested), DcooperRH (approved), kdoberst (approved)">jmekkatt (requested), DcooperRH (approved), kdoberst (approved)</td>
       <td title="1" style="color: #d4d4d4;">1</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="Release to Production - March 5 2025" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/225">Release to Production - March 5 2025
           </a>
@@ -1287,13 +1320,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI
           </a>
@@ -1303,7 +1336,7 @@
       <td title="21" style="color: red;">21</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available
           </a>
@@ -1313,7 +1346,7 @@
       <td title="13" style="color: red;">13</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases
           </a>
@@ -1323,7 +1356,7 @@
       <td title="5" style="color: orange;">5</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected
           </a>
@@ -1333,7 +1366,7 @@
       <td title="28" style="color: red;">28</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="false">
       <td><a title="OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/223">OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ
           </a>
@@ -1354,13 +1387,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs
           </a>
@@ -1370,7 +1403,7 @@
       <td title="26" style="color: red;">26</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available
           </a>
@@ -1380,7 +1413,7 @@
       <td title="13" style="color: red;">13</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases
           </a>
@@ -1390,7 +1423,7 @@
       <td title="5" style="color: orange;">5</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/216">OCMUI-3064: Cluster upgrade modal - filter out GCP WIF related version gate for non GCP clusters
           </a>
@@ -1411,13 +1444,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd
           </a>
@@ -1427,7 +1460,7 @@
       <td title="1" style="color: #d4d4d4;">1</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"
           </a>
@@ -1437,7 +1470,7 @@
       <td title="6" style="color: orange;">6</td>
       <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
           </a>
@@ -1447,7 +1480,7 @@
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false" data-needs-approval="true">
       <td><a title="Release to Production - March 5 2025" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/225">Release to Production - March 5 2025
           </a>
@@ -1468,13 +1501,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases
           </a>
@@ -1495,13 +1528,13 @@
         <td colspan="2">
             <table class="pr-table">
                 <tr>
-                  <th title="Pull Request">Pull Request</th>
+                  <th title="PR">PR</th>
                   <th title="Author">Author</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true" data-needs-approval="true">
       <td><a title="OCMUI-3142-machine-pool-in-HCP-wizard-bug" class="pr-link" 
              href="https://github.com/RedHatInsights/uhc-portal/pull/222">OCMUI-3142-machine-pool-in-HCP-wizard-bug
           </a>
@@ -1525,7 +1558,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":5},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1},{"reviewer":"jloss-redhat","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":6},{"reviewer":"apecha","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":3},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1},{"reviewer":"jloss-redhat","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
@@ -1593,8 +1626,8 @@
             // Add click handler for return to table button
             const returnButton = document.getElementById('return-to-table');
             returnButton.addEventListener('click', function() {
-                document.getElementById('show-pending').checked = true;
-                filterByStatus('pending');
+                document.getElementById('show-needs-approval').checked = true;
+                filterByStatus('needs_approval');
             });
         });
     </script>
