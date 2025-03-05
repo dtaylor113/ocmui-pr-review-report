@@ -417,9 +417,13 @@ function processData() {
             let detailRows = document.querySelectorAll('tr.pr-detail-row');
             let readyToMergeCount = 0;
             
+            // Track which reviewers have at least one visible PR
+            const reviewersWithVisiblePRs = new Set();
+            
             detailRows.forEach(row => {
                 const status = row.dataset.status;
                 const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
+                const reviewerRowId = row.closest('.pr-row-table').dataset.reviewer;
                 
                 // Count ready to merge PRs
                 if (status === 'ready_to_merge') {
@@ -435,11 +439,13 @@ function processData() {
                         row.classList.remove('pending-review');
                     }
                     row.style.display = '';
+                    reviewersWithVisiblePRs.add(reviewerRowId);
                 } 
                 else if (filterType === 'ready_to_merge') {
                     // Only show ready to merge PRs
                     if (status === 'ready_to_merge') {
                         row.style.display = '';
+                        reviewersWithVisiblePRs.add(reviewerRowId);
                     } else {
                         row.style.display = 'none';
                     }
@@ -451,8 +457,28 @@ function processData() {
                     if (isPending) {
                         row.classList.add('pending-review');
                         row.style.display = '';
+                        reviewersWithVisiblePRs.add(reviewerRowId);
                     } else {
                         row.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Hide/show reviewer rows based on whether they have visible PRs
+            document.querySelectorAll('.reviewer-row').forEach(row => {
+                const reviewerId = row.dataset.reviewer;
+                if (reviewerId) {
+                    // For Ready to Merge filter, hide reviewers without ready PRs
+                    if (filterType === 'ready_to_merge') {
+                        row.style.display = reviewersWithVisiblePRs.has(reviewerId) ? '' : 'none';
+                    } 
+                    // For Pending filter, hide reviewers without pending PRs
+                    else if (filterType === 'pending') {
+                        row.style.display = reviewersWithVisiblePRs.has(reviewerId) ? '' : 'none';
+                    }
+                    // For All filter, show all reviewers
+                    else {
+                        row.style.display = '';
                     }
                 }
             });
