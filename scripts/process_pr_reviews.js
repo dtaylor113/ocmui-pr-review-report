@@ -306,6 +306,14 @@ function processData() {
             color: #ff9800;
         }
         
+        /* Current reviewer highlight */
+        .current-reviewer {
+            text-decoration: underline;
+            text-decoration-color: #ff9800;
+            text-decoration-thickness: 2px;
+            font-weight: bold;
+        }
+        
         /* Legend styles */
         .legend {
             margin-top: 10px;
@@ -570,6 +578,9 @@ function processData() {
           <div class="legend-item">
             <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the Pull Request has been open
           </div>
+          <div class="legend-item">
+            <span class="current-reviewer">Underlined text</span>: Highlights your username in the reviewers list
+          </div>
         </div>
       </div>
     </div>
@@ -685,18 +696,28 @@ function processData() {
             }
 
             const pendingClass = pr.isPending ? '' : ''; // Initially no highlight
+
+            // Highlight the current reviewer in the reviewers list
+            const reviewersList = pr.reviewers.split(', ').map(reviewerItem => {
+                // Check if this reviewer item contains the current reviewer
+                if (reviewerItem.startsWith(reviewer + ' (')) {
+                    return `<span class="current-reviewer">${reviewerItem}</span>`;
+                }
+                return reviewerItem;
+            }).join(', ');
+
             // Add data-pending attribute to track pending status
             htmlContent += `<tr class="pr-detail-row" data-status="${pr.status}" data-pending="${pr.isPending}">
-      <td><a title="${pr.title}" class="pr-link" 
-             href="https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pull/${pr.number}">${pr.title}
-          </a>
-      </td>
-      <td title="${pr.author}">${pr.author}</td>
-      <td title="${pr.reviewers}">${pr.reviewers}</td>
-      <td title="${pr.daysOpen}" style="color: ${pr.daysOpenColor};">${pr.daysOpen}</td>
-      <td title="${pr.approvals}">${pr.approvals}/${REQUIRED_APPROVALS}</td>
-      <td class="${statusClass}" title="${statusText}">${statusText}</td>
-    </tr>`;
+              <td><a title="${pr.title}" class="pr-link" 
+                     href="https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pull/${pr.number}">${pr.title}
+                  </a>
+              </td>
+              <td title="${pr.author}">${pr.author}</td>
+              <td title="${pr.reviewers}">${reviewersList}</td>
+              <td title="${pr.daysOpen}" style="color: ${pr.daysOpenColor};">${pr.daysOpen}</td>
+              <td title="${pr.approvals}">${pr.approvals}/${REQUIRED_APPROVALS}</td>
+              <td class="${statusClass}" title="${statusText}">${statusText}</td>
+            </tr>`;
         });
 
         htmlContent += `</table>
