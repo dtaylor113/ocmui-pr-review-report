@@ -364,7 +364,7 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 10:29:21 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 10:39:16 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -469,7 +469,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">6</span></label>
+        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">7</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -540,7 +540,7 @@
           </a>
       </td>
       <td title="Ginxo">Ginxo</td>
-      <td title="LiorKGOW (approved), lizagilman (approved)">LiorKGOW (approved), lizagilman (approved)</td>
+      <td title="jmekkatt (requested), LiorKGOW (approved), lizagilman (approved)">jmekkatt (requested), LiorKGOW (approved), lizagilman (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -950,7 +950,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
         <td>Jayakrishnan Mekkattillam (jmekkatt)</td>
-        <td><span class="pending-count">6</span></td>
+        <td><span class="pending-count">7</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="jmekkatt">
@@ -1021,6 +1021,16 @@
       <td title="davidaznaur">davidaznaur</td>
       <td title="jmekkatt (requested), DcooperRH (approved), kdoberst (approved)">jmekkatt (requested), DcooperRH (approved), kdoberst (approved)</td>
       <td title="2" style="color: #d4d4d4;">2</td>
+      <td title="2">2/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+      <td><a title="Revert release fixes 20250306" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/228">Revert release fixes 20250306
+          </a>
+      </td>
+      <td title="Ginxo">Ginxo</td>
+      <td title="jmekkatt (requested), LiorKGOW (approved), lizagilman (approved)">jmekkatt (requested), LiorKGOW (approved), lizagilman (approved)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
@@ -1397,7 +1407,7 @@
           </a>
       </td>
       <td title="Ginxo">Ginxo</td>
-      <td title="LiorKGOW (approved), lizagilman (approved)">LiorKGOW (approved), lizagilman (approved)</td>
+      <td title="jmekkatt (requested), LiorKGOW (approved), lizagilman (approved)">jmekkatt (requested), LiorKGOW (approved), lizagilman (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1546,7 +1556,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":6},{"reviewer":"apecha","pending":2},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":3},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":2},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":3},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
