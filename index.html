@@ -364,7 +364,7 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open PRs
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 15:42:35 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 15:48:30 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -475,7 +475,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="lizagilman" onclick="filterTable('lizagilman')"> lizagilman <span class="pending-badge">4</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
@@ -1121,7 +1121,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
         <td>Kim Doberstein (kdoberst)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
@@ -1151,16 +1151,6 @@
       </td>
       <td title="davidaznaur">davidaznaur</td>
       <td title="kdoberst (requested), DcooperRH (requested)">kdoberst (requested), DcooperRH (requested)</td>
-      <td title="0" style="color: #d4d4d4;">0</td>
-      <td title="0">0/3</td>
-      <td class="needs-review" title="Needs Review">Needs Review</td>
-    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-      <td><a title="Release to Production March 6 2025" class="pr-link" 
-             href="https://github.com/RedHatInsights/uhc-portal/pull/231">Release to Production March 6 2025
-          </a>
-      </td>
-      <td title="davidaznaur">davidaznaur</td>
-      <td title="lizagilman (requested), zherman0 (requested), kdoberst (requested)">lizagilman (requested), zherman0 (requested), kdoberst (requested)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
       <td title="0">0/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1234,6 +1224,16 @@
       <td title="2" style="color: #d4d4d4;">2</td>
       <td title="2">2/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
+    </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+      <td><a title="Release to Production March 6 2025" class="pr-link" 
+             href="https://github.com/RedHatInsights/uhc-portal/pull/231">Release to Production March 6 2025
+          </a>
+      </td>
+      <td title="davidaznaur">davidaznaur</td>
+      <td title="lizagilman (requested), zherman0 (requested), kdoberst (approved)">lizagilman (requested), zherman0 (requested), kdoberst (approved)</td>
+      <td title="0" style="color: #d4d4d4;">0</td>
+      <td title="1">1/3</td>
+      <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="lizagilman">
@@ -1287,9 +1287,9 @@
           </a>
       </td>
       <td title="davidaznaur">davidaznaur</td>
-      <td title="lizagilman (requested), zherman0 (requested), kdoberst (requested)">lizagilman (requested), zherman0 (requested), kdoberst (requested)</td>
+      <td title="lizagilman (requested), zherman0 (requested), kdoberst (approved)">lizagilman (requested), zherman0 (requested), kdoberst (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
-      <td title="0">0/3</td>
+      <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
       <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
@@ -1391,9 +1391,9 @@
           </a>
       </td>
       <td title="davidaznaur">davidaznaur</td>
-      <td title="lizagilman (requested), zherman0 (requested), kdoberst (requested)">lizagilman (requested), zherman0 (requested), kdoberst (requested)</td>
+      <td title="lizagilman (requested), zherman0 (requested), kdoberst (approved)">lizagilman (requested), zherman0 (requested), kdoberst (approved)</td>
       <td title="0" style="color: #d4d4d4;">0</td>
-      <td title="0">0/3</td>
+      <td title="1">1/3</td>
       <td class="needs-review" title="Needs Review">Needs Review</td>
     </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
       <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
@@ -1456,7 +1456,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":8},{"reviewer":"apecha","pending":2},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":3},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":2},{"reviewer":"kelvah","pending":1},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":8},{"reviewer":"apecha","pending":2},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
