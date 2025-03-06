@@ -557,6 +557,10 @@ function processData() {
               <td><code>username (requested changes)</code></td>
               <td>Reviewer has requested changes that need to be addressed</td>
             </tr>
+            <tr>
+              <td><code>username (pending)</code></td>
+              <td>Started but not submitted review: When a reviewer begins drafting their review in GitHub but hasn't submitted it yet</td>
+            </tr>
           </table>
         </div>
         
