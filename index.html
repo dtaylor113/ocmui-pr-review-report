@@ -37,6 +37,39 @@
         .pr-table td:nth-child(5) { width: 5%; } /* # Approvals */
         .pr-table th:nth-child(6),
         .pr-table td:nth-child(6) { width: 10%; } /* Status */
+        
+        /* Ready to Merge table styles */
+        .ready-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background-color: rgba(76, 175, 80, 0.1); /* Light green background */
+            margin-top: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .ready-table th {
+            background-color: rgba(76, 175, 80, 0.5); /* Darker green header */
+            color: white;
+            padding: 10px 8px;
+        }
+        .ready-table td {
+            padding: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .ready-table th:nth-child(1),
+        .ready-table td:nth-child(1) { width: 40%; } /* PR title */
+        .ready-table th:nth-child(2),
+        .ready-table td:nth-child(2) { width: 15%; } /* Author */
+        .ready-table th:nth-child(3),
+        .ready-table td:nth-child(3) { width: 10%; } /* Days Open */
+        .ready-table th:nth-child(4),
+        .ready-table td:nth-child(4) { width: 10%; } /* Approvals */
+        .ready-table th:nth-child(5),
+        .ready-table td:nth-child(5) { width: 25%; } /* Approved By */
+        
         .last-updated { font-size: 14px; font-style: italic; float: right; }
         .hidden { display: none; }
         .repo-title { font-family: "Courier New", Courier, monospace; font-size: 24px; font-weight: bold; }
@@ -101,7 +134,30 @@
             color: #ff9800;
         }
         
-
+        /* Ready to merge section header */
+        .ready-section-header {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 4px solid #4caf50;
+            padding: 10px 15px;
+            margin-top: 30px;
+            border-radius: 0 4px 4px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ready-section-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #4caf50;
+        }
+        .ready-count {
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
         
         /* Legend styles */
         .legend {
@@ -254,6 +310,22 @@
             
             // Set default to show all PRs (report view)
             filterByStatus('all');
+            
+            // Toggle Ready to Merge table visibility
+            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
+            const readyTable = document.getElementById('ready-table-section');
+            
+            if (toggleReadyBtn && readyTable) {
+                toggleReadyBtn.addEventListener('click', function() {
+                    if (readyTable.classList.contains('hidden')) {
+                        readyTable.classList.remove('hidden');
+                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
+                    } else {
+                        readyTable.classList.add('hidden');
+                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
+                    }
+                });
+            }
         });
         
         function toggleDetails() {
@@ -295,7 +367,7 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 19:49:02 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 19:54:04 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -1351,6 +1423,45 @@
             </tr></table>
         </td>
     </tr></table>
+    
+    <!-- Ready to Merge PRs Section -->
+    <div class="ready-section-header">
+        <h2>Ready to Merge Pull Requests</h2>
+        <span class="ready-count">3</span>
+    </div>
+    
+    <table class="ready-table" id="ready-table">
+        <tr>
+            <th>Pull Request</th>
+            <th>Author</th>
+            <th>Days Open</th>
+            <th>Approvals</th>
+            <th>Approved By</th>
+        </tr>
+        <tr>
+            <td><a title="OCMUI-2942 Updated to use the new PF select" class="pr-link" 
+                 href="https://github.com/RedHatInsights/uhc-portal/pull/149">OCMUI-2942 Updated to use the new PF select</a></td>
+            <td>tlabaj</td>
+            <td style="color: red;">30</td>
+            <td>3/3</td>
+            <td title="davidaznaur, DcooperRH, apecha">davidaznaur, DcooperRH, apecha</td>
+        </tr>
+        <tr>
+            <td><a title="OCMUI-2965 - View htpasswrd users when viewing IDPs" class="pr-link" 
+                 href="https://github.com/RedHatInsights/uhc-portal/pull/159">OCMUI-2965 - View htpasswrd users when viewing IDPs</a></td>
+            <td>DcooperRH</td>
+            <td style="color: red;">27</td>
+            <td>3/3</td>
+            <td title="davidaznaur, kdoberst, shivanthi-amara">davidaznaur, kdoberst, shivanthi-amara</td>
+        </tr>
+        <tr>
+            <td><a title="OCMUI-3123 add comments and links to feature gate constants file" class="pr-link" 
+                 href="https://github.com/RedHatInsights/uhc-portal/pull/213">OCMUI-3123 add comments and links to feature gate constants file</a></td>
+            <td>kdoberst</td>
+            <td style="color: orange;">6</td>
+            <td>3/3</td>
+            <td title="DcooperRH, kelvah, davidaznaur">DcooperRH, kelvah, davidaznaur</td>
+        </tr></table>
 
     <script>
         // Variable to track current sort order
