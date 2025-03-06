@@ -262,6 +262,8 @@
         }
         
         function filterByStatus(filterType) {
+            console.log("Filtering by:", filterType);
+            
             const chartContainer = document.getElementById('chart-container');
             const reviewerTable = document.querySelector('.reviewer-table');
             const radioContainer = document.querySelector('.radio-container');
@@ -271,7 +273,7 @@
             chartContainer.style.display = 'none';
             reviewerTable.style.display = 'none';
             radioContainer.style.display = 'none';
-            readyMergeSection.classList.add('hidden');
+            readyMergeSection.style.display = 'none';
             
             // Then show only what's needed based on filter type
             if (filterType === 'chart') {
@@ -286,7 +288,7 @@
                 
             } else if (filterType === 'ready') {
                 // Ready to merge view - show only the ready to merge table
-                readyMergeSection.classList.remove('hidden');
+                readyMergeSection.style.display = 'block';
                 
             } else if (filterType === 'all') {
                 // Report view - show the reviewer table and radio container
@@ -329,21 +331,22 @@
             // Set default to show all PRs (report view)
             filterByStatus('all');
             
-            // Toggle Ready to Merge table visibility
-            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
-            const readyTable = document.getElementById('ready-table-section');
+            // Set up radio button event handlers explicitly
+            document.getElementById('show-all-prs').addEventListener('click', function() {
+                filterByStatus('all');
+            });
             
-            if (toggleReadyBtn && readyTable) {
-                toggleReadyBtn.addEventListener('click', function() {
-                    if (readyTable.classList.contains('hidden')) {
-                        readyTable.classList.remove('hidden');
-                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
-                    } else {
-                        readyTable.classList.add('hidden');
-                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
-                    }
-                });
-            }
+            document.getElementById('show-ready-prs').addEventListener('click', function() {
+                filterByStatus('ready');
+            });
+            
+            document.getElementById('show-chart').addEventListener('click', function() {
+                filterByStatus('chart');
+                drawHorizontalChart();
+            });
+            
+            // Initialize the horizontal chart
+            drawHorizontalChart();
         });
         
         function toggleDetails() {
@@ -370,13 +373,13 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 20:02:30 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 20:05:37 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
-        <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
-        <label><input type="radio" name="prFilter" id="show-ready-prs" onclick="filterByStatus('ready')"> Ready To Merge (<span id="ready-count-badge">3</span>)</label>
-        <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
+        <label><input type="radio" name="prFilter" id="show-all-prs" checked> Report</label>
+        <label><input type="radio" name="prFilter" id="show-ready-prs"> Ready To Merge (<span id="ready-count-badge">3</span>)</label>
+        <label><input type="radio" name="prFilter" id="show-chart"> Chart</label>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
@@ -1429,7 +1432,7 @@
     </tr></table>
     
     <!-- Ready to Merge PRs Section (hidden initially) -->
-    <div id="ready-merge-section" class="hidden">
+    <div id="ready-merge-section" style="display: none;">
         <div class="ready-section-header">
             <h2>Ready to Merge Pull Requests</h2>
             <span class="ready-count">3</span>
