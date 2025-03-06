@@ -32,6 +32,9 @@ function processData() {
     const reviewers = {};
     const pendingReviewers = {};
 
+    // Array to store PRs that are ready to merge
+    const readyToMergePRs = [];
+
     // Map to store full names for each reviewer
     const reviewerNames = {};
 
@@ -120,6 +123,22 @@ function processData() {
         let prStatus = 'needs_review';
         if (approvalCount >= REQUIRED_APPROVALS) {
             prStatus = 'ready_to_merge';
+
+            // Add to ready to merge PRs array
+            const reviewersWithApprovals = Object.entries(reviewerStatus)
+                .filter(([_, state]) => state === 'APPROVED')
+                .map(([reviewer, _]) => reviewer);
+
+            readyToMergePRs.push({
+                number: prNumber,
+                title: prTitle,
+                author: prAuthor,
+                daysOpen,
+                daysOpenColor: color,
+                approvals: approvalCount,
+                requiredApprovals: REQUIRED_APPROVALS,
+                approvedBy: reviewersWithApprovals.join(', ')
+            });
         } else if (Object.values(reviewerStatus).includes('CHANGES_REQUESTED')) {
             prStatus = 'changes_requested';
         }
@@ -242,6 +261,39 @@ function processData() {
         .pr-table td:nth-child(5) { width: 5%; } /* # Approvals */
         .pr-table th:nth-child(6),
         .pr-table td:nth-child(6) { width: 10%; } /* Status */
+        
+        /* Ready to Merge table styles */
+        .ready-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background-color: rgba(76, 175, 80, 0.1); /* Light green background */
+            margin-top: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .ready-table th {
+            background-color: rgba(76, 175, 80, 0.5); /* Darker green header */
+            color: white;
+            padding: 10px 8px;
+        }
+        .ready-table td {
+            padding: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .ready-table th:nth-child(1),
+        .ready-table td:nth-child(1) { width: 40%; } /* PR title */
+        .ready-table th:nth-child(2),
+        .ready-table td:nth-child(2) { width: 15%; } /* Author */
+        .ready-table th:nth-child(3),
+        .ready-table td:nth-child(3) { width: 10%; } /* Days Open */
+        .ready-table th:nth-child(4),
+        .ready-table td:nth-child(4) { width: 10%; } /* Approvals */
+        .ready-table th:nth-child(5),
+        .ready-table td:nth-child(5) { width: 25%; } /* Approved By */
+        
         .last-updated { font-size: 14px; font-style: italic; float: right; }
         .hidden { display: none; }
         .repo-title { font-family: "Courier New", Courier, monospace; font-size: 24px; font-weight: bold; }
@@ -306,7 +358,30 @@ function processData() {
             color: #ff9800;
         }
         
-
+        /* Ready to merge section header */
+        .ready-section-header {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 4px solid #4caf50;
+            padding: 10px 15px;
+            margin-top: 30px;
+            border-radius: 0 4px 4px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ready-section-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #4caf50;
+        }
+        .ready-count {
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
         
         /* Legend styles */
         .legend {
@@ -459,6 +534,22 @@ function processData() {
             
             // Set default to show all PRs (report view)
             filterByStatus('all');
+            
+            // Toggle Ready to Merge table visibility
+            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
+            const readyTable = document.getElementById('ready-table-section');
+            
+            if (toggleReadyBtn && readyTable) {
+                toggleReadyBtn.addEventListener('click', function() {
+                    if (readyTable.classList.contains('hidden')) {
+                        readyTable.classList.remove('hidden');
+                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
+                    } else {
+                        readyTable.classList.add('hidden');
+                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
+                    }
+                });
+            }
         });
         
         function toggleDetails() {
@@ -732,6 +823,48 @@ function processData() {
         </td>
     </tr>`;
     });
+
+    htmlContent += `</table>
+    
+    <!-- Ready to Merge PRs Section -->
+    <div class="ready-section-header">
+        <h2>Ready to Merge Pull Requests</h2>
+        <span class="ready-count">${readyToMergePRs.length}</span>
+    </div>
+    
+    <table class="ready-table" id="ready-table">
+        <tr>
+            <th>Pull Request</th>
+            <th>Author</th>
+            <th>Days Open</th>
+            <th>Approvals</th>
+            <th>Approved By</th>
+        </tr>`;
+
+    // Sort ready to merge PRs by days open (newest first)
+    readyToMergePRs.sort((a, b) => b.daysOpen - a.daysOpen);
+
+    readyToMergePRs.forEach(pr => {
+        htmlContent += `
+        <tr>
+            <td><a title="${pr.title}" class="pr-link" 
+                 href="https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pull/${pr.number}">${pr.title}</a></td>
+            <td>${pr.author}</td>
+            <td style="color: ${pr.daysOpenColor};">${pr.daysOpen}</td>
+            <td>${pr.approvals}/${pr.requiredApprovals}</td>
+            <td title="${pr.approvedBy}">${pr.approvedBy}</td>
+        </tr>`;
+    });
+
+    // Add message for no PRs ready to merge
+    if (readyToMergePRs.length === 0) {
+        htmlContent += `
+        <tr>
+            <td colspan="5" style="text-align: center; padding: 20px;">
+                No pull requests are currently ready to merge.
+            </td>
+        </tr>`;
+    }
 
     htmlContent += `</table>
 
