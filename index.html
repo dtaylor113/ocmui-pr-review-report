@@ -25,17 +25,6 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .pr-table th:nth-child(3),
-        .pr-table td:nth-child(3) {
-            white-space: normal; /* Allow text to wrap in reviewers column */
-            line-height: 1.3;
-        }
-        /* Highlight for the current reviewer */
-        .current-reviewer {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 3px;
-            padding: 2px 4px;
-        }
         .pr-table th:nth-child(1),
         .pr-table td:nth-child(1) { width: 35%; } /* PR link */
         .pr-table th:nth-child(2),
@@ -212,17 +201,6 @@
             rows.forEach(row => {
                 row.style.display = (reviewer === 'all' || row.dataset.reviewer === reviewer) ? '' : 'none';
             });
-            
-            // First, clear any existing highlights
-            document.querySelectorAll('.current-reviewer').forEach(el => {
-                const parent = el.parentNode;
-                parent.innerHTML = parent.innerHTML.replace(/<span class="current-reviewer">([^<]+)</span>/g, '$1');
-            });
-            
-            // Then highlight the current reviewer if one is selected
-            if (reviewer !== 'all') {
-                highlightCurrentReviewer(reviewer);
-            }
         }
         
         function filterByStatus(filterType) {
@@ -274,24 +252,6 @@
             
             // Set default to show all PRs (report view)
             filterByStatus('all');
-            
-            // Check for URL parameter to set initial selected reviewer
-            const urlParams = new URLSearchParams(window.location.search);
-            const initialReviewer = urlParams.get('reviewer');
-            if (initialReviewer) {
-                // Find the radio button for this reviewer and check it
-                const reviewerRadio = document.querySelector('input[name="reviewerFilter"][value="' + initialReviewer + '"]');
-                if (reviewerRadio) {
-                    reviewerRadio.checked = true;
-                    filterTable(initialReviewer);
-                }
-            }
-            
-            // Add highlight to the first selected reviewer if any
-            const selectedReviewer = document.querySelector('input[name="reviewerFilter"]:checked');
-            if (selectedReviewer && selectedReviewer.value !== 'all') {
-                highlightCurrentReviewer(selectedReviewer.value);
-            }
         });
         
         function toggleDetails() {
@@ -318,44 +278,22 @@
             }
         }
         
-            // Add a function to highlight the current selected reviewer
-            function highlightCurrentReviewer(currentReviewer) {
-                if (!currentReviewer || currentReviewer === 'all') return;
-                
-                // Loop through all reviewers cells in the PR table
-                const reviewerCells = document.querySelectorAll('.pr-table td:nth-child(3)');
-                
-                reviewerCells.forEach(cell => {
-                    // Get the HTML content of the cell
-                    let html = cell.innerHTML;
-                    
-                    // Replace all occurrences of the current reviewer with highlighted version
-                    // We need to be careful to match the exact reviewer name with proper word boundaries
-                    const regex = new RegExp('(\b' + currentReviewer + '\s*\([^)]+\))', 'g');
-                    html = html.replace(regex, '<span class="current-reviewer">$1</span>');
-                    
-                    // Update the cell content
-                    cell.innerHTML = html;
-                });
+        function toggleLegend() {
+            const legend = document.getElementById('legend');
+            if (legend.classList.contains('hidden')) {
+                legend.classList.remove('hidden');
+                document.getElementById('toggleLegendBtn').textContent = 'Hide Legend';
+            } else {
+                legend.classList.add('hidden');
+                document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
             }
-            
-            // Function to toggle the legend display
-            function toggleLegend() {
-                const legend = document.getElementById('legend');
-                if (legend.classList.contains('hidden')) {
-                    legend.classList.remove('hidden');
-                    document.getElementById('toggleLegendBtn').textContent = 'Hide Legend';
-                } else {
-                    legend.classList.add('hidden');
-                    document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
-                }
-            }
+        }
     </script>
 </head>  
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 19:19:14 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 19:21:07 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -443,7 +381,37 @@
     
     <div class="radio-container">
         <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label><table style="margin-top: 8px; margin-bottom: 24px;">
-    <tr><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">4</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="pending-badge">3</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">1</span></label>    </td></tr><tr><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="jschuler" onclick="filterTable('jschuler')"> Joachim Schuler (jschuler) <span class="pending-badge">1</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">3</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">2</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">9</span></label>    </td></tr><tr><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">3</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="lizagilman" onclick="filterTable('lizagilman')"> lizagilman <span class="pending-badge">4</span></label>    </td></tr><tr><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">3</span></label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) </label>    </td><td style="text-align: left; padding: 2px;">        <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">1</span></label>    </td></tr></table></div>
+    <tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">4</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">1</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="jschuler" onclick="filterTable('jschuler')"> Joachim Schuler (jschuler) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">2</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">9</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="lizagilman" onclick="filterTable('lizagilman')"> lizagilman <span class="pending-badge">4</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">3</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) </label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">1</span></label>
+    </td></tr></table></div>
     <table class="reviewer-table">
         <tr>
             <th style="width: 28%;">Reviewer</th>
@@ -1408,7 +1376,7 @@
                 
                 // Get the full name for the chart label if available
                 const fullName = {"LiorKGOW":"Lior Keren","Ginxo":"Enrique Mingorance Cano","kelvah":"roberto emanuel","eliranmal":"Lyn M","jschuler":"Joachim Schuler","DcooperRH":"Dylan Cooper","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","zherman0":"Zac Herman","dragan000":"Denis Ragan"}[item.reviewer] || '';
-                const displayName = fullName ? fullName + ' (' + item.reviewer + ')' : item.reviewer;
+                const displayName = fullName ? `${fullName} (${item.reviewer})` : item.reviewer;
                 
                 label.textContent = displayName;
                 label.title = displayName; // Add tooltip for truncated names
