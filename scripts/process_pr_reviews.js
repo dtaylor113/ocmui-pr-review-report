@@ -164,8 +164,21 @@ function processData() {
                 reviewers[reviewer] = { pending: 0, prDetails: [] };
             }
 
-            // If this reviewer is requested and hasn't reviewed yet, count as pending
-            const isPending = requestedReviewers.includes(reviewer) && !reviewerStatus[reviewer];
+            // Determine if this review is pending:
+            // 1. If reviewer is requested and hasn't reviewed yet
+            // 2. If reviewer has commented (but not approved)
+            // 3. If reviewer has requested changes
+            // 4. If reviewer status is explicitly "pending"
+            let isPending = false;
+
+            if (requestedReviewers.includes(reviewer) && !reviewerStatus[reviewer]) {
+                // Case 1: Requested but hasn't reviewed
+                isPending = true;
+            } else if (reviewerStatus[reviewer]) {
+                // Case 2-4: Check review status
+                const status = reviewerStatus[reviewer];
+                isPending = status === 'COMMENTED' || status === 'CHANGES_REQUESTED' || status === 'PENDING';
+            }
             if (isPending) {
                 reviewers[reviewer].pending += 1;
             }
