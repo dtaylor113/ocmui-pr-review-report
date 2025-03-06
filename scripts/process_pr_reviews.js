@@ -306,13 +306,7 @@ function processData() {
             color: #ff9800;
         }
         
-        /* Current reviewer highlight */
-        .current-reviewer {
-            text-decoration: underline;
-            text-decoration-color: #ff9800;
-            text-decoration-thickness: 2px;
-            font-weight: bold;
-        }
+
         
         /* Legend styles */
         .legend {
@@ -579,7 +573,7 @@ function processData() {
             <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the Pull Request has been open
           </div>
           <div class="legend-item">
-            <span class="current-reviewer">Underlined text</span>: Highlights your username in the reviewers list
+            Your username will appear first in the reviewers list for easy identification
           </div>
         </div>
       </div>
@@ -697,14 +691,24 @@ function processData() {
 
             const pendingClass = pr.isPending ? '' : ''; // Initially no highlight
 
-            // Highlight the current reviewer in the reviewers list
-            const reviewersList = pr.reviewers.split(', ').map(reviewerItem => {
-                // Check if this reviewer item contains the current reviewer
-                if (reviewerItem.startsWith(reviewer + ' (')) {
-                    return `<span class="current-reviewer">${reviewerItem}</span>`;
-                }
-                return reviewerItem;
-            }).join(', ');
+            // Move current reviewer to the front of the list and highlight it
+            let reviewersArray = pr.reviewers.split(', ');
+
+            // Find the current reviewer in the list
+            const currentReviewerIndex = reviewersArray.findIndex(item =>
+                item.startsWith(reviewer + ' ('));
+
+            // If the current reviewer is in the list, move them to the front
+            if (currentReviewerIndex !== -1) {
+                const currentReviewer = reviewersArray[currentReviewerIndex];
+                // Remove from current position
+                reviewersArray.splice(currentReviewerIndex, 1);
+                // Add to the front (without special styling now)
+                reviewersArray.unshift(currentReviewer);
+            }
+
+            // Join the array back into a string
+            const reviewersList = reviewersArray.join(', ');
 
             // Add data-pending attribute to track pending status
             htmlContent += `<tr class="pr-detail-row" data-status="${pr.status}" data-pending="${pr.isPending}">
