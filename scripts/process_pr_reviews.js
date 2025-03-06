@@ -414,78 +414,24 @@ function processData() {
                 });
             }
             
-            let detailRows = document.querySelectorAll('tr.pr-detail-row');
-            let readyToMergeCount = 0;
-            
-            // Track which reviewers have at least one visible PR
-            const reviewersWithVisiblePRs = new Set();
-            
-            detailRows.forEach(row => {
-                const status = row.dataset.status;
-                const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
-                const reviewerRowId = row.closest('.pr-row-table').dataset.reviewer;
-                
-                // Count ready to merge PRs
-                if (status === 'ready_to_merge') {
-                    readyToMergeCount++;
-                }
-                
-                // Apply the appropriate filter
-                if (filterType === 'all') {
-                    // Show all PRs with pending highlight
+            // For 'all' (Report view), show all PRs with pending highlight for pending PRs
+            if (filterType === 'all') {
+                let detailRows = document.querySelectorAll('tr.pr-detail-row');
+                detailRows.forEach(row => {
+                    const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
                     if (isPending) {
                         row.classList.add('pending-review');
                     } else {
                         row.classList.remove('pending-review');
                     }
                     row.style.display = '';
-                    reviewersWithVisiblePRs.add(reviewerRowId);
-                } 
-                else if (filterType === 'ready_to_merge') {
-                    // Only show ready to merge PRs
-                    if (status === 'ready_to_merge') {
-                        row.style.display = '';
-                        reviewersWithVisiblePRs.add(reviewerRowId);
-                    } else {
-                        row.style.display = 'none';
-                    }
-                    // No pending highlight needed in this view
-                    row.classList.remove('pending-review');
-                }
-                else if (filterType === 'pending') {
-                    // Only show pending reviews
-                    if (isPending) {
-                        row.classList.add('pending-review');
-                        row.style.display = '';
-                        reviewersWithVisiblePRs.add(reviewerRowId);
-                    } else {
-                        row.style.display = 'none';
-                    }
-                }
-            });
-            
-            // Hide/show reviewer rows based on whether they have visible PRs
-            document.querySelectorAll('.reviewer-row').forEach(row => {
-                const reviewerId = row.dataset.reviewer;
-                if (reviewerId) {
-                    // For Ready to Merge filter, hide reviewers without ready PRs
-                    if (filterType === 'ready_to_merge') {
-                        row.style.display = reviewersWithVisiblePRs.has(reviewerId) ? '' : 'none';
-                    } 
-                    // For Pending filter, hide reviewers without pending PRs
-                    else if (filterType === 'pending') {
-                        row.style.display = reviewersWithVisiblePRs.has(reviewerId) ? '' : 'none';
-                    }
-                    // For All filter, show all reviewers
-                    else {
-                        row.style.display = '';
-                    }
-                }
-            });
-            
-            // Update the ready to merge badge
-            const readyToMergeBadge = document.getElementById('ready-to-merge-badge');
-            readyToMergeBadge.textContent = readyToMergeCount;
+                });
+                
+                // Show all reviewer rows
+                document.querySelectorAll('.reviewer-row').forEach(row => {
+                    row.style.display = '';
+                });
+            }
         }
         
         document.addEventListener("DOMContentLoaded", function() {
@@ -496,17 +442,8 @@ function processData() {
                 lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
             }
             
-            // Count ready to merge PRs for the badge
-            let readyToMergeCount = 0;
-            document.querySelectorAll('tr.pr-detail-row').forEach(row => {
-                if (row.dataset.status === 'ready_to_merge') {
-                    readyToMergeCount++;
-                }
-            });
-            document.getElementById('ready-to-merge-badge').textContent = readyToMergeCount;
-            
-            // Set default to show pending reviews (already checked in HTML)
-            filterByStatus('pending');
+            // Set default to show all PRs (report view)
+            filterByStatus('all');
         });
         
         function toggleDetails() {
@@ -528,16 +465,8 @@ function processData() {
                     prRowTable.classList.add('hidden');
                 });
             } else {
-                // Get the currently selected filter (default to pending)
-                let selectedFilter = 'pending';
-                if (document.getElementById('show-all-prs').checked) {
-                    selectedFilter = 'all';
-                } else if (document.getElementById('show-ready-to-merge').checked) {
-                    selectedFilter = 'ready_to_merge';
-                }
-                
-                // Apply the appropriate filter
-                filterByStatus(selectedFilter);
+                // Only option now is the "Report" view (all)
+                filterByStatus('all');
             }
         }
         
@@ -564,9 +493,7 @@ function processData() {
     </h2>
     
     <div class="filter-controls">
-        <label><input type="radio" name="prFilter" id="show-pending" onclick="filterByStatus('pending')" checked> Reviews Pending</label>
-        <label><input type="radio" name="prFilter" id="show-ready-to-merge" onclick="filterByStatus('ready_to_merge')"> Ready to Merge <span id="ready-to-merge-badge" class="merge-badge">0</span></label>
-        <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')"> All</label>
+        <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
         <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
@@ -690,7 +617,7 @@ function processData() {
 
     /** Reviewer's PR Table with full names **/
 
-    // Prepare reviewer data for the chart
+        // Prepare reviewer data for the chart
     const chartData = [];
     Object.entries(reviewers).forEach(([reviewer, data]) => {
         if (data.pending > 0) {
@@ -844,8 +771,8 @@ function processData() {
             // Add click handler for return to table button
             const returnButton = document.getElementById('return-to-table');
             returnButton.addEventListener('click', function() {
-                document.getElementById('show-pending').checked = true;
-                filterByStatus('pending');
+                document.getElementById('show-all-prs').checked = true;
+                filterByStatus('all');
             });
         });
     </script>
