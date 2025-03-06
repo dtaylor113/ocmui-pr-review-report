@@ -476,6 +476,36 @@ function processData() {
             font-weight: bold;
             color: #ff9800;
         }
+        
+        /* Navigation link styles */
+        .nav-link {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .nav-link:hover {
+            background-color: #3d8b40;
+        }
+        .back-to-top {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .back-to-top:hover {
+            background-color: #555;
+        }
     </style>
     <script>
         function filterTable(reviewer) {
@@ -593,7 +623,7 @@ function processData() {
 
     htmlContent += `  
 <body>
-    <h2>
+    <h2 id="top">
       <span class="repo-title">${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}</span> Open Pull Requests
       <span id="lastUpdated" class="last-updated" data-utc="${lastUpdatedUTC}"></span>
     </h2>
@@ -601,6 +631,7 @@ function processData() {
     <div class="filter-controls">
         <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
         <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
+        ${readyToMergePRs.length > 0 ? `<a href="#ready-section" class="nav-link">Ready To Merge (${readyToMergePRs.length})</a>` : ''}
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
@@ -827,9 +858,12 @@ function processData() {
     htmlContent += `</table>
     
     <!-- Ready to Merge PRs Section -->
-    <div class="ready-section-header">
+    <div id="ready-section" class="ready-section-header">
         <h2>Ready to Merge Pull Requests</h2>
-        <span class="ready-count">${readyToMergePRs.length}</span>
+        <div>
+            <span class="ready-count">${readyToMergePRs.length}</span>
+            <a href="#top" class="back-to-top">Back to top</a>
+        </div>
     </div>
     
     <table class="ready-table" id="ready-table">
