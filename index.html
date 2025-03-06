@@ -213,21 +213,15 @@
                 row.style.display = (reviewer === 'all' || row.dataset.reviewer === reviewer) ? '' : 'none';
             });
             
-            // Highlight the current reviewer in the reviewers list
+            // First, clear any existing highlights
+            document.querySelectorAll('.current-reviewer').forEach(el => {
+                const parent = el.parentNode;
+                parent.innerHTML = parent.innerHTML.replace(/<span class="current-reviewer">([^<]+)</span>/g, '$1');
+            });
+            
+            // Then highlight the current reviewer if one is selected
             if (reviewer !== 'all') {
-                // First remove any existing highlights
-                document.querySelectorAll('.current-reviewer').forEach(el => {
-                    el.outerHTML = el.innerHTML;
-                });
-                
-                // Then add highlight to the current reviewer
-                document.querySelectorAll('.pr-table td:nth-child(3)').forEach(cell => {
-                    // Create a regex that matches the reviewer name with various statuses in parentheses
-                    const pattern = new RegExp(reviewer + ' \((requested|approved|commented|pending|requested changes)\)', 'g');
-                    cell.innerHTML = cell.innerHTML.replace(pattern, function(match) {
-                        return '<span class="current-reviewer">' + match + '</span>';
-                    });
-                });
+                highlightCurrentReviewer(reviewer);
             }
         }
         
@@ -292,6 +286,12 @@
                     filterTable(initialReviewer);
                 }
             }
+            
+            // Add highlight to the first selected reviewer if any
+            const selectedReviewer = document.querySelector('input[name="reviewerFilter"]:checked');
+            if (selectedReviewer && selectedReviewer.value !== 'all') {
+                highlightCurrentReviewer(selectedReviewer.value);
+            }
         });
         
         function toggleDetails() {
@@ -318,22 +318,44 @@
             }
         }
         
-        function toggleLegend() {
-            const legend = document.getElementById('legend');
-            if (legend.classList.contains('hidden')) {
-                legend.classList.remove('hidden');
-                document.getElementById('toggleLegendBtn').textContent = 'Hide Legend';
-            } else {
-                legend.classList.add('hidden');
-                document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
+            // Add a function to highlight the current selected reviewer
+            function highlightCurrentReviewer(currentReviewer) {
+                if (!currentReviewer || currentReviewer === 'all') return;
+                
+                // Loop through all reviewers cells in the PR table
+                const reviewerCells = document.querySelectorAll('.pr-table td:nth-child(3)');
+                
+                reviewerCells.forEach(cell => {
+                    // Get the HTML content of the cell
+                    let html = cell.innerHTML;
+                    
+                    // Replace all occurrences of the current reviewer with highlighted version
+                    // We need to be careful to match the exact reviewer name with proper word boundaries
+                    const regex = new RegExp('(\b' + currentReviewer + '\s*\([^)]+\))', 'g');
+                    html = html.replace(regex, '<span class="current-reviewer">$1</span>');
+                    
+                    // Update the cell content
+                    cell.innerHTML = html;
+                });
             }
-        }
+            
+            // Function to toggle the legend display
+            function toggleLegend() {
+                const legend = document.getElementById('legend');
+                if (legend.classList.contains('hidden')) {
+                    legend.classList.remove('hidden');
+                    document.getElementById('toggleLegendBtn').textContent = 'Hide Legend';
+                } else {
+                    legend.classList.add('hidden');
+                    document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
+                }
+            }
     </script>
 </head>  
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 19:13:03 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 19:16:36 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
