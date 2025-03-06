@@ -35,6 +35,9 @@ function processData() {
     // Array to store PRs that are ready to merge
     const readyToMergePRs = [];
 
+    // Get total number of open PRs
+    const totalOpenPRs = prData.data.repository.pullRequests.nodes.length;
+
     // Map to store full names for each reviewer
     const reviewerNames = {};
 
@@ -315,6 +318,8 @@ function processData() {
             padding: 10px;
             background-color: #1e1e1e;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
         }
         .filter-controls label {
             margin-right: 15px;
@@ -349,6 +354,15 @@ function processData() {
             border-radius: 3px;
             margin-left: 5px;
             vertical-align: middle;
+        }
+        
+        /* Total PRs badge */
+        .total-prs-badge {
+            display: inline-block;
+            color: #d4d4d4;
+            font-size: 14px;
+            margin-left: auto;
+            margin-right: 15px;
         }
         
         /* Bigger pending count in main table */
@@ -629,10 +643,13 @@ function processData() {
     </h2>
     
     <div class="filter-controls">
-        <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
-        <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-        ${readyToMergePRs.length > 0 ? `<a href="#ready-section" class="nav-link">Ready To Merge (${readyToMergePRs.length})</a>` : ''}
-        <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
+        <div>
+            <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
+            <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
+            ${readyToMergePRs.length > 0 ? `<a href="#ready-section" class="nav-link">Ready To Merge (${readyToMergePRs.length})</a>` : ''}
+        </div>
+        <span class="total-prs-badge">Total # Of Open PRs: ${totalOpenPRs}</span>
+        <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
     <!-- Legend positioned between filters and radio buttons -->
