@@ -262,26 +262,38 @@
         }
         
         function filterByStatus(filterType) {
-            // Hide chart if it's visible and we're switching to a non-chart filter
-            if (filterType !== 'chart') {
-                const chartContainer = document.getElementById('chart-container');
-                const reviewerTable = document.querySelector('.reviewer-table');
-                const radioContainer = document.querySelector('.radio-container');
+            const chartContainer = document.getElementById('chart-container');
+            const reviewerTable = document.querySelector('.reviewer-table');
+            const radioContainer = document.querySelector('.radio-container');
+            const readyMergeSection = document.getElementById('ready-merge-section');
+            
+            // First, hide everything
+            chartContainer.style.display = 'none';
+            reviewerTable.style.display = 'none';
+            radioContainer.style.display = 'none';
+            readyMergeSection.classList.add('hidden');
+            
+            // Then show only what's needed based on filter type
+            if (filterType === 'chart') {
+                // Chart view
+                chartContainer.style.display = 'block';
                 
-                // Show the regular view
-                chartContainer.style.display = 'none';
+                // Ensure PR details are hidden
+                const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
+                prRowTables.forEach(prRowTable => {
+                    prRowTable.classList.add('hidden');
+                });
+                
+            } else if (filterType === 'ready') {
+                // Ready to merge view - show only the ready to merge table
+                readyMergeSection.classList.remove('hidden');
+                
+            } else if (filterType === 'all') {
+                // Report view - show the reviewer table and radio container
                 reviewerTable.style.display = 'table';
                 radioContainer.style.display = 'block';
                 
-                // Show PR details
-                const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
-                prRowTables.forEach(prRowTable => {
-                    prRowTable.classList.remove('hidden');
-                });
-            }
-            
-            // For 'all' (Report view), show all PRs with pending highlight for pending PRs
-            if (filterType === 'all') {
+                // For 'all' (Report view), show all PRs with pending highlight for pending PRs
                 let detailRows = document.querySelectorAll('tr.pr-detail-row');
                 detailRows.forEach(row => {
                     const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
@@ -296,6 +308,12 @@
                 // Show all reviewer rows
                 document.querySelectorAll('.reviewer-row').forEach(row => {
                     row.style.display = '';
+                });
+                
+                // Show PR details
+                const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
+                prRowTables.forEach(prRowTable => {
+                    prRowTable.classList.remove('hidden');
                 });
             }
         }
@@ -329,27 +347,12 @@
         });
         
         function toggleDetails() {
-            const chartRadio = document.getElementById('show-chart');
-            const chartContainer = document.getElementById('chart-container');
-            const reviewerTable = document.querySelector('.reviewer-table');
-            const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
-            const radioContainer = document.querySelector('.radio-container');
+            // Simply call filterByStatus with 'chart' to handle showing/hiding the appropriate elements
+            filterByStatus('chart');
             
-            // When chart mode is enabled
-            if (chartRadio.checked) {
-                // Show only the chart
-                chartContainer.style.display = 'block';
-                reviewerTable.style.display = 'none';
-                radioContainer.style.display = 'none';
-                
-                // Ensure PR details are hidden
-                prRowTables.forEach(prRowTable => {
-                    prRowTable.classList.add('hidden');
-                });
-            } else {
-                // Only option now is the "Report" view (all)
-                filterByStatus('all');
-            }
+            // Initialize the chart if it's not already done
+            drawHorizontalChart();
+        }
         }
         
         function toggleLegend() {
@@ -367,11 +370,12 @@
 <body>
     <h2>
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 20:00:21 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 20:02:30 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
         <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
+        <label><input type="radio" name="prFilter" id="show-ready-prs" onclick="filterByStatus('ready')"> Ready To Merge (<span id="ready-count-badge">3</span>)</label>
         <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
@@ -1424,13 +1428,14 @@
         </td>
     </tr></table>
     
-    <!-- Ready to Merge PRs Section -->
-    <div class="ready-section-header">
-        <h2>Ready to Merge Pull Requests</h2>
-        <span class="ready-count">3</span>
-    </div>
-    
-    <table class="ready-table" id="ready-table">
+    <!-- Ready to Merge PRs Section (hidden initially) -->
+    <div id="ready-merge-section" class="hidden">
+        <div class="ready-section-header">
+            <h2>Ready to Merge Pull Requests</h2>
+            <span class="ready-count">3</span>
+        </div>
+        
+        <table class="ready-table" id="ready-table">
         <tr>
             <th>Pull Request</th>
             <th>Author</th>
