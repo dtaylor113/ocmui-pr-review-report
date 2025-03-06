@@ -91,6 +91,8 @@
             padding: 10px;
             background-color: #1e1e1e;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
         }
         .filter-controls label {
             margin-right: 15px;
@@ -130,13 +132,10 @@
         /* Total PRs badge */
         .total-prs-badge {
             display: inline-block;
-            background-color: #2196F3;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 4px;
-            margin-left: 15px;
+            color: #d4d4d4;
+            font-size: 14px;
+            margin-left: auto;
+            margin-right: 15px;
         }
         
         /* Bigger pending count in main table */
@@ -409,15 +408,17 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 21:08:00 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 06 2025 21:11:58 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
-        <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
-        <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-        <a href="#ready-section" class="nav-link">Ready To Merge (3)</a>
+        <div>
+            <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
+            <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
+            <a href="#ready-section" class="nav-link">Ready To Merge (3)</a>
+        </div>
         <span class="total-prs-badge">Total # Of Open PRs: 39</span>
-        <button id="toggleLegendBtn" onClick="toggleLegend()" style="float: right; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
+        <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
     <!-- Legend positioned between filters and radio buttons -->
