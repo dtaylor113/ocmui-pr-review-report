@@ -309,34 +309,62 @@
             return params;
         }
         
-        // Function to apply reviewer filter from URL if present
+        // Enhanced filterTable function that updates the URL and applies filtering
+        function filterTable(reviewer) {
+            console.log("Filtering for reviewer:", reviewer);
+            
+            // Update the URL with the reviewer parameter if it's not 'all'
+            if (reviewer !== 'all') {
+                // Use replaceState to update URL without adding to browser history
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('reviewer', reviewer);
+                window.history.replaceState({}, '', newUrl);
+                console.log("Updated URL with reviewer param:", reviewer);
+            } else {
+                // Remove the reviewer parameter if 'all' is selected
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.delete('reviewer');
+                window.history.replaceState({}, '', newUrl);
+                console.log("Removed reviewer param from URL");
+            }
+            
+            // Apply filtering to the table rows
+            let rows = document.querySelectorAll('.reviewer-row');
+            rows.forEach(row => {
+                const shouldShow = (reviewer === 'all' || row.dataset.reviewer.toLowerCase() === reviewer.toLowerCase());
+                row.style.display = shouldShow ? '' : 'none';
+                console.log("Row:", row.dataset.reviewer, "Display:", shouldShow ? 'showing' : 'hidden');
+            });
+        }
+        
+        // Function to apply reviewer filter from URL if present (case-insensitive)
         function applyReviewerFilterFromUrl() {
             const params = getUrlParams();
             
             if (params.reviewer) {
-                console.log("Found reviewer param:", params.reviewer);
-                // Find the radio button for this reviewer
-                const reviewerRadio = document.querySelector('input[name="reviewerFilter"][value="' + params.reviewer + '"]');
+                const reviewerParam = params.reviewer.toLowerCase();
+                console.log("Found reviewer param:", reviewerParam);
                 
-                if (reviewerRadio) {
-                    console.log("Found radio button for reviewer:", params.reviewer);
-                    // Select this radio button
-                    reviewerRadio.checked = true;
-                    
-                    // Apply the filter
-                    filterTable(params.reviewer);
+                // Find matching radio button (case-insensitive)
+                let found = false;
+                const reviewerRadios = document.querySelectorAll('input[name="reviewerFilter"]');
+                
+                reviewerRadios.forEach(radio => {
+                    if (radio.value.toLowerCase() === reviewerParam) {
+                        console.log("Found radio button for reviewer:", radio.value);
+                        // Select this radio button
+                        radio.checked = true;
+                        
+                        // Apply the filter
+                        filterTable(radio.value);
+                        found = true;
+                    }
+                });
+                
+                if (!found) {
+                    console.log("No matching reviewer found for:", reviewerParam);
                 }
             }
-        }
-        
-        function filterTable(reviewer) {
-            console.log("Filtering for reviewer:", reviewer);
-            let rows = document.querySelectorAll('.reviewer-row');
-            rows.forEach(row => {
-                const shouldShow = (reviewer === 'all' || row.dataset.reviewer === reviewer);
-                row.style.display = shouldShow ? '' : 'none';
-                console.log("Row:", row.dataset.reviewer, "Display:", shouldShow ? 'showing' : 'hidden');
-            });
         }
         
         function filterByStatus(filterType) {
@@ -376,6 +404,10 @@
                     document.querySelectorAll('.reviewer-row').forEach(row => {
                         row.style.display = '';
                     });
+                } else {
+                    // Re-apply the current reviewer filter
+                    const selectedReviewer = document.querySelector('input[name="reviewerFilter"]:checked').value;
+                    filterTable(selectedReviewer);
                 }
             }
         }
@@ -454,7 +486,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 07 2025 13:59:32 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 07 2025 14:06:00 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -756,7 +788,7 @@
               </td>
               <td title="lizagilman">lizagilman</td>
               <td title="shivanthi-amara (requested), kdoberst (approved), jmekkatt (commented), kelvah (approved)">kelvah (approved), shivanthi-amara (requested), kdoberst (approved), jmekkatt (commented)</td>
-              <td title="3" style="color: yellow;">3</td>
+              <td title="4" style="color: yellow;">4</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
@@ -1051,7 +1083,7 @@
               </td>
               <td title="lizagilman">lizagilman</td>
               <td title="shivanthi-amara (requested), kdoberst (approved), jmekkatt (commented), kelvah (approved)">jmekkatt (commented), shivanthi-amara (requested), kdoberst (approved), kelvah (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
+              <td title="4" style="color: yellow;">4</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
@@ -1272,7 +1304,7 @@
               </td>
               <td title="lizagilman">lizagilman</td>
               <td title="shivanthi-amara (requested), kdoberst (approved), jmekkatt (commented), kelvah (approved)">kdoberst (approved), shivanthi-amara (requested), jmekkatt (commented), kelvah (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
+              <td title="4" style="color: yellow;">4</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
@@ -1406,7 +1438,7 @@
               </td>
               <td title="lizagilman">lizagilman</td>
               <td title="shivanthi-amara (requested), kdoberst (approved), jmekkatt (commented), kelvah (approved)">shivanthi-amara (requested), kdoberst (approved), jmekkatt (commented), kelvah (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
+              <td title="4" style="color: yellow;">4</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
