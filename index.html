@@ -295,10 +295,47 @@
         }
     </style>
     <script>
+        // Function to get URL query parameters
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search;
+            
+            if (queryString) {
+                const urlParams = new URLSearchParams(queryString);
+                urlParams.forEach((value, key) => {
+                    params[key] = value;
+                });
+            }
+            return params;
+        }
+        
+        // Function to apply reviewer filter from URL if present
+        function applyReviewerFilterFromUrl() {
+            const params = getUrlParams();
+            
+            if (params.reviewer) {
+                console.log("Found reviewer param:", params.reviewer);
+                // Find the radio button for this reviewer
+                const reviewerRadio = document.querySelector('input[name="reviewerFilter"][value="' + params.reviewer + '"]');
+                
+                if (reviewerRadio) {
+                    console.log("Found radio button for reviewer:", params.reviewer);
+                    // Select this radio button
+                    reviewerRadio.checked = true;
+                    
+                    // Apply the filter
+                    filterTable(params.reviewer);
+                }
+            }
+        }
+        
         function filterTable(reviewer) {
+            console.log("Filtering for reviewer:", reviewer);
             let rows = document.querySelectorAll('.reviewer-row');
             rows.forEach(row => {
-                row.style.display = (reviewer === 'all' || row.dataset.reviewer === reviewer) ? '' : 'none';
+                const shouldShow = (reviewer === 'all' || row.dataset.reviewer === reviewer);
+                row.style.display = shouldShow ? '' : 'none';
+                console.log("Row:", row.dataset.reviewer, "Display:", shouldShow ? 'showing' : 'hidden');
             });
         }
         
@@ -334,45 +371,11 @@
                     row.style.display = '';
                 });
                 
-                // Show all reviewer rows
-                document.querySelectorAll('.reviewer-row').forEach(row => {
-                    row.style.display = '';
-                });
-            }
-        }
-        
-        // Function to get URL query parameters
-        function getUrlParams() {
-            const params = {};
-            const queryString = window.location.search;
-            
-            if (queryString) {
-                const urlParams = new URLSearchParams(queryString);
-                urlParams.forEach((value, key) => {
-                    params[key] = value;
-                });
-            }
-            return params;
-        }
-        
-        // Function to apply reviewer filter from URL if present
-        function applyReviewerFilterFromUrl() {
-            const params = getUrlParams();
-            
-            if (params.reviewer) {
-                // Find the radio button for this reviewer
-                const reviewerRadio = document.querySelector('input[name="reviewerFilter"][value="' + params.reviewer + '"]');
-                
-                if (reviewerRadio) {
-                    // Select this radio button
-                    reviewerRadio.checked = true;
-                    
-                    // Apply the filter
-                    filterTable(params.reviewer);
-                    
-                    // Make sure we're in "Report" view
-                    document.getElementById('show-all-prs').checked = true;
-                    filterByStatus('all');
+                // If we're not filtering by reviewer, show all reviewer rows
+                if (document.querySelector('input[name="reviewerFilter"][value="all"]').checked) {
+                    document.querySelectorAll('.reviewer-row').forEach(row => {
+                        row.style.display = '';
+                    });
                 }
             }
         }
@@ -413,6 +416,7 @@
         }
         
         document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM content loaded");
             const lastUpdatedElement = document.getElementById("lastUpdated");
             const utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
             if (utcTimestamp) {
@@ -422,9 +426,6 @@
             
             // Set default to show all PRs (report view)
             filterByStatus('all');
-            
-            // Check for reviewer in URL and apply filter
-            applyReviewerFilterFromUrl();
             
             // Toggle Ready to Merge table visibility
             const toggleReadyBtn = document.getElementById('toggle-ready-btn');
@@ -441,13 +442,19 @@
                     }
                 });
             }
+            
+            // Check for reviewer in URL and apply filter with a slight delay
+            // to ensure all elements are properly initialized
+            setTimeout(function() {
+                applyReviewerFilterFromUrl();
+            }, 200);
         });
     </script>
 </head>  
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 07 2025 13:47:52 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 07 2025 13:50:09 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
