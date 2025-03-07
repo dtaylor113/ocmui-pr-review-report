@@ -506,6 +506,20 @@ function processData() {
         .nav-link:hover {
             background-color: #3d8b40;
         }
+        
+        /* Ready to Merge link style - no background, green text */
+        .ready-link {
+            display: inline-block;
+            background-color: transparent; /* No background */
+            color: #4caf50; /* Green text */
+            padding: 5px 12px;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        .ready-link:hover {
+            text-decoration: underline;
+        }
         .back-to-top {
             display: inline-block;
             background-color: #333;
@@ -724,7 +738,7 @@ function processData() {
         <div>
             <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-            ${readyToMergePRs.length > 0 ? `<a href="#ready-section" class="nav-link">Ready To Merge (${readyToMergePRs.length})</a>` : ''}
+            ${readyToMergePRs.length > 0 ? `<a href="#ready-section" class="ready-link">Ready To Merge (${readyToMergePRs.length})</a>` : ''}
         </div>
         <span class="total-prs-badge">Total # Of Open PRs: ${totalOpenPRs}</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>

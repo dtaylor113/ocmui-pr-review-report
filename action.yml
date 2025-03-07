@@ -181,35 +181,35 @@ runs:
         
         echo "File check status: $(if [ -n "$FILE_SHA" ]; then echo "Found with SHA: $FILE_SHA"; else echo "Not found"; fi)"
         
-        # Prepare the request body
+        # Create temporary files for JSON construction
+        echo "{" > /tmp/request_start.json
+        echo "  \"message\": \"Update PR Review Report for ${{ inputs.owner }}/${{ inputs.name }}\"," >> /tmp/request_start.json
+        echo "  \"content\": \"$BASE64_CONTENT\"," >> /tmp/request_start.json
+        echo "  \"branch\": \"gh-pages\"" >> /tmp/request_start.json
+        
         if [ -n "$FILE_SHA" ]; then
           # Update existing file
           echo "Updating existing file"
-          REQUEST_BODY=$(jq -n \
-            --arg message "Update PR Review Report for ${{ inputs.owner }}/${{ inputs.name }}" \
-            --arg content "$BASE64_CONTENT" \
-            --arg branch "gh-pages" \
-            --arg sha "$FILE_SHA" \
-            '{message: $message, content: $content, branch: $branch, sha: $sha}')
+          echo "  ,\"sha\": \"$FILE_SHA\"" >> /tmp/request_start.json
         else
           # Create new file
           echo "Creating new file"
-          REQUEST_BODY=$(jq -n \
-            --arg message "Create PR Review Report for ${{ inputs.owner }}/${{ inputs.name }}" \
-            --arg content "$BASE64_CONTENT" \
-            --arg branch "gh-pages" \
-            '{message: $message, content: $content, branch: $branch}')
         fi
         
-        echo "Request body (excerpt): $(echo "$REQUEST_BODY" | jq 'del(.content)')"
+        echo "}" >> /tmp/request_start.json
+        
+        echo "Request body prepared (without full content for logging)"
         
         # Make the API call to create/update the file
         echo "Making API call..."
         RESPONSE=$(curl -v -X PUT \
           -H "Authorization: token $GH_TOKEN" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d "$REQUEST_BODY" \
+          -d @/tmp/request_start.json \
           "https://api.github.com/repos/dtaylor113/ocmui-pr-review-report/contents/index.html" 2>&1)
+        
+        # Clean up temp file
+        rm /tmp/request_start.json
         
         echo "API Response (first 1000 chars): $(echo "$RESPONSE" | head -c 1000)"
         
