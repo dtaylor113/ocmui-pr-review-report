@@ -522,11 +522,76 @@ function processData() {
         }
     </style>
     <script>
+        // Function to get URL query parameters
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search;
+            
+            if (queryString) {
+                const urlParams = new URLSearchParams(queryString);
+                urlParams.forEach((value, key) => {
+                    params[key] = value;
+                });
+            }
+            return params;
+        }
+        
+        // Enhanced filterTable function that updates the URL and applies filtering
         function filterTable(reviewer) {
+            console.log("Filtering for reviewer:", reviewer);
+            
+            // Update the URL with the reviewer parameter if it's not 'all'
+            if (reviewer !== 'all') {
+                // Use replaceState to update URL without adding to browser history
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('reviewer', reviewer);
+                window.history.replaceState({}, '', newUrl);
+                console.log("Updated URL with reviewer param:", reviewer);
+            } else {
+                // Remove the reviewer parameter if 'all' is selected
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.delete('reviewer');
+                window.history.replaceState({}, '', newUrl);
+                console.log("Removed reviewer param from URL");
+            }
+            
+            // Apply filtering to the table rows
             let rows = document.querySelectorAll('.reviewer-row');
             rows.forEach(row => {
-                row.style.display = (reviewer === 'all' || row.dataset.reviewer === reviewer) ? '' : 'none';
+                const shouldShow = (reviewer === 'all' || row.dataset.reviewer.toLowerCase() === reviewer.toLowerCase());
+                row.style.display = shouldShow ? '' : 'none';
+                console.log("Row:", row.dataset.reviewer, "Display:", shouldShow ? 'showing' : 'hidden');
             });
+        }
+        
+        // Function to apply reviewer filter from URL if present (case-insensitive)
+        function applyReviewerFilterFromUrl() {
+            const params = getUrlParams();
+            
+            if (params.reviewer) {
+                const reviewerParam = params.reviewer.toLowerCase();
+                console.log("Found reviewer param:", reviewerParam);
+                
+                // Find matching radio button (case-insensitive)
+                let found = false;
+                const reviewerRadios = document.querySelectorAll('input[name="reviewerFilter"]');
+                
+                reviewerRadios.forEach(radio => {
+                    if (radio.value.toLowerCase() === reviewerParam) {
+                        console.log("Found radio button for reviewer:", radio.value);
+                        // Select this radio button
+                        radio.checked = true;
+                        
+                        // Apply the filter
+                        filterTable(radio.value);
+                        found = true;
+                    }
+                });
+                
+                if (!found) {
+                    console.log("No matching reviewer found for:", reviewerParam);
+                }
+            }
         }
         
         function filterByStatus(filterType) {
@@ -561,40 +626,18 @@ function processData() {
                     row.style.display = '';
                 });
                 
-                // Show all reviewer rows
-                document.querySelectorAll('.reviewer-row').forEach(row => {
-                    row.style.display = '';
-                });
+                // If we're not filtering by reviewer, show all reviewer rows
+                if (document.querySelector('input[name="reviewerFilter"][value="all"]').checked) {
+                    document.querySelectorAll('.reviewer-row').forEach(row => {
+                        row.style.display = '';
+                    });
+                } else {
+                    // Re-apply the current reviewer filter
+                    const selectedReviewer = document.querySelector('input[name="reviewerFilter"]:checked').value;
+                    filterTable(selectedReviewer);
+                }
             }
         }
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            const lastUpdatedElement = document.getElementById("lastUpdated");
-            const utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
-            if (utcTimestamp) {
-                var localDate = new Date(utcTimestamp);
-                lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
-            }
-            
-            // Set default to show all PRs (report view)
-            filterByStatus('all');
-            
-            // Toggle Ready to Merge table visibility
-            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
-            const readyTable = document.getElementById('ready-table-section');
-            
-            if (toggleReadyBtn && readyTable) {
-                toggleReadyBtn.addEventListener('click', function() {
-                    if (readyTable.classList.contains('hidden')) {
-                        readyTable.classList.remove('hidden');
-                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
-                    } else {
-                        readyTable.classList.add('hidden');
-                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
-                    }
-                });
-            }
-        });
         
         function toggleDetails() {
             const chartRadio = document.getElementById('show-chart');
@@ -630,6 +673,41 @@ function processData() {
                 document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
             }
         }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM content loaded");
+            const lastUpdatedElement = document.getElementById("lastUpdated");
+            const utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
+            if (utcTimestamp) {
+                var localDate = new Date(utcTimestamp);
+                lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
+            }
+            
+            // Set default to show all PRs (report view)
+            filterByStatus('all');
+            
+            // Toggle Ready to Merge table visibility
+            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
+            const readyTable = document.getElementById('ready-table-section');
+            
+            if (toggleReadyBtn && readyTable) {
+                toggleReadyBtn.addEventListener('click', function() {
+                    if (readyTable.classList.contains('hidden')) {
+                        readyTable.classList.remove('hidden');
+                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
+                    } else {
+                        readyTable.classList.add('hidden');
+                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
+                    }
+                });
+            }
+            
+            // Check for reviewer in URL and apply filter with a slight delay
+            // to ensure all elements are properly initialized
+            setTimeout(function() {
+                applyReviewerFilterFromUrl();
+            }, 200);
+        });
     </script>
 </head>`;
 
