@@ -341,33 +341,41 @@
             }
         }
         
-        document.addEventListener("DOMContentLoaded", function() {
-            const lastUpdatedElement = document.getElementById("lastUpdated");
-            const utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
-            if (utcTimestamp) {
-                var localDate = new Date(utcTimestamp);
-                lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
-            }
+        // Function to get URL query parameters
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search;
             
-            // Set default to show all PRs (report view)
-            filterByStatus('all');
-            
-            // Toggle Ready to Merge table visibility
-            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
-            const readyTable = document.getElementById('ready-table-section');
-            
-            if (toggleReadyBtn && readyTable) {
-                toggleReadyBtn.addEventListener('click', function() {
-                    if (readyTable.classList.contains('hidden')) {
-                        readyTable.classList.remove('hidden');
-                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
-                    } else {
-                        readyTable.classList.add('hidden');
-                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
-                    }
+            if (queryString) {
+                const urlParams = new URLSearchParams(queryString);
+                urlParams.forEach((value, key) => {
+                    params[key] = value;
                 });
             }
-        });
+            return params;
+        }
+        
+        // Function to apply reviewer filter from URL if present
+        function applyReviewerFilterFromUrl() {
+            const params = getUrlParams();
+            
+            if (params.reviewer) {
+                // Find the radio button for this reviewer
+                const reviewerRadio = document.querySelector('input[name="reviewerFilter"][value="' + params.reviewer + '"]');
+                
+                if (reviewerRadio) {
+                    // Select this radio button
+                    reviewerRadio.checked = true;
+                    
+                    // Apply the filter
+                    filterTable(params.reviewer);
+                    
+                    // Make sure we're in "Report" view
+                    document.getElementById('show-all-prs').checked = true;
+                    filterByStatus('all');
+                }
+            }
+        }
         
         function toggleDetails() {
             const chartRadio = document.getElementById('show-chart');
@@ -403,12 +411,43 @@
                 document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
             }
         }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const lastUpdatedElement = document.getElementById("lastUpdated");
+            const utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
+            if (utcTimestamp) {
+                var localDate = new Date(utcTimestamp);
+                lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
+            }
+            
+            // Set default to show all PRs (report view)
+            filterByStatus('all');
+            
+            // Check for reviewer in URL and apply filter
+            applyReviewerFilterFromUrl();
+            
+            // Toggle Ready to Merge table visibility
+            const toggleReadyBtn = document.getElementById('toggle-ready-btn');
+            const readyTable = document.getElementById('ready-table-section');
+            
+            if (toggleReadyBtn && readyTable) {
+                toggleReadyBtn.addEventListener('click', function() {
+                    if (readyTable.classList.contains('hidden')) {
+                        readyTable.classList.remove('hidden');
+                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
+                    } else {
+                        readyTable.classList.add('hidden');
+                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
+                    }
+                });
+            }
+        });
     </script>
 </head>  
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 07 2025 13:35:22 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 07 2025 13:42:07 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
