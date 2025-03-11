@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 11 2025 16:20:57 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 11 2025 16:33:43 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -509,7 +509,7 @@
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
             
         </div>
-        <span class="total-prs-badge">Total # Of Open PRs: 40</span>
+        <span class="total-prs-badge">Total # Of Open PRs: 41</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
@@ -600,7 +600,7 @@
     <div class="radio-container">
         <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label><table style="margin-top: 8px; margin-bottom: 24px;">
     <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">5</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -628,7 +628,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="jloss-redhat" onclick="filterTable('jloss-redhat')"> Jason Loss (jloss-redhat) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) <span class="pending-badge">1</span></label>
+        <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">2</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
@@ -640,7 +640,7 @@
             <th># Reviews Requested (Pending)</th>
         </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">3</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="LiorKGOW">
@@ -673,6 +673,16 @@
               <td title="21" style="color: red;">21</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3178: when idp delete success remove from list straight away" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/243">OCMUI-3178: when idp delete success remove from list straight away
+                  </a>
+              </td>
+              <td title="davidaznaur">davidaznaur</td>
+              <td title="zherman0 (requested), LiorKGOW (requested)">LiorKGOW (requested), zherman0 (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="Ginxo">
@@ -1478,7 +1488,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="zherman0">
         <td>Zac Herman (zherman0)</td>
-        <td><span class="pending-count">1</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="zherman0">
@@ -1500,6 +1510,16 @@
               <td title="zherman0 (requested), jmekkatt (requested), Ginxo (approved)">zherman0 (requested), jmekkatt (requested), Ginxo (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3178: when idp delete success remove from list straight away" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/243">OCMUI-3178: when idp delete success remove from list straight away
+                  </a>
+              </td>
+              <td title="davidaznaur">davidaznaur</td>
+              <td title="zherman0 (requested), LiorKGOW (requested)">zherman0 (requested), LiorKGOW (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
@@ -1622,7 +1642,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":3},{"reviewer":"eliranmal","pending":3},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":5},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":3},{"reviewer":"eliranmal","pending":3},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":5},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
