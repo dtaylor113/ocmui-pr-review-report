@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 11 2025 11:58:40 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 11 2025 12:12:38 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -618,7 +618,7 @@
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -1021,9 +1021,9 @@
                   </a>
               </td>
               <td title="Ginxo">Ginxo</td>
-              <td title="dtaylor113 (requested), davidaznaur (requested)">dtaylor113 (requested), davidaznaur (requested)</td>
+              <td title="dtaylor113 (requested), davidaznaur (approved)">dtaylor113 (requested), davidaznaur (approved)</td>
               <td title="7" style="color: red;">7</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3166][Rosa classic] Error thrown on Network -> VPCs step when no vpc permissions" class="pr-link" 
@@ -1193,7 +1193,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
         <td>David Aznaurov (davidaznaur)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="davidaznaur">
@@ -1214,16 +1214,6 @@
               <td title="DcooperRH">DcooperRH</td>
               <td title="kdoberst (commented), davidaznaur (commented)">davidaznaur (commented), kdoberst (commented)</td>
               <td title="8" style="color: red;">8</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog
-                  </a>
-              </td>
-              <td title="Ginxo">Ginxo</td>
-              <td title="dtaylor113 (requested), davidaznaur (requested)">davidaznaur (requested), dtaylor113 (requested)</td>
-              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
@@ -1265,6 +1255,16 @@
               <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">davidaznaur (approved), jmekkatt (requested), DcooperRH (approved)</td>
               <td title="31" style="color: red;">31</td>
               <td title="2">2/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog
+                  </a>
+              </td>
+              <td title="Ginxo">Ginxo</td>
+              <td title="dtaylor113 (requested), davidaznaur (approved)">davidaznaur (approved), dtaylor113 (requested)</td>
+              <td title="7" style="color: red;">7</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="[OCMUI-3166][Rosa classic] Error thrown on Network -> VPCs step when no vpc permissions" class="pr-link" 
@@ -1695,7 +1695,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":3},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":5},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":3},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":5},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
