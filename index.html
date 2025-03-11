@@ -500,14 +500,14 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 11 2025 13:23:28 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Tue Mar 11 2025 13:34:35 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
         <div>
             <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-            <a href="#ready-section" class="ready-link">Ready To Merge (2)</a>
+            <a href="#ready-section" class="ready-link">Ready To Merge (3)</a>
         </div>
         <span class="total-prs-badge">Total # Of Open PRs: 43</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
@@ -600,7 +600,7 @@
     <div class="radio-container">
         <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label><table style="margin-top: 8px; margin-bottom: 24px;">
     <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">5</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -640,7 +640,7 @@
             <th># Reviews Requested (Pending)</th>
         </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="LiorKGOW">
@@ -673,16 +673,16 @@
               <td title="21" style="color: red;">21</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase." class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/239">[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase.
                   </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
-              <td title="LiorKGOW (requested), davidaznaur (approved), dragan000 (approved)">LiorKGOW (requested), davidaznaur (approved), dragan000 (approved)</td>
+              <td title="davidaznaur (approved), dragan000 (approved), LiorKGOW (approved)">LiorKGOW (approved), davidaznaur (approved), dragan000 (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="Ginxo">
@@ -1306,16 +1306,16 @@
               <td title="4" style="color: yellow;">4</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase." class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/239">[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase.
                   </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
-              <td title="LiorKGOW (requested), davidaznaur (approved), dragan000 (approved)">davidaznaur (approved), LiorKGOW (requested), dragan000 (approved)</td>
+              <td title="davidaznaur (approved), dragan000 (approved), LiorKGOW (approved)">davidaznaur (approved), dragan000 (approved), LiorKGOW (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
@@ -1648,16 +1648,16 @@
               <td title="11" style="color: red;">11</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase." class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/239">[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase.
                   </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
-              <td title="LiorKGOW (requested), davidaznaur (approved), dragan000 (approved)">dragan000 (approved), LiorKGOW (requested), davidaznaur (approved)</td>
+              <td title="davidaznaur (approved), dragan000 (approved), LiorKGOW (approved)">dragan000 (approved), davidaznaur (approved), LiorKGOW (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="aneelac22">
@@ -1703,7 +1703,7 @@
     <div id="ready-section" class="ready-section-header">
         <h2>Ready to Merge Pull Requests</h2>
         <div>
-            <span class="ready-count">2</span>
+            <span class="ready-count">3</span>
             <a href="#top" class="back-to-top">Back to top</a>
         </div>
     </div>
@@ -1731,6 +1731,14 @@
             <td style="color: yellow;">4</td>
             <td>3/3</td>
             <td title="lizagilman, aneelac22, jmekkatt">lizagilman, aneelac22, jmekkatt</td>
+        </tr>
+        <tr>
+            <td><a title="[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase." class="pr-link" 
+                 href="https://github.com/RedHatInsights/uhc-portal/pull/239">[OCMUI-3180][QE CI]Flaky fix for rosa cluster creation wizard testcase.</a></td>
+            <td>jmekkatt</td>
+            <td style="color: #d4d4d4;">1</td>
+            <td>3/3</td>
+            <td title="davidaznaur, dragan000, LiorKGOW">davidaznaur, dragan000, LiorKGOW</td>
         </tr></table>
 
     <script>
@@ -1743,7 +1751,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":4},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":5},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1},{"reviewer":"aneelac22","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":4},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":2},{"reviewer":"lizagilman","pending":5},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"dragan000","pending":1},{"reviewer":"aneelac22","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
