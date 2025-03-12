@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 13:47:11 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 13:52:17 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -600,7 +600,7 @@
     <div class="radio-container">
         <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label><table style="margin-top: 8px; margin-bottom: 24px;">
     <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">5</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -640,7 +640,7 @@
             <th># Reviews Requested (Pending)</th>
         </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="LiorKGOW">
@@ -663,16 +663,6 @@
               <td title="64" style="color: red;">64</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
-              <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code
-                  </a>
-              </td>
-              <td title="eliranmal">eliranmal</td>
-              <td title="LiorKGOW (requested), jmekkatt (requested), Ginxo (requested changes)">LiorKGOW (requested), jmekkatt (requested), Ginxo (requested changes)</td>
-              <td title="22" style="color: red;">22</td>
-              <td title="0">0/3</td>
-              <td class="changes-requested" title="Changes Requested">Changes Requested</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="OCMUI-3178: when idp delete success remove from list straight away" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/243">OCMUI-3178: when idp delete success remove from list straight away
@@ -726,7 +716,7 @@
                   </a>
               </td>
               <td title="eliranmal">eliranmal</td>
-              <td title="LiorKGOW (requested), jmekkatt (requested), Ginxo (requested changes)">Ginxo (requested changes), LiorKGOW (requested), jmekkatt (requested)</td>
+              <td title="jmekkatt (requested), Ginxo (requested changes)">Ginxo (requested changes), jmekkatt (requested)</td>
               <td title="22" style="color: red;">22</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
@@ -1088,7 +1078,7 @@
                   </a>
               </td>
               <td title="eliranmal">eliranmal</td>
-              <td title="LiorKGOW (requested), jmekkatt (requested), Ginxo (requested changes)">jmekkatt (requested), LiorKGOW (requested), Ginxo (requested changes)</td>
+              <td title="jmekkatt (requested), Ginxo (requested changes)">jmekkatt (requested), Ginxo (requested changes)</td>
               <td title="22" style="color: red;">22</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
@@ -1635,7 +1625,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"aneelac22","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"aneelac22","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
