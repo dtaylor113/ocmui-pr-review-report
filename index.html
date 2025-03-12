@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 23:08:26 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 23:18:12 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -606,7 +606,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">3</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -859,7 +859,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="eliranmal">
         <td>Lyn M (eliranmal)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">3</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="eliranmal">
@@ -882,6 +882,16 @@
               <td title="47" style="color: red;">47</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/223">OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ
+                  </a>
+              </td>
+              <td title="zherman0">zherman0</td>
+              <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">eliranmal (requested), shivanthi-amara (requested), lizagilman (approved)</td>
+              <td title="7" style="color: red;">7</td>
+              <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3182] execute CI on push event to master" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/241">[OCMUI-3182] execute CI on push event to master
@@ -1320,7 +1330,7 @@
                   </a>
               </td>
               <td title="zherman0">zherman0</td>
-              <td title="shivanthi-amara (requested), lizagilman (approved)">lizagilman (approved), shivanthi-amara (requested)</td>
+              <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">lizagilman (approved), shivanthi-amara (requested), eliranmal (requested)</td>
               <td title="7" style="color: red;">7</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1434,7 +1444,7 @@
                   </a>
               </td>
               <td title="zherman0">zherman0</td>
-              <td title="shivanthi-amara (requested), lizagilman (approved)">shivanthi-amara (requested), lizagilman (approved)</td>
+              <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)</td>
               <td title="7" style="color: red;">7</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1646,7 +1656,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":4},{"reviewer":"Ginxo","pending":7},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"davidaznaur","pending":2},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":10},{"reviewer":"apecha","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"DcooperRH","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1},{"reviewer":"jloss-redhat","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":4},{"reviewer":"Ginxo","pending":7},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":3},{"reviewer":"davidaznaur","pending":2},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":10},{"reviewer":"apecha","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"DcooperRH","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1},{"reviewer":"jloss-redhat","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
