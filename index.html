@@ -500,14 +500,14 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 12:38:55 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 12:55:16 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
         <div>
             <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-            
+            <a href="#ready-section" class="ready-link">Ready To Merge (1)</a>
         </div>
         <span class="total-prs-badge">Total # Of Open PRs: 40</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
@@ -618,7 +618,7 @@
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -683,16 +683,16 @@
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/244">[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow
                   </a>
               </td>
               <td title="Ginxo">Ginxo</td>
-              <td title="davidaznaur (requested), LiorKGOW (approved), jmekkatt (approved)">LiorKGOW (approved), davidaznaur (requested), jmekkatt (approved)</td>
+              <td title="LiorKGOW (approved), jmekkatt (approved), davidaznaur (approved)">LiorKGOW (approved), jmekkatt (approved), davidaznaur (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="Ginxo">
@@ -1132,16 +1132,16 @@
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/244">[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow
                   </a>
               </td>
               <td title="Ginxo">Ginxo</td>
-              <td title="davidaznaur (requested), LiorKGOW (approved), jmekkatt (approved)">jmekkatt (approved), davidaznaur (requested), LiorKGOW (approved)</td>
+              <td title="LiorKGOW (approved), jmekkatt (approved), davidaznaur (approved)">jmekkatt (approved), LiorKGOW (approved), davidaznaur (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="apecha">
@@ -1173,7 +1173,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
         <td>David Aznaurov (davidaznaur)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="davidaznaur">
@@ -1205,16 +1205,6 @@
               <td title="davidaznaur (requested), DcooperRH (requested), zherman0 (approved)">davidaznaur (requested), DcooperRH (requested), zherman0 (approved)</td>
               <td title="8" style="color: red;">8</td>
               <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/244">[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow
-                  </a>
-              </td>
-              <td title="Ginxo">Ginxo</td>
-              <td title="davidaznaur (requested), LiorKGOW (approved), jmekkatt (approved)">davidaznaur (requested), LiorKGOW (approved), jmekkatt (approved)</td>
-              <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
@@ -1256,6 +1246,16 @@
               <td title="5" style="color: orange;">5</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+              <td><a title="[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/244">[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow
+                  </a>
+              </td>
+              <td title="Ginxo">Ginxo</td>
+              <td title="LiorKGOW (approved), jmekkatt (approved), davidaznaur (approved)">davidaznaur (approved), LiorKGOW (approved), jmekkatt (approved)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
@@ -1633,7 +1633,7 @@
     <div id="ready-section" class="ready-section-header">
         <h2>Ready to Merge Pull Requests</h2>
         <div>
-            <span class="ready-count">0</span>
+            <span class="ready-count">1</span>
             <a href="#top" class="back-to-top">Back to top</a>
         </div>
     </div>
@@ -1647,9 +1647,12 @@
             <th>Approved By</th>
         </tr>
         <tr>
-            <td colspan="5" style="text-align: center; padding: 20px;">
-                No pull requests are currently ready to merge.
-            </td>
+            <td><a title="[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow" class="pr-link" 
+                 href="https://github.com/RedHatInsights/uhc-portal/pull/244">[OCMUI-2885] Swap branch use case error fixed "Check Backend Open API changes" workflow</a></td>
+            <td>Ginxo</td>
+            <td style="color: #d4d4d4;">0</td>
+            <td>3/3</td>
+            <td title="LiorKGOW, jmekkatt, davidaznaur">LiorKGOW, jmekkatt, davidaznaur</td>
         </tr></table>
 
     <script>
@@ -1662,7 +1665,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":3},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":7},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
