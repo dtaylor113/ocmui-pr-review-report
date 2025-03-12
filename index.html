@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 18:44:54 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Wed Mar 12 2025 18:51:59 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -509,7 +509,7 @@
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
             <a href="#ready-section" class="ready-link">Ready To Merge (1)</a>
         </div>
-        <span class="total-prs-badge">Total # Of Open PRs: 40</span>
+        <span class="total-prs-badge">Total # Of Open PRs: 41</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     
@@ -600,9 +600,9 @@
     <div class="radio-container">
         <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label><table style="margin-top: 8px; margin-bottom: 24px;">
     <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">5</span></label>
+        <label><input type="radio" name="reviewerFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="pending-badge">6</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -614,7 +614,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">8</span></label>
+        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">9</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -640,7 +640,7 @@
             <th># Reviews Requested (Pending)</th>
         </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">3</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="LiorKGOW">
@@ -673,11 +673,21 @@
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9
+                  </a>
+              </td>
+              <td title="zherman0">zherman0</td>
+              <td title="Ginxo (requested), LiorKGOW (requested), jmekkatt (requested)">LiorKGOW (requested), Ginxo (requested), jmekkatt (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="Ginxo">
         <td>Enrique Mingorance Cano (Ginxo)</td>
-        <td><span class="pending-count">5</span></td>
+        <td><span class="pending-count">6</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="Ginxo">
@@ -738,6 +748,16 @@
               <td title="LiorKGOW">LiorKGOW</td>
               <td title="Ginxo (requested)">Ginxo (requested)</td>
               <td title="7" style="color: red;">7</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9
+                  </a>
+              </td>
+              <td title="zherman0">zherman0</td>
+              <td title="Ginxo (requested), LiorKGOW (requested), jmekkatt (requested)">Ginxo (requested), LiorKGOW (requested), jmekkatt (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
@@ -1019,7 +1039,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
         <td>Jayakrishnan Mekkattillam (jmekkatt)</td>
-        <td><span class="pending-count">8</span></td>
+        <td><span class="pending-count">9</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="jmekkatt">
@@ -1109,6 +1129,16 @@
               </td>
               <td title="shivanthi-amara">shivanthi-amara</td>
               <td title="jmekkatt (requested), jloss-redhat (requested), dragan000 (requested)">jmekkatt (requested), jloss-redhat (requested), dragan000 (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9
+                  </a>
+              </td>
+              <td title="zherman0">zherman0</td>
+              <td title="Ginxo (requested), LiorKGOW (requested), jmekkatt (requested)">jmekkatt (requested), Ginxo (requested), LiorKGOW (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1615,7 +1645,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":2},{"reviewer":"Ginxo","pending":5},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":8},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1},{"reviewer":"jloss-redhat","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":6},{"reviewer":"kelvah","pending":2},{"reviewer":"eliranmal","pending":2},{"reviewer":"jschuler","pending":1},{"reviewer":"DcooperRH","pending":4},{"reviewer":"dtaylor113","pending":3},{"reviewer":"jmekkatt","pending":9},{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"zherman0","pending":2},{"reviewer":"dragan000","pending":2},{"reviewer":"aneelac22","pending":1},{"reviewer":"jloss-redhat","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
