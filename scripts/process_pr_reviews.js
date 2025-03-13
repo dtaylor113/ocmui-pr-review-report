@@ -389,11 +389,12 @@ function generateHtmlReport(
         '        /* Filter controls */\n' +
         '        .filter-controls {\n' +
         '            margin-bottom: 15px;\n' +
-        '            padding: 10px;\n' +
-        '            background-color: #1e1e1e;\n' +
+        '            padding: 10px 10px 10px 5px;\n' +
+        '            background-color: transparent;\n' +
         '            border-radius: 4px;\n' +
         '            display: flex;\n' +
         '            align-items: center;\n' +
+        '            justify-content: flex-start;\n' +
         '        }\n' +
         '        .filter-controls label {\n' +
         '            margin-right: 15px;\n' +
@@ -401,22 +402,24 @@ function generateHtmlReport(
         '        \n' +
         '        /* View Controls */\n' +
         '        .view-controls {\n' +
-        '            margin-top: 10px;\n' +
-        '            padding: 10px;\n' +
-        '            background-color: #222;\n' +
+        '            margin-top: 5px;\n' +
+        '            margin-bottom: 5px;\n' +
+        '            padding: 10px 10px 10px 5px;\n' +
+        '            background-color: transparent;\n' +
         '            border-radius: 4px;\n' +
         '            display: flex;\n' +
         '            align-items: center;\n' +
+        '            justify-content: flex-start;\n' +
         '        }\n' +
         '        .view-controls label {\n' +
         '            margin-right: 15px;\n' +
         '        }\n' +
         '        .view-selector {\n' +
         '            display: inline-block;\n' +
-        '            background-color: #333;\n' +
+        '            background-color: transparent;\n' +
         '            border-radius: 4px;\n' +
         '            overflow: hidden;\n' +
-        '            margin-left: 20px;\n' +
+        '            margin-left: 0px;\n' +
         '        }\n' +
         '        .view-btn {\n' +
         '            background-color: #333;\n' +
@@ -1130,6 +1133,16 @@ function generateHtmlReport(
         '      <span id="lastUpdated" class="last-updated" data-utc="' + lastUpdatedUTC + '"></span>\n' +
         '    </h2>\n' +
         '    \n' +
+        '    <!-- View selector -->\n' +
+        '    <div class="view-controls">\n' +
+        '        <div class="view-selector">\n' +
+        '            <button id="reviewers-view-btn" class="view-btn active" ' +
+        'data-view="reviewers">Reviewers\' View</button>\n' +
+        '            <button id="authors-view-btn" class="view-btn" ' +
+        'data-view="authors">Authors\' View (beta)</button>\n' +
+        '        </div>\n' +
+        '    </div>\n' +
+        '    \n' +
         '    <div class="filter-controls">\n' +
         '        <div>\n' +
         '            <label><input type="radio" name="prFilter" id="show-all-prs" ' +
@@ -1144,16 +1157,6 @@ function generateHtmlReport(
         '        <button id="toggleLegendBtn" onClick="toggleLegend()" ' +
         'style="margin-left: 15px; background-color: #333; color: white; border: none; ' +
         'padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>\n' +
-        '    </div>\n' +
-        '    \n' +
-        '    <!-- View selector -->\n' +
-        '    <div class="view-controls">\n' +
-        '        <div class="view-selector">\n' +
-        '            <button id="reviewers-view-btn" class="view-btn active" ' +
-        'data-view="reviewers">Reviewers\' View</button>\n' +
-        '            <button id="authors-view-btn" class="view-btn" ' +
-        'data-view="authors">Authors\' View (beta)</button>\n' +
-        '        </div>\n' +
         '    </div>\n' +
         '    <!-- Empty row for spacing -->\n' +
         '    <div style="height: 15px;"></div>\n' +
