@@ -101,11 +101,12 @@
         /* Filter controls */
         .filter-controls {
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 10px 10px 10px 5px;
             background-color: transparent;
             border-radius: 4px;
             display: flex;
             align-items: center;
+            justify-content: flex-start;
         }
         .filter-controls label {
             margin-right: 15px;
@@ -113,12 +114,14 @@
         
         /* View Controls */
         .view-controls {
-            margin-top: 10px;
-            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 10px 10px 10px 5px;
             background-color: transparent;
             border-radius: 4px;
             display: flex;
             align-items: center;
+            justify-content: flex-start;
         }
         .view-controls label {
             margin-right: 15px;
@@ -128,7 +131,7 @@
             background-color: transparent;
             border-radius: 4px;
             overflow: hidden;
-            margin-left: 20px;
+            margin-left: 0px;
         }
         .view-btn {
             background-color: #333;
@@ -835,7 +838,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 22:39:17 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 22:43:22 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -860,7 +863,93 @@
     
     <!-- Legend positioned between filters and radio buttons -->
     <div id="legend" class="legend hidden">
-<div id="reviewers-view">
+      <h3>Pull Request Review Report Legend</h3>
+      
+      <div class="legend-grid">
+        <div class="legend-box">
+          <h4>Pull Request Status</h4>
+          <div class="legend-item">
+            <span class="legend-sample" style="background-color: #ff9800;"></span>
+            <span class="needs-review">Needs Review</span>: Pull Request needs more reviews before it can be merged
+          </div>
+          <div class="legend-item">
+            <span class="legend-sample" style="background-color: #f44336;"></span>
+            <span class="changes-requested">Changes Requested</span>: Pull Request needs code changes based on review feedback
+          </div>
+          <div class="legend-item">
+            <span class="legend-sample" style="background-color: #4caf50;"></span>
+            <span class="ready-to-merge">Ready to Merge</span>: Pull Request has all required approvals (3) and can be merged
+          </div>
+        </div>
+        
+        <div class="legend-box">
+          <h4>Reviewer Status</h4>
+          <table class="legend-table">
+            <tr>
+              <th>Status</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><code>username (requested)</code></td>
+              <td>Reviewer has been requested but hasn't reviewed yet</td>
+            </tr>
+            <tr>
+              <td><code>username (approved)</code></td>
+              <td>Reviewer has approved the Pull Request</td>
+            </tr>
+            <tr>
+              <td><code>username (commented)</code></td>
+              <td>Reviewer has commented but not approved or requested changes</td>
+            </tr>
+            <tr>
+              <td><code>username (requested changes)</code></td>
+              <td>Reviewer has requested changes that need to be addressed</td>
+            </tr>
+            <tr>
+              <td><code>username (pending)</code></td>
+              <td>Started but not submitted review: When a reviewer begins drafting their review in GitHub but hasn't submitted it yet</td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="legend-box">
+          <h4>Visual Indicators & Views</h4>
+          <div class="legend-item">
+            <div class="legend-pending-sample">Pull Request requiring your review</div>
+            Pull Requests that need your review are highlighted with an orange left border in Reviewers' View
+          </div>
+          <div class="legend-item">
+            <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews in Reviewers' View
+          </div>
+          <div class="legend-item">
+            <span class="draft-badge">DRAFT</span> Indicates a pull request in draft state that is not ready for review
+          </div>
+          <div class="legend-item">
+            <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the Pull Request has been open
+          </div>
+          <div class="legend-item">
+            <strong>Reviewers' View</strong>: Focus on PRs that each reviewer is responsible for reviewing
+          </div>
+          <div class="legend-item">
+            <strong>Authors' View</strong>: Focus on PRs created by each author
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bar chart container -->
+    <div id="chart-container" class="chart-container">
+        <h3>
+            Pending Reviews by Reviewer
+            <button id="toggle-sort" style="margin-left: 10px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 12px;">
+                Sort: Highest First
+            </button>
+            <button id="return-to-table" style="margin-left: 10px; background-color: #555; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 12px;">
+                Back to Table View
+            </button>
+        </h3>
+        <div id="horizontal-chart"></div>
+    </div><div id="reviewers-view">
         <div class="radio-container">
             <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
