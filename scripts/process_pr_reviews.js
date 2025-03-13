@@ -454,6 +454,19 @@ function generateHtmlReport(
         '            vertical-align: middle;\n' +
         '        }\n' +
         '        \n' +
+        '        /* Author PR count badge */\n' +
+        '        .author-badge {\n' +
+        '            display: inline-block;\n' +
+        '            background-color: #1e90ff;\n' +
+        '            color: black;\n' +
+        '            font-size: 11px;\n' +
+        '            font-weight: bold;\n' +
+        '            padding: 0px 4px;\n' +
+        '            border-radius: 3px;\n' +
+        '            margin-left: 5px;\n' +
+        '            vertical-align: middle;\n' +
+        '        }\n' +
+        '        \n' +
         '        /* Ready to merge badge */\n' +
         '        .merge-badge {\n' +
         '            display: inline-block;\n' +
@@ -1228,6 +1241,10 @@ function generateHtmlReport(
         'shows how many pending reviews in Reviewers\' View\n' +
         '          </div>\n' +
         '          <div class="legend-item">\n' +
+        '            <span class="author-badge">4</span> The number in the blue badge ' +
+        'shows how many PRs created in Authors\' View\n' +
+        '          </div>\n' +
+        '          <div class="legend-item">\n' +
         '            <span class="draft-badge">DRAFT</span> Indicates a pull request in draft state that is not ready for review\n' +
         '          </div>\n' +
         '          <div class="legend-item">\n' +
@@ -1421,9 +1438,12 @@ function generateHtmlReport(
         // Format as "Full Name (username)" if full name exists, otherwise just username
         const displayName = fullName ? fullName + ' (' + author + ')' : author;
 
+        // Add blue author badge similar to the orange pending badge for reviewers
+        const authorBadge = '<span class="author-badge">' + prCount + '</span>';
+
         htmlContent += '<td style="text-align: left; padding: 2px;">\n' +
             '        <label><input type="radio" name="authorFilter" value="' + author + '" ' +
-            'onclick="filterTable(\'' + author + '\')"> ' + displayName + '</label>\n' +
+            'onclick="filterTable(\'' + author + '\')"> ' + displayName + ' ' + authorBadge + '</label>\n' +
             '    </td>';
         count++;
     });
