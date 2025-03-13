@@ -166,6 +166,19 @@
             vertical-align: middle;
         }
         
+        /* Author PR count badge */
+        .author-badge {
+            display: inline-block;
+            background-color: #1e90ff;
+            color: black;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 0px 4px;
+            border-radius: 3px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        
         /* Ready to merge badge */
         .merge-badge {
             display: inline-block;
@@ -838,7 +851,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 22:56:28 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 23:02:01 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -920,6 +933,9 @@
           </div>
           <div class="legend-item">
             <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews in Reviewers' View
+          </div>
+          <div class="legend-item">
+            <span class="author-badge">4</span> The number in the blue badge shows how many PRs created in Authors' View
           </div>
           <div class="legend-item">
             <span class="draft-badge">DRAFT</span> Indicates a pull request in draft state that is not ready for review
@@ -1935,35 +1951,35 @@
             <label><input type="radio" name="authorFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
                 <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW)</label>
+        <label><input type="radio" name="authorFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="author-badge">4</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="renovate" onclick="filterTable('renovate')"> renovate</label>
+        <label><input type="radio" name="authorFilter" value="renovate" onclick="filterTable('renovate')"> renovate <span class="author-badge">4</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo)</label>
+        <label><input type="radio" name="authorFilter" value="Ginxo" onclick="filterTable('Ginxo')"> Enrique Mingorance Cano (Ginxo) <span class="author-badge">7</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="ammont82" onclick="filterTable('ammont82')"> Montse Ortega Gallart (ammont82)</label>
+        <label><input type="radio" name="authorFilter" value="ammont82" onclick="filterTable('ammont82')"> Montse Ortega Gallart (ammont82) <span class="author-badge">2</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0)</label>
+        <label><input type="radio" name="authorFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) <span class="author-badge">6</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst)</label>
+        <label><input type="radio" name="authorFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="author-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal)</label>
+        <label><input type="radio" name="authorFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="author-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113)</label>
+        <label><input type="radio" name="authorFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="author-badge">2</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="tlabaj" onclick="filterTable('tlabaj')"> Titani Labaj (tlabaj)</label>
+        <label><input type="radio" name="authorFilter" value="tlabaj" onclick="filterTable('tlabaj')"> Titani Labaj (tlabaj) <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha)</label>
+        <label><input type="radio" name="authorFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt)</label>
+        <label><input type="radio" name="authorFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="author-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH)</label>
+        <label><input type="radio" name="authorFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="author-badge">1</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur)</label>
+        <label><input type="radio" name="authorFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="author-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="casey-williams-rh" onclick="filterTable('casey-williams-rh')"> Casey Williams (casey-williams-rh)</label>
+        <label><input type="radio" name="authorFilter" value="casey-williams-rh" onclick="filterTable('casey-williams-rh')"> Casey Williams (casey-williams-rh) <span class="author-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara)</label>
+        <label><input type="radio" name="authorFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="author-badge">1</span></label>
     </td></tr></table>
         </div>
         <table class="author-table">
