@@ -594,26 +594,37 @@
             });
             document.getElementById(view + '-view-btn').classList.add('active');
             
-            // Hide all views
-            document.getElementById('reviewers-view').classList.add('hidden');
-            document.getElementById('authors-view').classList.add('hidden');
+            // Check if we're in chart mode
+            var isChartMode = document.getElementById('show-chart').checked;
             
-            // Show selected view
-            document.getElementById(view + '-view').classList.remove('hidden');
-            
-            // Reset chart container
-            var chartContainer = document.getElementById('chart-container');
-            chartContainer.style.display = 'none';
-            
-            // Reset to report view
-            document.getElementById('show-all-prs').checked = true;
-            
-            // Apply filter from URL
-            applyFilterFromUrl();
-            
-            // Update chart if in chart mode
-            if (document.getElementById('show-chart').checked) {
-                toggleDetails();
+            if (isChartMode) {
+                // If in chart mode, just update the chart for the new view
+                var chartContainer = document.getElementById('chart-container');
+                
+                // Make sure chart is visible
+                chartContainer.style.display = 'block';
+                
+                // Hide all table views
+                document.getElementById('reviewers-view').classList.add('hidden');
+                document.getElementById('authors-view').classList.add('hidden');
+                
+                // Draw the appropriate chart for the new view
+                if (view === 'reviewers') {
+                    drawHorizontalChart('reviewers');
+                } else {
+                    drawHorizontalChart('authors');
+                }
+            } else {
+                // In table mode, switch the visible view
+                // Hide all views
+                document.getElementById('reviewers-view').classList.add('hidden');
+                document.getElementById('authors-view').classList.add('hidden');
+                
+                // Show selected view
+                document.getElementById(view + '-view').classList.remove('hidden');
+                
+                // Apply filter from URL
+                applyFilterFromUrl();
             }
         }
         
@@ -786,7 +797,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 16:58:39 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 17:12:11 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -801,12 +812,13 @@
     
     <!-- View selector -->
     <div class="view-controls">
-        <span>View by:</span>
         <div class="view-selector">
             <button id="reviewers-view-btn" class="view-btn active" data-view="reviewers">Reviewers View</button>
             <button id="authors-view-btn" class="view-btn" data-view="authors">Authors View</button>
         </div>
     </div>
+    <!-- Empty row for spacing -->
+    <div style="height: 15px;"></div>
     
     <!-- Legend positioned between filters and radio buttons -->
     <div id="legend" class="legend hidden">
