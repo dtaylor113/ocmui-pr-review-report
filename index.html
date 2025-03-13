@@ -27,29 +27,29 @@
         }
         /* Reviewer view PR table column widths */
         .reviewer-pr-table th:nth-child(1),
-        .reviewer-pr-table td:nth-child(1) { width: 35%; } /* PR link */
+        .reviewer-pr-table td:nth-child(1) { width: 33%; } /* PR link - reduced from 35% */
         .reviewer-pr-table th:nth-child(2),
         .reviewer-pr-table td:nth-child(2) { width: 10%; } /* Author */
         .reviewer-pr-table th:nth-child(3),
-        .reviewer-pr-table td:nth-child(3) { width: 35%; } /* Reviewers */
+        .reviewer-pr-table td:nth-child(3) { width: 32%; } /* Reviewers - reduced from 35% */
         .reviewer-pr-table th:nth-child(4),
-        .reviewer-pr-table td:nth-child(4) { width: 5%; } /* # Days Open */      
+        .reviewer-pr-table td:nth-child(4) { width: 8%; white-space: nowrap; } /* # Days Open - increased */
         .reviewer-pr-table th:nth-child(5),
-        .reviewer-pr-table td:nth-child(5) { width: 5%; } /* # Approvals */
+        .reviewer-pr-table td:nth-child(5) { width: 8%; white-space: nowrap; } /* # Approvals - increased */
         .reviewer-pr-table th:nth-child(6),
-        .reviewer-pr-table td:nth-child(6) { width: 10%; } /* Status */
+        .reviewer-pr-table td:nth-child(6) { width: 9%; } /* Status - reduced from 10% */
         
         /* Author view PR table column widths */
         .author-pr-table th:nth-child(1),
-        .author-pr-table td:nth-child(1) { width: 40%; } /* PR link */
+        .author-pr-table td:nth-child(1) { width: 38%; } /* PR link - reduced from 40% */
         .author-pr-table th:nth-child(2),
-        .author-pr-table td:nth-child(2) { width: 40%; } /* Reviewers */
+        .author-pr-table td:nth-child(2) { width: 37%; } /* Reviewers - reduced from 40% */
         .author-pr-table th:nth-child(3),
-        .author-pr-table td:nth-child(3) { width: 5%; } /* # Days Open */      
+        .author-pr-table td:nth-child(3) { width: 8%; white-space: nowrap; } /* # Days Open - increased */
         .author-pr-table th:nth-child(4),
-        .author-pr-table td:nth-child(4) { width: 5%; } /* # Approvals */
+        .author-pr-table td:nth-child(4) { width: 8%; white-space: nowrap; } /* # Approvals - increased */
         .author-pr-table th:nth-child(5),
-        .author-pr-table td:nth-child(5) { width: 10%; } /* Status */
+        .author-pr-table td:nth-child(5) { width: 9%; } /* Status - reduced from 10% */
         
         /* Ready to Merge table styles */
         .ready-table {
@@ -796,6 +796,9 @@
             var returnButton = document.getElementById('return-to-table');
             returnButton.addEventListener('click', function() {
                 document.getElementById('show-all-prs').checked = true;
+                // Switch to the current view first to make sure all tables are properly shown
+                switchView(currentView);
+                // Then apply the filter
                 filterByStatus('all');
             });
             
@@ -817,7 +820,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 17:45:35 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 17:51:05 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
