@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 10:55:11 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 11:01:04 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -626,7 +626,7 @@
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) </label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">4</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="aneelac22" onclick="filterTable('aneelac22')"> Aneela Chagarlamudi (aneelac22) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -1549,7 +1549,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="dragan000">
         <td>Denis Ragan (dragan000)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">4</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="dragan000">
@@ -1591,6 +1591,16 @@
               <td title="jloss-redhat (requested), dragan000 (requested), apecha (requested), jmekkatt (approved)">dragan000 (requested), jloss-redhat (requested), apecha (requested), jmekkatt (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/250">[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases
+                  </a>
+              </td>
+              <td title="jmekkatt">jmekkatt</td>
+              <td title="dragan000 (requested)">dragan000 (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
@@ -1706,7 +1716,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":6},{"reviewer":"jmekkatt","pending":4},{"reviewer":"kelvah","pending":3},{"reviewer":"eliranmal","pending":4},{"reviewer":"davidaznaur","pending":2},{"reviewer":"dtaylor113","pending":3},{"reviewer":"apecha","pending":5},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"DcooperRH","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":3},{"reviewer":"aneelac22","pending":2},{"reviewer":"jloss-redhat","pending":1}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":6},{"reviewer":"jmekkatt","pending":4},{"reviewer":"kelvah","pending":3},{"reviewer":"eliranmal","pending":4},{"reviewer":"davidaznaur","pending":2},{"reviewer":"dtaylor113","pending":3},{"reviewer":"apecha","pending":5},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"DcooperRH","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":4},{"reviewer":"aneelac22","pending":2},{"reviewer":"jloss-redhat","pending":1}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
