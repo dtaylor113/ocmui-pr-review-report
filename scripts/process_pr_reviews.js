@@ -65,6 +65,7 @@ function processData() {
         const prNumber = pr.number;
         const prTitle = pr.title;
         const prAuthor = pr.author?.login || 'Unknown';
+        const isDraft = pr.isDraft || false; // Extract isDraft property
 
         // Store author's full name if available
         if (pr.author?.name && pr.author?.login) {
@@ -149,7 +150,8 @@ function processData() {
                 daysOpenColor: color,
                 approvals: approvalCount,
                 requiredApprovals: REQUIRED_APPROVALS,
-                approvedBy: reviewersWithApprovals.join(', ')
+                approvedBy: reviewersWithApprovals.join(', '),
+                isDraft: isDraft // Add isDraft property
             });
         } else if (Object.values(reviewerStatus).includes('CHANGES_REQUESTED')) {
             prStatus = 'changes_requested';
@@ -185,6 +187,7 @@ function processData() {
                 reviewers: reviewersWithStatus.join(', '),
                 approvals: approvalCount,
                 status: prStatus,
+                isDraft: isDraft, // Add isDraft property
             });
         });
 
@@ -228,6 +231,7 @@ function processData() {
                     status: prStatus,
                     isPending: isPending,
                     sortOrder: isPending ? 0 : 1, // Pending PRs will sort to the top
+                    isDraft: isDraft, // Add isDraft property
                 });
             }
         });
@@ -246,6 +250,7 @@ function processData() {
             reviewers: reviewersWithStatus.join(', '), // Make sure to include reviewers
             approvals: approvalCount,
             status: prStatus,
+            isDraft: isDraft, // Add isDraft property
         });
     });
 
@@ -451,6 +456,19 @@ function generateHtmlReport(
         '            display: inline-block;\n' +
         '            background-color: #4caf50;\n' +
         '            color: black;\n' +
+        '            font-size: 11px;\n' +
+        '            font-weight: bold;\n' +
+        '            padding: 0px 4px;\n' +
+        '            border-radius: 3px;\n' +
+        '            margin-left: 5px;\n' +
+        '            vertical-align: middle;\n' +
+        '        }\n' +
+        '        \n' +
+        '        /* Draft PR badge */\n' +
+        '        .draft-badge {\n' +
+        '            display: inline-block;\n' +
+        '            background-color: #6c757d;\n' +
+        '            color: white;\n' +
         '            font-size: 11px;\n' +
         '            font-weight: bold;\n' +
         '            padding: 0px 4px;\n' +
@@ -1207,6 +1225,9 @@ function generateHtmlReport(
         'shows how many pending reviews in Reviewers\' View\n' +
         '          </div>\n' +
         '          <div class="legend-item">\n' +
+        '            <span class="draft-badge">DRAFT</span> Indicates a pull request in draft state that is not ready for review\n' +
+        '          </div>\n' +
+        '          <div class="legend-item">\n' +
         '            <span style="color: yellow;">Yellow</span> / ' +
         '<span style="color: orange;">Orange</span> / ' +
         '<span style="color: red;">Red</span> days count: ' +
@@ -1355,11 +1376,13 @@ function generateHtmlReport(
                 'data-pending="' + pr.isPending + '">\n' +
                 '              <td><a title="' + pr.title + '" class="pr-link" \n' +
                 '                     href="https://github.com/' + process.env.PROJECT_OWNER + '/' +
-                process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title + '\n' +
+                process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title +
                 '                  </a>\n' +
                 '              </td>\n' +
                 '              <td title="' + pr.author + '">' + pr.author + '</td>\n' +
-                '              <td title="' + pr.reviewers + '">' + reviewersList + '</td>\n' +
+                '              <td title="' + pr.reviewers + '">' +
+                (pr.isDraft ? '<span class="draft-badge">DRAFT</span><br/>' : '') +
+                reviewersList + '</td>\n' +
                 '              <td title="' + pr.daysOpen + '" style="color: ' +
                 pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
                 '              <td title="' + pr.approvals + '">' + pr.approvals + '/' +
@@ -1460,10 +1483,12 @@ function generateHtmlReport(
             htmlContent += '<tr class="pr-detail-row" data-status="' + pr.status + '">\n' +
                 '              <td><a title="' + pr.title + '" class="pr-link" \n' +
                 '                     href="https://github.com/' + process.env.PROJECT_OWNER + '/' +
-                process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title + '\n' +
+                process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title +
                 '                  </a>\n' +
                 '              </td>\n' +
-                '              <td title="' + pr.reviewers + '">' + pr.reviewers + '</td>\n' +
+                '              <td title="' + pr.reviewers + '">' +
+                (pr.isDraft ? '<span class="draft-badge">DRAFT</span><br/>' : '') +
+                pr.reviewers + '</td>\n' +
                 '              <td title="' + pr.daysOpen + '" style="color: ' +
                 pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
                 '              <td title="' + pr.approvals + '">' + pr.approvals + '/' +
@@ -1504,7 +1529,8 @@ function generateHtmlReport(
         htmlContent += '\n        <tr>\n' +
             '            <td><a title="' + pr.title + '" class="pr-link" \n' +
             '                 href="https://github.com/' + process.env.PROJECT_OWNER + '/' +
-            process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title + '</a></td>\n' +
+            process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title +
+            (pr.isDraft ? ' <span class="draft-badge">DRAFT</span>' : '') + '</a></td>\n' +
             '            <td>' + pr.author + '</td>\n' +
             '            <td style="color: ' + pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
             '            <td>' + pr.approvals + '/' + pr.requiredApprovals + '</td>\n' +

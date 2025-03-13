@@ -49,6 +49,7 @@ runs:
                   number
                   title
                   createdAt
+                  isDraft
                   author {
                     login
                     ... on User {
@@ -90,7 +91,6 @@ runs:
         cat ./tool-repo/pr_review_report.json > /dev/null
         echo "JSON file has been saved and verified"
 
-    # Create a simple wrapper script that will call the original JS with proper environment
     - name: Create wrapper script
       shell: bash
       run: |
