@@ -500,7 +500,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 13:49:24 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Mar 13 2025 13:55:11 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <div class="filter-controls">
@@ -612,7 +612,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">5</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
@@ -1142,15 +1142,15 @@
                   </a>
               </td>
               <td title="eliranmal">eliranmal</td>
-              <td title="dtaylor113 (requested), davidaznaur (approved)">davidaznaur (approved), dtaylor113 (requested)</td>
+              <td title="davidaznaur (approved), dtaylor113 (approved)">davidaznaur (approved), dtaylor113 (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="1">1/3</td>
+              <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="dtaylor113">
         <td>Dave Taylor (dtaylor113)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="dtaylor113">
@@ -1183,16 +1183,6 @@
               <td title="6" style="color: orange;">6</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="Release to Production / March 12, 2025" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/247">Release to Production / March 12, 2025
-                  </a>
-              </td>
-              <td title="eliranmal">eliranmal</td>
-              <td title="dtaylor113 (requested), davidaznaur (approved)">dtaylor113 (requested), davidaznaur (approved)</td>
-              <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script
@@ -1202,6 +1192,16 @@
               <td title="davidaznaur (requested), dtaylor113 (approved)">dtaylor113 (approved), davidaznaur (requested)</td>
               <td title="47" style="color: red;">47</td>
               <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="Release to Production / March 12, 2025" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/247">Release to Production / March 12, 2025
+                  </a>
+              </td>
+              <td title="eliranmal">eliranmal</td>
+              <td title="davidaznaur (approved), dtaylor113 (approved)">dtaylor113 (approved), davidaznaur (approved)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
@@ -1756,7 +1756,7 @@
             chartContainer.innerHTML = ''; // Clear existing content
             
             // Get chart data
-            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":7},{"reviewer":"jmekkatt","pending":4},{"reviewer":"kelvah","pending":4},{"reviewer":"eliranmal","pending":4},{"reviewer":"davidaznaur","pending":3},{"reviewer":"dtaylor113","pending":3},{"reviewer":"apecha","pending":5},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"DcooperRH","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":4},{"reviewer":"aneelac22","pending":2}];
+            const chartData = [{"reviewer":"LiorKGOW","pending":3},{"reviewer":"Ginxo","pending":7},{"reviewer":"jmekkatt","pending":4},{"reviewer":"kelvah","pending":4},{"reviewer":"eliranmal","pending":4},{"reviewer":"davidaznaur","pending":3},{"reviewer":"dtaylor113","pending":2},{"reviewer":"apecha","pending":5},{"reviewer":"kdoberst","pending":1},{"reviewer":"lizagilman","pending":4},{"reviewer":"DcooperRH","pending":3},{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"dragan000","pending":4},{"reviewer":"aneelac22","pending":2}];
             
             // Sort data by pending reviews based on current sort direction
             if (sortAscending) {
