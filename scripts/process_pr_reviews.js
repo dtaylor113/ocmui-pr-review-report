@@ -32,14 +32,18 @@ function processData() {
     const reviewers = {};
     const pendingReviewers = {};
 
+    // Data structure to track authors and their PRs
+    const authors = {};
+
     // Array to store PRs that are ready to merge
     const readyToMergePRs = [];
 
     // Get total number of open PRs
     const totalOpenPRs = prData.data.repository.pullRequests.nodes.length;
 
-    // Map to store full names for each reviewer
+    // Map to store full names for each reviewer and author
     const reviewerNames = {};
+    const authorNames = {};
 
     // Map review states to readable format
     const reviewStateMap = {
@@ -61,6 +65,11 @@ function processData() {
         const prNumber = pr.number;
         const prTitle = pr.title;
         const prAuthor = pr.author?.login || 'Unknown';
+
+        // Store author's full name if available
+        if (pr.author?.name && pr.author?.login) {
+            authorNames[pr.author.login] = pr.author.name;
+        }
 
         // Calculate # Days Open
         const prCreatedDate = new Date(pr.createdAt);
@@ -222,6 +231,22 @@ function processData() {
                 });
             }
         });
+
+        // Track authors and their PRs
+        if (!authors[prAuthor]) {
+            authors[prAuthor] = { count: 0, prDetails: [] };
+        }
+
+        authors[prAuthor].count += 1;
+        authors[prAuthor].prDetails.push({
+            number: prNumber,
+            title: prTitle,
+            daysOpen,
+            daysOpenColor: color,
+            reviewers: reviewersWithStatus.join(', '),
+            approvals: approvalCount,
+            status: prStatus,
+        });
     });
 
     // Generate HTML report
@@ -252,18 +277,31 @@ function processData() {
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .pr-table th:nth-child(1),
-        .pr-table td:nth-child(1) { width: 35%; } /* PR link */
-        .pr-table th:nth-child(2),
-        .pr-table td:nth-child(2) { width: 10%; } /* Author */
-        .pr-table th:nth-child(3),
-        .pr-table td:nth-child(3) { width: 35%; } /* Reviewers */
-        .pr-table th:nth-child(4),
-        .pr-table td:nth-child(4) { width: 5%; } /* # Days Open */      
-        .pr-table th:nth-child(5),
-        .pr-table td:nth-child(5) { width: 5%; } /* # Approvals */
-        .pr-table th:nth-child(6),
-        .pr-table td:nth-child(6) { width: 10%; } /* Status */
+        /* Reviewer view PR table column widths */
+        .reviewer-pr-table th:nth-child(1),
+        .reviewer-pr-table td:nth-child(1) { width: 35%; } /* PR link */
+        .reviewer-pr-table th:nth-child(2),
+        .reviewer-pr-table td:nth-child(2) { width: 10%; } /* Author */
+        .reviewer-pr-table th:nth-child(3),
+        .reviewer-pr-table td:nth-child(3) { width: 35%; } /* Reviewers */
+        .reviewer-pr-table th:nth-child(4),
+        .reviewer-pr-table td:nth-child(4) { width: 5%; } /* # Days Open */      
+        .reviewer-pr-table th:nth-child(5),
+        .reviewer-pr-table td:nth-child(5) { width: 5%; } /* # Approvals */
+        .reviewer-pr-table th:nth-child(6),
+        .reviewer-pr-table td:nth-child(6) { width: 10%; } /* Status */
+        
+        /* Author view PR table column widths */
+        .author-pr-table th:nth-child(1),
+        .author-pr-table td:nth-child(1) { width: 40%; } /* PR link */
+        .author-pr-table th:nth-child(2),
+        .author-pr-table td:nth-child(2) { width: 40%; } /* Reviewers */
+        .author-pr-table th:nth-child(3),
+        .author-pr-table td:nth-child(3) { width: 5%; } /* # Days Open */      
+        .author-pr-table th:nth-child(4),
+        .author-pr-table td:nth-child(4) { width: 5%; } /* # Approvals */
+        .author-pr-table th:nth-child(5),
+        .author-pr-table td:nth-child(5) { width: 10%; } /* Status */
         
         /* Ready to Merge table styles */
         .ready-table {
@@ -325,6 +363,40 @@ function processData() {
             margin-right: 15px;
         }
         
+        /* View Controls */
+        .view-controls {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        .view-controls label {
+            margin-right: 15px;
+        }
+        .view-selector {
+            display: inline-block;
+            background-color: #333;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-left: 20px;
+        }
+        .view-btn {
+            background-color: #333;
+            color: #aaa;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        .view-btn.active {
+            background-color: #4caf50;
+            color: white;
+        }
+        .view-btn:first-child {
+            border-right: 1px solid #555;
+        }
+        
         /* Pending review highlighting */
         .pending-review {
             border-left: 3px solid #ff9800; /* Orange left border only */
@@ -370,6 +442,13 @@ function processData() {
             font-size: 18px;
             font-weight: bold;
             color: #ff9800;
+        }
+        
+        /* PR count for authors */
+        .pr-count {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e90ff;
         }
         
         /* Ready to merge section header */
@@ -483,12 +562,18 @@ function processData() {
             transition: width 0.5s ease-in-out;
             position: relative;
         }
+        .author-chart-bar {
+            background-color: #1e90ff; /* Different color for author charts */
+        }
         .chart-value {
             position: absolute;
             right: -30px;
             top: 3px;
             font-weight: bold;
             color: #ff9800;
+        }
+        .author-chart-value {
+            color: #1e90ff; /* Different color for author charts */
         }
         
         /* Navigation link styles */
@@ -536,6 +621,15 @@ function processData() {
         }
     </style>
     <script>
+        // Global variables for view state
+        let currentView = 'reviewers'; // 'reviewers' or 'authors'
+        
+        // Global data for charts
+        var reviewerChartData = ${JSON.stringify(chartData)};
+        var authorData = ${JSON.stringify(authors)};
+        var authorNames = ${JSON.stringify(authorNames)};
+        var reviewerNames = ${JSON.stringify(reviewerNames)};
+        
         // Function to get URL query parameters
         function getUrlParams() {
             const params = {};
@@ -551,46 +645,59 @@ function processData() {
         }
         
         // Enhanced filterTable function that updates the URL and applies filtering
-        function filterTable(reviewer) {
-            console.log("Filtering for reviewer:", reviewer);
+        function filterTable(filterValue) {
+            console.log("Filtering for:", filterValue);
             
-            // Update the URL with the reviewer parameter if it's not 'all'
-            if (reviewer !== 'all') {
+            // Update the URL with the filter parameter if it's not 'all'
+            if (filterValue !== 'all') {
                 // Use replaceState to update URL without adding to browser history
                 const newUrl = new URL(window.location.href);
-                newUrl.searchParams.set('reviewer', reviewer);
+                if (currentView === 'reviewers') {
+                    newUrl.searchParams.set('reviewer', filterValue);
+                    newUrl.searchParams.delete('author');
+                } else {
+                    newUrl.searchParams.set('author', filterValue);
+                    newUrl.searchParams.delete('reviewer');
+                }
                 window.history.replaceState({}, '', newUrl);
-                console.log("Updated URL with reviewer param:", reviewer);
+                console.log("Updated URL with filter param:", filterValue);
             } else {
-                // Remove the reviewer parameter if 'all' is selected
+                // Remove the filter parameters if 'all' is selected
                 const newUrl = new URL(window.location.href);
-                newUrl.searchParams.delete('reviewer');
+                if (currentView === 'reviewers') {
+                    newUrl.searchParams.delete('reviewer');
+                } else {
+                    newUrl.searchParams.delete('author');
+                }
                 window.history.replaceState({}, '', newUrl);
-                console.log("Removed reviewer param from URL");
+                console.log("Removed filter param from URL");
             }
             
-            // Apply filtering to the table rows
-            let rows = document.querySelectorAll('.reviewer-row');
+            // Apply filtering to the table rows based on current view
+            let rowSelector = currentView === 'reviewers' ? '.reviewer-row' : '.author-row';
+            let dataAttr = currentView === 'reviewers' ? 'data-reviewer' : 'data-author';
+            
+            let rows = document.querySelectorAll(rowSelector);
             rows.forEach(row => {
-                const shouldShow = (reviewer === 'all' || row.dataset.reviewer.toLowerCase() === reviewer.toLowerCase());
+                const shouldShow = (filterValue === 'all' || row.getAttribute(dataAttr).toLowerCase() === filterValue.toLowerCase());
                 row.style.display = shouldShow ? '' : 'none';
-                console.log("Row:", row.dataset.reviewer, "Display:", shouldShow ? 'showing' : 'hidden');
+                console.log("Row:", row.getAttribute(dataAttr), "Display:", shouldShow ? 'showing' : 'hidden');
             });
         }
         
-        // Function to apply reviewer filter from URL if present (case-insensitive)
-        function applyReviewerFilterFromUrl() {
+        // Function to apply filter from URL if present (case-insensitive)
+        function applyFilterFromUrl() {
             const params = getUrlParams();
             
-            if (params.reviewer) {
+            if (currentView === 'reviewers' && params.reviewer) {
                 const reviewerParam = params.reviewer.toLowerCase();
                 console.log("Found reviewer param:", reviewerParam);
                 
                 // Find matching radio button (case-insensitive)
                 let found = false;
-                const reviewerRadios = document.querySelectorAll('input[name="reviewerFilter"]');
+                const filterRadios = document.querySelectorAll('input[name="reviewerFilter"]');
                 
-                reviewerRadios.forEach(radio => {
+                filterRadios.forEach(radio => {
                     if (radio.value.toLowerCase() === reviewerParam) {
                         console.log("Found radio button for reviewer:", radio.value);
                         // Select this radio button
@@ -605,6 +712,29 @@ function processData() {
                 if (!found) {
                     console.log("No matching reviewer found for:", reviewerParam);
                 }
+            } else if (currentView === 'authors' && params.author) {
+                const authorParam = params.author.toLowerCase();
+                console.log("Found author param:", authorParam);
+                
+                // Find matching radio button (case-insensitive)
+                let found = false;
+                const filterRadios = document.querySelectorAll('input[name="authorFilter"]');
+                
+                filterRadios.forEach(radio => {
+                    if (radio.value.toLowerCase() === authorParam) {
+                        console.log("Found radio button for author:", radio.value);
+                        // Select this radio button
+                        radio.checked = true;
+                        
+                        // Apply the filter
+                        filterTable(radio.value);
+                        found = true;
+                    }
+                });
+                
+                if (!found) {
+                    console.log("No matching author found for:", authorParam);
+                }
             }
         }
         
@@ -612,16 +742,21 @@ function processData() {
             // Hide chart if it's visible and we're switching to a non-chart filter
             if (filterType !== 'chart') {
                 const chartContainer = document.getElementById('chart-container');
-                const reviewerTable = document.querySelector('.reviewer-table');
+                const mainTable = currentView === 'reviewers' ? 
+                                document.querySelector('.reviewer-table') : 
+                                document.querySelector('.author-table');
                 const radioContainer = document.querySelector('.radio-container');
                 
                 // Show the regular view
                 chartContainer.style.display = 'none';
-                reviewerTable.style.display = 'table';
+                mainTable.style.display = 'table';
                 radioContainer.style.display = 'block';
                 
                 // Show PR details
-                const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
+                const selector = currentView === 'reviewers' ? 
+                               '.reviewer-row.pr-row-table' : 
+                               '.author-row.pr-row-table';
+                const prRowTables = document.querySelectorAll(selector);
                 prRowTables.forEach(prRowTable => {
                     prRowTable.classList.remove('hidden');
                 });
@@ -631,46 +766,57 @@ function processData() {
             if (filterType === 'all') {
                 let detailRows = document.querySelectorAll('tr.pr-detail-row');
                 detailRows.forEach(row => {
-                    const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
-                    if (isPending) {
-                        row.classList.add('pending-review');
+                    if (currentView === 'reviewers') {
+                        const isPending = row.hasAttribute('data-pending') && row.getAttribute('data-pending') === 'true';
+                        if (isPending) {
+                            row.classList.add('pending-review');
+                        } else {
+                            row.classList.remove('pending-review');
+                        }
                     } else {
+                        // In author view, we don't highlight pending rows
                         row.classList.remove('pending-review');
                     }
                     row.style.display = '';
                 });
                 
-                // If we're not filtering by reviewer, show all reviewer rows
-                if (document.querySelector('input[name="reviewerFilter"][value="all"]').checked) {
-                    document.querySelectorAll('.reviewer-row').forEach(row => {
-                        row.style.display = '';
-                    });
-                } else {
-                    // Re-apply the current reviewer filter
-                    const selectedReviewer = document.querySelector('input[name="reviewerFilter"]:checked').value;
-                    filterTable(selectedReviewer);
-                }
+                // Reapply the current filter
+                const filterName = currentView === 'reviewers' ? 'reviewerFilter' : 'authorFilter';
+                const selectedFilter = document.querySelector('input[name="' + filterName + '"]:checked').value;
+                filterTable(selectedFilter);
             }
         }
         
         function toggleDetails() {
             const chartRadio = document.getElementById('show-chart');
             const chartContainer = document.getElementById('chart-container');
-            const reviewerTable = document.querySelector('.reviewer-table');
-            const prRowTables = document.querySelectorAll('.reviewer-row.pr-row-table');
+            const mainTable = currentView === 'reviewers' ? 
+                            document.querySelector('.reviewer-table') : 
+                            document.querySelector('.author-table');
+            const selector = currentView === 'reviewers' ? 
+                           '.reviewer-row.pr-row-table' : 
+                           '.author-row.pr-row-table';
+            const prRowTables = document.querySelectorAll(selector);
             const radioContainer = document.querySelector('.radio-container');
             
             // When chart mode is enabled
             if (chartRadio.checked) {
                 // Show only the chart
                 chartContainer.style.display = 'block';
-                reviewerTable.style.display = 'none';
+                mainTable.style.display = 'none';
                 radioContainer.style.display = 'none';
                 
                 // Ensure PR details are hidden
                 prRowTables.forEach(prRowTable => {
                     prRowTable.classList.add('hidden');
                 });
+                
+                // Draw the appropriate chart
+                if (currentView === 'reviewers') {
+                    drawHorizontalChart('reviewers');
+                } else {
+                    drawHorizontalChart('authors');
+                }
             } else {
                 // Only option now is the "Report" view (all)
                 filterByStatus('all');
@@ -687,6 +833,140 @@ function processData() {
                 document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
             }
         }
+        
+        function switchView(view) {
+            currentView = view;
+            
+            // Update active button styling
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(view + '-view-btn').classList.add('active');
+            
+            // Hide all views
+            document.getElementById('reviewers-view').classList.add('hidden');
+            document.getElementById('authors-view').classList.add('hidden');
+            
+            // Show selected view
+            document.getElementById(view + '-view').classList.remove('hidden');
+            
+            // Reset chart container
+            const chartContainer = document.getElementById('chart-container');
+            chartContainer.style.display = 'none';
+            
+            // Reset to report view
+            document.getElementById('show-all-prs').checked = true;
+            
+            // Apply filter from URL
+            applyFilterFromUrl();
+            
+            // Update chart if in chart mode
+            if (document.getElementById('show-chart').checked) {
+                toggleDetails();
+            }
+        }
+        
+        // Draw the horizontal bar chart
+        function drawHorizontalChart(chartType) {
+            const chartContainer = document.getElementById('horizontal-chart');
+            chartContainer.innerHTML = ''; // Clear existing content
+            
+            // Get chart data based on type
+            let chartData;
+            if (chartType === 'reviewers') {
+                chartData = ${JSON.stringify(chartData)};
+                document.querySelector('#chart-container h3').textContent = 'Pending Reviews by Reviewer';
+            } else {
+                // For authors, we use author data
+                chartData = [];
+                // Convert author data to chart data format
+                Object.entries(${JSON.stringify(authors)}).forEach(([author, data]) => {
+                    if (data.count > 0) {
+                        chartData.push({ author, count: data.count });
+                    }
+                });
+                document.querySelector('#chart-container h3').textContent = 'Pull Requests by Author';
+            }
+            
+            // Sort data based on current sort direction
+            if (sortAscending) {
+                if (chartType === 'reviewers') {
+                    chartData.sort((a, b) => a.pending - b.pending); // Ascending (lowest first)
+                } else {
+                    chartData.sort((a, b) => a.count - b.count); // Ascending (lowest first)
+                }
+            } else {
+                if (chartType === 'reviewers') {
+                    chartData.sort((a, b) => b.pending - a.pending); // Descending (highest first)
+                } else {
+                    chartData.sort((a, b) => b.count - a.count); // Descending (highest first)
+                }
+            }
+            
+            // Find the maximum value to calculate bar widths
+            const maxValue = Math.max(...chartData.map(item => 
+                chartType === 'reviewers' ? item.pending : item.count));
+            const maxBarWidth = 800; // Maximum width for the bars in pixels
+            
+            // Create and append chart rows
+            chartData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'chart-row';
+                
+                const label = document.createElement('div');
+                label.className = 'chart-label';
+                
+                let displayName;
+                if (chartType === 'reviewers') {
+                    // Get the full name for reviewers if available
+                    const fullName = ${JSON.stringify(reviewerNames)}[item.reviewer] || '';
+                    displayName = fullName ? `${fullName} (${item.reviewer})` : item.reviewer;
+                } else {
+                    // Get the full name for authors if available
+                    const fullName = ${JSON.stringify(authorNames)}[item.author] || '';
+                    displayName = fullName ? `${fullName} (${item.author})` : item.author;
+                }
+                
+                label.textContent = displayName;
+                label.title = displayName; // Add tooltip for truncated names
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.flex = '1';
+                
+                const bar = document.createElement('div');
+                bar.className = chartType === 'reviewers' ? 'chart-bar' : 'chart-bar author-chart-bar';
+                const width = ((chartType === 'reviewers' ? item.pending : item.count) / maxValue) * maxBarWidth;
+                bar.style.width = width + 'px';
+                
+                const value = document.createElement('div');
+                value.className = chartType === 'reviewers' ? 'chart-value' : 'chart-value author-chart-value';
+                value.textContent = chartType === 'reviewers' ? item.pending : item.count;
+                
+                bar.appendChild(value);
+                barContainer.appendChild(bar);
+                
+                row.appendChild(label);
+                row.appendChild(barContainer);
+                
+                chartContainer.appendChild(row);
+            });
+        }
+        
+        // Function to toggle sort order
+        function toggleSortOrder() {
+            sortAscending = !sortAscending;
+            const toggleButton = document.getElementById('toggle-sort');
+            toggleButton.textContent = sortAscending ? 'Sort: Lowest First' : 'Sort: Highest First';
+            
+            if (currentView === 'reviewers') {
+                drawHorizontalChart('reviewers');
+            } else {
+                drawHorizontalChart('authors');
+            }
+        }
+        
+        // Variable to track current sort order
+        let sortAscending = false;
         
         document.addEventListener("DOMContentLoaded", function() {
             console.log("DOM content loaded");
@@ -716,10 +996,35 @@ function processData() {
                 });
             }
             
-            // Check for reviewer in URL and apply filter with a slight delay
+            // Add event listener for view selector buttons
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchView(this.getAttribute('data-view'));
+                });
+            });
+            
+            // Set up sort toggle button
+            const toggleButton = document.getElementById('toggle-sort');
+            toggleButton.addEventListener('click', toggleSortOrder);
+            
+            // Add click handler for return to table button
+            const returnButton = document.getElementById('return-to-table');
+            returnButton.addEventListener('click', function() {
+                document.getElementById('show-all-prs').checked = true;
+                filterByStatus('all');
+            });
+            
+            // Check for params in URL and apply filter with a slight delay
             // to ensure all elements are properly initialized
             setTimeout(function() {
-                applyReviewerFilterFromUrl();
+                // Default view is reviewers
+                switchView('reviewers');
+                
+                // Check if we need to switch to authors view based on URL
+                const params = getUrlParams();
+                if (params.author) {
+                    switchView('authors');
+                }
             }, 200);
         });
     </script>
@@ -742,6 +1047,15 @@ function processData() {
         </div>
         <span class="total-prs-badge">Total # Of Open PRs: ${totalOpenPRs}</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
+    </div>
+    
+    <!-- View selector -->
+    <div class="view-controls">
+        <span>View by:</span>
+        <div class="view-selector">
+            <button id="reviewers-view-btn" class="view-btn active" data-view="reviewers">Reviewers View</button>
+            <button id="authors-view-btn" class="view-btn" data-view="authors">Authors View</button>
+        </div>
     </div>
     
     <!-- Legend positioned between filters and radio buttons -->
@@ -796,19 +1110,22 @@ function processData() {
         </div>
         
         <div class="legend-box">
-          <h4>Visual Indicators</h4>
+          <h4>Visual Indicators & Views</h4>
           <div class="legend-item">
             <div class="legend-pending-sample">Pull Request requiring your review</div>
-            Pull Requests that need your review are highlighted with an orange left border
+            Pull Requests that need your review are highlighted with an orange left border in Reviewers View
           </div>
           <div class="legend-item">
-            <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews
+            <span class="pending-badge">3</span> The number in the orange badge shows how many pending reviews in Reviewers View
           </div>
           <div class="legend-item">
             <span style="color: yellow;">Yellow</span> / <span style="color: orange;">Orange</span> / <span style="color: red;">Red</span> days count: Indicates how long the Pull Request has been open
           </div>
           <div class="legend-item">
-            Your username will appear first in the reviewers list for easy identification
+            <strong>Reviewers View</strong>: Focus on PRs that each reviewer is responsible for reviewing
+          </div>
+          <div class="legend-item">
+            <strong>Authors View</strong>: Focus on PRs created by each author
           </div>
         </div>
       </div>
@@ -826,15 +1143,15 @@ function processData() {
             </button>
         </h3>
         <div id="horizontal-chart"></div>
-    </div>
-    
-    <div class="radio-container">
-        <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show All Reviewers</label>`;
+    </div>`;
 
-    /** Reviewer's radiobuttons with full names **/
+    /* REVIEWERS VIEW */
+    htmlContent += `<div id="reviewers-view">
+        <div class="radio-container">
+            <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
+            <table style="margin-top: 8px; margin-bottom: 24px;">
+                <tr>`; // Start the first row
 
-    htmlContent += `<table style="margin-top: 8px; margin-bottom: 24px;">
-    <tr>`; // Start the first row
     let count = 0;
     Object.keys(reviewers).forEach((reviewer) => {
         if (count % 4 === 0 && count !== 0) {
@@ -857,26 +1174,16 @@ function processData() {
         count++;
     });
     // Close the last row
-    htmlContent += `</tr></table>`;
+    htmlContent += `</tr></table>
+        </div>
+        <table class="reviewer-table">
+            <tr>
+                <th style="width: 28%;">Reviewer</th>
+                <th># Reviews Requested (Pending)</th>
+            </tr>`;
 
-    /** Reviewers Table **/
-
-    htmlContent += `</div>
-    <table class="reviewer-table">
-        <tr>
-            <th style="width: 28%;">Reviewer</th>
-            <th># Reviews Requested (Pending)</th>
-        </tr>`;
-
-    /** Reviewer's PR Table with full names **/
-
-        // Prepare reviewer data for the chart
-    const chartData = [];
+    // Reviewer's PR Table with full names
     Object.entries(reviewers).forEach(([reviewer, data]) => {
-        if (data.pending > 0) {
-            chartData.push({ reviewer, pending: data.pending });
-        }
-
         // Get the full name for the reviewer, default to empty string if not available
         const fullName = reviewerNames[reviewer] || '';
 
@@ -890,7 +1197,7 @@ function processData() {
   
     <tr class="reviewer-row pr-row-table" data-reviewer="${reviewer}">
         <td colspan="2">
-            <table class="pr-table">
+            <table class="pr-table reviewer-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
@@ -965,7 +1272,112 @@ function processData() {
     });
 
     htmlContent += `</table>
-    
+    </div>`; // End of reviewers view
+
+    /* AUTHORS VIEW */
+    htmlContent += `<div id="authors-view" class="hidden">
+        <div class="radio-container">
+            <label><input type="radio" name="authorFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
+            <table style="margin-top: 8px; margin-bottom: 24px;">
+                <tr>`; // Start the first row
+
+    count = 0;
+    Object.keys(authors).forEach((author) => {
+        if (count % 4 === 0 && count !== 0) {
+            htmlContent += `</tr><tr>`; // Close the previous row and start a new one every 4 items
+        }
+
+        const prCount = authors[author].count;
+        // Get the full name for the author, default to empty string if not available
+        const fullName = authorNames[author] || '';
+
+        // Format as "Full Name (username)" if full name exists, otherwise just username
+        const displayName = fullName ? `${fullName} (${author})` : author;
+
+        htmlContent += `<td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="authorFilter" value="${author}" onclick="filterTable('${author}')"> ${displayName}</label>
+    </td>`;
+        count++;
+    });
+    // Close the last row
+    htmlContent += `</tr></table>
+        </div>
+        <table class="author-table">
+            <tr>
+                <th style="width: 28%;">Author</th>
+                <th># PRs Created</th>
+            </tr>`;
+
+    // Author's PR Table with full names
+    Object.entries(authors).forEach(([author, data]) => {
+        // Get the full name for the author, default to empty string if not available
+        const fullName = authorNames[author] || '';
+
+        // Format as "Full Name (username)" if full name exists, otherwise just username
+        const displayName = fullName ? `${fullName} (${author})` : author;
+
+        htmlContent += `<tr class="author-row" data-author="${author}">
+        <td>${displayName}</td>
+        <td><span class="pr-count">${data.count}</span></td>
+    </tr>
+  
+    <tr class="author-row pr-row-table" data-author="${author}">
+        <td colspan="2">
+            <table class="pr-table author-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr>`;
+
+        // Sort PR details by days open (newest first)
+        const sortedPRDetails = [...data.prDetails].sort((a, b) => b.daysOpen - a.daysOpen);
+
+        sortedPRDetails.forEach((pr) => {
+            // Set status class for styling
+            let statusClass = '';
+            let statusText = '';
+
+            switch (pr.status) {
+                case 'ready_to_merge':
+                    statusClass = 'ready-to-merge';
+                    statusText = 'Ready to Merge';
+                    break;
+                case 'changes_requested':
+                    statusClass = 'changes-requested';
+                    statusText = 'Changes Requested';
+                    break;
+                case 'needs_review':
+                default:
+                    statusClass = 'needs-review';
+                    statusText = 'Needs Review';
+                    break;
+            }
+
+            htmlContent += `<tr class="pr-detail-row" data-status="${pr.status}">
+              <td><a title="${pr.title}" class="pr-link" 
+                     href="https://github.com/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pull/${pr.number}">${pr.title}
+                  </a>
+              </td>
+              <td title="${pr.reviewers}">${pr.reviewers}</td>
+              <td title="${pr.daysOpen}" style="color: ${pr.daysOpenColor};">${pr.daysOpen}</td>
+              <td title="${pr.approvals}">${pr.approvals}/${REQUIRED_APPROVALS}</td>
+              <td class="${statusClass}" title="${statusText}">${statusText}</td>
+            </tr>`;
+        });
+
+        htmlContent += `</table>
+        </td>
+    </tr>`;
+    });
+
+    htmlContent += `</table>
+    </div>`; // End of authors view
+
+    /* READY TO MERGE SECTION */
+    htmlContent += `
     <!-- Ready to Merge PRs Section -->
     <div id="ready-section" class="ready-section-header">
         <h2>Ready to Merge Pull Requests</h2>
@@ -1010,90 +1422,6 @@ function processData() {
     }
 
     htmlContent += `</table>
-
-    <script>
-        // Variable to track current sort order
-        let sortAscending = false;
-        
-        // Draw the horizontal bar chart
-        function drawHorizontalChart() {
-            const chartContainer = document.getElementById('horizontal-chart');
-            chartContainer.innerHTML = ''; // Clear existing content
-            
-            // Get chart data
-            const chartData = ${JSON.stringify(chartData)};
-            
-            // Sort data by pending reviews based on current sort direction
-            if (sortAscending) {
-                chartData.sort((a, b) => a.pending - b.pending); // Ascending (lowest first)
-            } else {
-                chartData.sort((a, b) => b.pending - a.pending); // Descending (highest first)
-            }
-            
-            // Find the maximum value to calculate bar widths
-            const maxValue = Math.max(...chartData.map(item => item.pending));
-            const maxBarWidth = 800; // Maximum width for the bars in pixels
-            
-            // Create and append chart rows
-            chartData.forEach(item => {
-                const row = document.createElement('div');
-                row.className = 'chart-row';
-                
-                const label = document.createElement('div');
-                label.className = 'chart-label';
-                
-                // Get the full name for the chart label if available
-                const fullName = ${JSON.stringify(reviewerNames)}[item.reviewer] || '';
-                const displayName = fullName ? \`\${fullName} (\${item.reviewer})\` : item.reviewer;
-                
-                label.textContent = displayName;
-                label.title = displayName; // Add tooltip for truncated names
-                
-                const barContainer = document.createElement('div');
-                barContainer.style.flex = '1';
-                
-                const bar = document.createElement('div');
-                bar.className = 'chart-bar';
-                const width = (item.pending / maxValue) * maxBarWidth;
-                bar.style.width = width + 'px';
-                
-                const value = document.createElement('div');
-                value.className = 'chart-value';
-                value.textContent = item.pending;
-                
-                bar.appendChild(value);
-                barContainer.appendChild(bar);
-                
-                row.appendChild(label);
-                row.appendChild(barContainer);
-                
-                chartContainer.appendChild(row);
-            });
-        }
-        
-        // Function to toggle sort order
-        function toggleSortOrder() {
-            sortAscending = !sortAscending;
-            const toggleButton = document.getElementById('toggle-sort');
-            toggleButton.textContent = sortAscending ? 'Sort: Lowest First' : 'Sort: Highest First';
-            drawHorizontalChart();
-        }
-        
-        // Set up event handlers when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            drawHorizontalChart();
-            // Add click handler for sort toggle button
-            const toggleButton = document.getElementById('toggle-sort');
-            toggleButton.addEventListener('click', toggleSortOrder);
-            
-            // Add click handler for return to table button
-            const returnButton = document.getElementById('return-to-table');
-            returnButton.addEventListener('click', function() {
-                document.getElementById('show-all-prs').checked = true;
-                filterByStatus('all');
-            });
-        });
-    </script>
 </body>
 </html>`;
 
