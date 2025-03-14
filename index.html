@@ -439,7 +439,6 @@
         }
         
         // Enhanced filterTable function that updates the URL and applies filtering
-        // Enhanced filterTable function that updates the URL and applies filtering
         function filterTable(filterValue) {
             console.log("Filtering for:", filterValue);
             
@@ -480,44 +479,410 @@
                 console.log("Row:", row.getAttribute(dataAttr), 
                     "Display:", shouldShow ? 'showing' : 'hidden');
             });
+        }
+        
+        // Function to apply filter from URL if present (case-insensitive)
+        function applyFilterFromUrl() {
+            var params = getUrlParams();
             
-            // Handle showing/hiding radio buttons
-            var radioContainer, radioButtons;
-            
-            if (currentView === 'reviewers') {
-                radioContainer = document.querySelector('#reviewers-view .radio-container table');
-                radioButtons = radioContainer.querySelectorAll('input[name="reviewerFilter"]');
-            } else {
-                radioContainer = document.querySelector('#authors-view .radio-container table');
-                radioButtons = radioContainer.querySelectorAll('input[name="authorFilter"]');
+            if (currentView === 'reviewers' && params.reviewer) {
+                var reviewerParam = params.reviewer.toLowerCase();
+                console.log("Found reviewer param:", reviewerParam);
+                
+                // Find matching radio button (case-insensitive)
+                var found = false;
+                var filterRadios = document.querySelectorAll('input[name="reviewerFilter"]');
+                
+                filterRadios.forEach(function(radio) {
+                    if (radio.value.toLowerCase() === reviewerParam) {
+                        console.log("Found radio button for reviewer:", radio.value);
+                        // Select this radio button
+                        radio.checked = true;
+                        
+                        // Apply the filter
+                        filterTable(radio.value);
+                        found = true;
+                    }
+                });
+                
+                if (!found) {
+                    console.log("No matching reviewer found for:", reviewerParam);
+                }
+            } else if (currentView === 'authors' && params.author) {
+                var authorParam = params.author.toLowerCase();
+                console.log("Found author param:", authorParam);
+                
+                // Find matching radio button (case-insensitive)
+                var found = false;
+                var filterRadios = document.querySelectorAll('input[name="authorFilter"]');
+                
+                filterRadios.forEach(function(radio) {
+                    if (radio.value.toLowerCase() === authorParam) {
+                        console.log("Found radio button for author:", radio.value);
+                        // Select this radio button
+                        radio.checked = true;
+                        
+                        // Apply the filter
+                        filterTable(radio.value);
+                        found = true;
+                    }
+                });
+                
+                if (!found) {
+                    console.log("No matching author found for:", authorParam);
+                }
+            }
+        }
+        
+        function filterByStatus(filterType) {
+            // Hide chart if it's visible and we're switching to a non-chart filter
+            if (filterType !== 'chart') {
+                var chartContainer = document.getElementById('chart-container');
+                var mainTable = currentView === 'reviewers' ? 
+                                document.querySelector('.reviewer-table') : 
+                                document.querySelector('.author-table');
+                var radioContainer = document.querySelector('.radio-container');
+                
+                // Show the regular view
+                chartContainer.style.display = 'none';
+                mainTable.style.display = 'table';
+                radioContainer.style.display = 'block';
+                
+                // Show PR details
+                var selector = currentView === 'reviewers' ? 
+                               '.reviewer-row.pr-row-table' : 
+                               '.author-row.pr-row-table';
+                var prRowTables = document.querySelectorAll(selector);
+                prRowTables.forEach(function(prRowTable) {
+                    prRowTable.classList.remove('hidden');
+                });
             }
             
-            // Select all table cells containing radio buttons (except "Show all")
-            var radioCells = radioContainer.querySelectorAll('td');
-            
-            if (filterValue === 'all') {
-                // Show all radio buttons when "Show all" is selected
-                radioCells.forEach(function(cell) {
-                    cell.style.display = '';
-                });
-            } else {
-                // Hide all radio buttons except "Show all" and the selected one
-                radioCells.forEach(function(cell) {
-                    var radioInput = cell.querySelector('input[type="radio"]');
-                    if (radioInput) {
-                        if (radioInput.value === 'all' || radioInput.value === filterValue) {
-                            cell.style.display = '';
+            // For 'all' (Report view), show all PRs with pending highlight for pending PRs
+            if (filterType === 'all') {
+                var detailRows = document.querySelectorAll('tr.pr-detail-row');
+                detailRows.forEach(function(row) {
+                    if (currentView === 'reviewers') {
+                        var isPending = row.hasAttribute('data-pending') && 
+                            row.getAttribute('data-pending') === 'true';
+                        if (isPending) {
+                            row.classList.add('pending-review');
                         } else {
-                            cell.style.display = 'none';
+                            row.classList.remove('pending-review');
                         }
+                    } else {
+                        // In author view, we don't highlight pending rows
+                        row.classList.remove('pending-review');
+                    }
+                    row.style.display = '';
+                });
+                
+                // Reapply the current filter
+                var filterName = currentView === 'reviewers' ? 
+                    'reviewerFilter' : 'authorFilter';
+                var selectedFilter = document.querySelector(
+                    'input[name="' + filterName + '"]:checked').value;
+                filterTable(selectedFilter);
+            }
+        }
+        
+        function toggleDetails() {
+            var chartRadio = document.getElementById('show-chart');
+            var chartContainer = document.getElementById('chart-container');
+            var mainTable = currentView === 'reviewers' ? 
+                            document.querySelector('.reviewer-table') : 
+                            document.querySelector('.author-table');
+            var selector = currentView === 'reviewers' ? 
+                           '.reviewer-row.pr-row-table' : 
+                           '.author-row.pr-row-table';
+            var prRowTables = document.querySelectorAll(selector);
+            var radioContainer = document.querySelector('.radio-container');
+            
+            // When chart mode is enabled
+            if (chartRadio.checked) {
+                // Show only the chart
+                chartContainer.style.display = 'block';
+                mainTable.style.display = 'none';
+                radioContainer.style.display = 'none';
+                
+                // Ensure PR details are hidden
+                prRowTables.forEach(function(prRowTable) {
+                    prRowTable.classList.add('hidden');
+                });
+                
+                // Draw the appropriate chart
+                if (currentView === 'reviewers') {
+                    drawHorizontalChart('reviewers');
+                } else {
+                    drawHorizontalChart('authors');
+                }
+            } else {
+                // Only option now is the "Report" view (all)
+                filterByStatus('all');
+            }
+        }
+        
+        function toggleLegend() {
+            var legend = document.getElementById('legend');
+            if (legend.classList.contains('hidden')) {
+                legend.classList.remove('hidden');
+                document.getElementById('toggleLegendBtn').textContent = 'Hide Legend';
+            } else {
+                legend.classList.add('hidden');
+                document.getElementById('toggleLegendBtn').textContent = 'Show Legend';
+            }
+        }
+        
+        function switchView(view) {
+            currentView = view;
+            
+            // Update active button styling
+            document.querySelectorAll('.view-btn').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            document.getElementById(view + '-view-btn').classList.add('active');
+            
+            // Show/hide the Ready to Merge elements based on the view
+            var readyLink = document.getElementById('ready-to-merge-link');
+            var readySection = document.getElementById('ready-section');
+            var readyTable = document.getElementById('ready-table');
+            
+            if (view === 'authors') {
+                // Show Ready to Merge elements in Authors' view
+                if (readyLink) readyLink.style.display = 'inline-block';
+                if (readySection) readySection.style.display = 'flex';
+                if (readyTable) readyTable.style.display = 'table';
+            } else {
+                // Hide Ready to Merge elements in Reviewers' view
+                if (readyLink) readyLink.style.display = 'none';
+                if (readySection) readySection.style.display = 'none';
+                if (readyTable) readyTable.style.display = 'none';
+            }
+            
+            // Check if we're in chart mode
+            var isChartMode = document.getElementById('show-chart').checked;
+            
+            if (isChartMode) {
+                // If in chart mode, just update the chart for the new view
+                var chartContainer = document.getElementById('chart-container');
+                
+                // Make sure chart is visible
+                chartContainer.style.display = 'block';
+                
+                // Hide all table views
+                document.getElementById('reviewers-view').classList.add('hidden');
+                document.getElementById('authors-view').classList.add('hidden');
+                
+                // Draw the appropriate chart for the new view
+                if (view === 'reviewers') {
+                    drawHorizontalChart('reviewers');
+                } else {
+                    drawHorizontalChart('authors');
+                }
+            } else {
+                // In table mode, switch the visible view
+                // Hide all views
+                document.getElementById('reviewers-view').classList.add('hidden');
+                document.getElementById('authors-view').classList.add('hidden');
+                
+                // Show selected view
+                document.getElementById(view + '-view').classList.remove('hidden');
+                
+                // Apply filter from URL
+                applyFilterFromUrl();
+            }
+        }
+        
+        // Draw the horizontal bar chart
+        function drawHorizontalChart(chartType) {
+            var chartContainer = document.getElementById('horizontal-chart');
+            chartContainer.innerHTML = ''; // Clear existing content
+            
+            // Get chart data based on type
+            var chartData;
+            if (chartType === 'reviewers') {
+                chartData = reviewerChartData;
+                document.querySelector('#chart-container h3').textContent = 
+                    'Pending Reviews by Reviewer';
+            } else {
+                // For authors, we use author data
+                chartData = [];
+                // Convert author data to chart data format
+                Object.entries(authorData).forEach(function(entry) {
+                    var author = entry[0];
+                    var data = entry[1];
+                    if (data.count > 0) {
+                        chartData.push({ author: author, count: data.count });
+                    }
+                });
+                document.querySelector('#chart-container h3').textContent = 
+                    'Pull Requests by Author';
+            }
+            
+            // Sort data based on current sort direction
+            if (sortAscending) {
+                if (chartType === 'reviewers') {
+                    chartData.sort(function(a, b) { 
+                        return a.pending - b.pending; 
+                    }); // Ascending (lowest first)
+                } else {
+                    chartData.sort(function(a, b) { 
+                        return a.count - b.count; 
+                    }); // Ascending (lowest first)
+                }
+            } else {
+                if (chartType === 'reviewers') {
+                    chartData.sort(function(a, b) { 
+                        return b.pending - a.pending; 
+                    }); // Descending (highest first)
+                } else {
+                    chartData.sort(function(a, b) { 
+                        return b.count - a.count; 
+                    }); // Descending (highest first)
+                }
+            }
+            
+            // Find the maximum value to calculate bar widths
+            var maxValue = 0;
+            chartData.forEach(function(item) {
+                var val = chartType === 'reviewers' ? item.pending : item.count;
+                if (val > maxValue) maxValue = val;
+            });
+            var maxBarWidth = 800; // Maximum width for the bars in pixels
+            
+            // Create and append chart rows
+            chartData.forEach(function(item) {
+                var row = document.createElement('div');
+                row.className = 'chart-row';
+                
+                var label = document.createElement('div');
+                label.className = 'chart-label';
+                
+                var displayName;
+                if (chartType === 'reviewers') {
+                    // Get the full name for reviewers if available
+                    var fullName = reviewerNames[item.reviewer] || '';
+                    displayName = fullName ? 
+                        fullName + ' (' + item.reviewer + ')' : item.reviewer;
+                } else {
+                    // Get the full name for authors if available
+                    var fullName = authorNames[item.author] || '';
+                    displayName = fullName ? 
+                        fullName + ' (' + item.author + ')' : item.author;
+                }
+                
+                label.textContent = displayName;
+                label.title = displayName; // Add tooltip for truncated names
+                
+                var barContainer = document.createElement('div');
+                barContainer.style.flex = '1';
+                
+                var bar = document.createElement('div');
+                bar.className = chartType === 'reviewers' ? 
+                    'chart-bar' : 'chart-bar author-chart-bar';
+                var value = chartType === 'reviewers' ? item.pending : item.count;
+                var width = (value / maxValue) * maxBarWidth;
+                bar.style.width = width + 'px';
+                
+                var valueDisplay = document.createElement('div');
+                valueDisplay.className = chartType === 'reviewers' ? 
+                    'chart-value' : 'chart-value author-chart-value';
+                valueDisplay.textContent = value;
+                
+                bar.appendChild(valueDisplay);
+                barContainer.appendChild(bar);
+                
+                row.appendChild(label);
+                row.appendChild(barContainer);
+                
+                chartContainer.appendChild(row);
+            });
+        }
+        
+        // Function to toggle sort order
+        function toggleSortOrder() {
+            sortAscending = !sortAscending;
+            var toggleButton = document.getElementById('toggle-sort');
+            toggleButton.textContent = sortAscending ? 
+                'Sort: Lowest First' : 'Sort: Highest First';
+            
+            if (currentView === 'reviewers') {
+                drawHorizontalChart('reviewers');
+            } else {
+                drawHorizontalChart('authors');
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM content loaded");
+            var lastUpdatedElement = document.getElementById("lastUpdated");
+            var utcTimestamp = lastUpdatedElement.getAttribute("data-utc");
+            if (utcTimestamp) {
+                var localDate = new Date(utcTimestamp);
+                lastUpdatedElement.textContent = "Last Updated: " + localDate.toLocaleString();
+            }
+            
+            // Set default to show all PRs (report view)
+            filterByStatus('all');
+            
+            // Toggle Ready to Merge table visibility
+            var toggleReadyBtn = document.getElementById('toggle-ready-btn');
+            var readyTable = document.getElementById('ready-table-section');
+            
+            if (toggleReadyBtn && readyTable) {
+                toggleReadyBtn.addEventListener('click', function() {
+                    if (readyTable.classList.contains('hidden')) {
+                        readyTable.classList.remove('hidden');
+                        toggleReadyBtn.textContent = 'Hide Ready to Merge PRs';
+                    } else {
+                        readyTable.classList.add('hidden');
+                        toggleReadyBtn.textContent = 'Show Ready to Merge PRs';
                     }
                 });
             }
-        }  
+            
+            // Add event listener for view selector buttons
+            document.querySelectorAll('.view-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    switchView(this.getAttribute('data-view'));
+                });
+            });
+            
+            // Set up sort toggle button
+            var toggleButton = document.getElementById('toggle-sort');
+            toggleButton.addEventListener('click', toggleSortOrder);
+            
+            // Add click handler for return to table button
+            var returnButton = document.getElementById('return-to-table');
+            returnButton.addEventListener('click', function() {
+                document.getElementById('show-all-prs').checked = true;
+                // Switch to the current view first to make sure all tables are properly shown
+                switchView(currentView);
+                // Then apply the filter
+                filterByStatus('all');
+            });
+            
+            // Always default to reviewers view first, regardless of URL parameters
+            switchView('reviewers');
+            
+            // Then check for params in URL and apply filter with a slight delay
+            // to ensure all elements are properly initialized
+            setTimeout(function() {
+                var params = getUrlParams();
+                // If we have author filter, switch to authors view
+                if (params.author) {
+                    switchView('authors');
+                }
+                // Apply filters based on parameters
+                applyFilterFromUrl();
+            }, 200);
+        });
+    </script>
+</head>  
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 14 2025 17:51:44 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 14 2025 17:54:16 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
