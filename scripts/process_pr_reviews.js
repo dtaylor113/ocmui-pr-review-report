@@ -1,5 +1,13 @@
 const fs = require('fs'); // Ensure fs is required at the top
 
+// Add this utility function to extract Jira IDs from PR titles
+function extractJiraIds(str) {
+    if (!str) return [];
+    const regex = /OCMUI-\d+/g;
+    const matches = str.match(regex) || [];
+    return [...new Set(matches)]; // Remove duplicates
+}
+
 let prData;
 
 const path = './pr_review_report.json';
@@ -66,6 +74,14 @@ function processData() {
         const prTitle = pr.title;
         const prAuthor = pr.author?.login || 'Unknown';
         const isDraft = pr.isDraft || false; // Extract isDraft property
+
+        // Extract Jira IDs from PR title
+        const jiraIds = extractJiraIds(prTitle);
+
+        // Format Jira IDs as clickable links
+        const jiraLinks = jiraIds.map(id =>
+            `<a href="https://issues.redhat.com/browse/${id}" target="_blank">${id}</a>`
+        ).join(', ');
 
         // Store author's full name if available
         if (pr.author?.name && pr.author?.login) {
@@ -151,7 +167,8 @@ function processData() {
                 approvals: approvalCount,
                 requiredApprovals: REQUIRED_APPROVALS,
                 approvedBy: reviewersWithApprovals.join(', '),
-                isDraft: isDraft // Add isDraft property
+                isDraft: isDraft, // Add isDraft property
+                jiraLinks: jiraLinks // Add Jira links
             });
         } else if (Object.values(reviewerStatus).includes('CHANGES_REQUESTED')) {
             prStatus = 'changes_requested';
@@ -188,6 +205,7 @@ function processData() {
                 approvals: approvalCount,
                 status: prStatus,
                 isDraft: isDraft, // Add isDraft property
+                jiraLinks: jiraLinks // Add Jira links
             });
         });
 
@@ -232,6 +250,7 @@ function processData() {
                     isPending: isPending,
                     sortOrder: isPending ? 0 : 1, // Pending PRs will sort to the top
                     isDraft: isDraft, // Add isDraft property
+                    jiraLinks: jiraLinks // Add Jira links
                 });
             }
         });
@@ -251,6 +270,7 @@ function processData() {
             approvals: approvalCount,
             status: prStatus,
             isDraft: isDraft, // Add isDraft property
+            jiraLinks: jiraLinks // Add Jira links
         });
     });
 
@@ -315,29 +335,33 @@ function generateHtmlReport(
         '        }\n' +
         '        /* Reviewer view PR table column widths */\n' +
         '        .reviewer-pr-table th:nth-child(1),\n' +
-        '        .reviewer-pr-table td:nth-child(1) { width: 33%; } /* PR link - reduced from 35% */\n' +
+        '        .reviewer-pr-table td:nth-child(1) { width: 25%; } /* PR link */\n' +
         '        .reviewer-pr-table th:nth-child(2),\n' +
-        '        .reviewer-pr-table td:nth-child(2) { width: 10%; } /* Author */\n' +
+        '        .reviewer-pr-table td:nth-child(2) { width: 9%; } /* Author */\n' +
         '        .reviewer-pr-table th:nth-child(3),\n' +
-        '        .reviewer-pr-table td:nth-child(3) { width: 32%; } /* Reviewers - reduced from 35% */\n' +
+        '        .reviewer-pr-table td:nth-child(3) { width: 17%; } /* Jira - moved to 3rd */\n' +
         '        .reviewer-pr-table th:nth-child(4),\n' +
-        '        .reviewer-pr-table td:nth-child(4) { width: 8%; white-space: nowrap; } /* # Days Open - increased */\n' +
+        '        .reviewer-pr-table td:nth-child(4) { width: 20%; } /* Reviewers */\n' +
         '        .reviewer-pr-table th:nth-child(5),\n' +
-        '        .reviewer-pr-table td:nth-child(5) { width: 8%; white-space: nowrap; } /* # Approvals - increased */\n' +
+        '        .reviewer-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Days Open */\n' +
         '        .reviewer-pr-table th:nth-child(6),\n' +
-        '        .reviewer-pr-table td:nth-child(6) { width: 9%; } /* Status - reduced from 10% */\n' +
+        '        .reviewer-pr-table td:nth-child(6) { width: 7%; white-space: nowrap; } /* # Approvals */\n' +
+        '        .reviewer-pr-table th:nth-child(7),\n' +
+        '        .reviewer-pr-table td:nth-child(7) { width: 10%; } /* Status */\n' +
         '        \n' +
         '        /* Author view PR table column widths */\n' +
         '        .author-pr-table th:nth-child(1),\n' +
-        '        .author-pr-table td:nth-child(1) { width: 38%; } /* PR link - reduced from 40% */\n' +
+        '        .author-pr-table td:nth-child(1) { width: 30%; } /* PR link */\n' +
         '        .author-pr-table th:nth-child(2),\n' +
-        '        .author-pr-table td:nth-child(2) { width: 37%; } /* Reviewers - reduced from 40% */\n' +
+        '        .author-pr-table td:nth-child(2) { width: 18%; } /* Jira - moved to 2nd */\n' +
         '        .author-pr-table th:nth-child(3),\n' +
-        '        .author-pr-table td:nth-child(3) { width: 8%; white-space: nowrap; } /* # Days Open - increased */\n' +
+        '        .author-pr-table td:nth-child(3) { width: 25%; } /* Reviewers */\n' +
         '        .author-pr-table th:nth-child(4),\n' +
-        '        .author-pr-table td:nth-child(4) { width: 8%; white-space: nowrap; } /* # Approvals - increased */\n' +
+        '        .author-pr-table td:nth-child(4) { width: 7%; white-space: nowrap; } /* # Days Open */\n' +
         '        .author-pr-table th:nth-child(5),\n' +
-        '        .author-pr-table td:nth-child(5) { width: 9%; } /* Status - reduced from 10% */\n' +
+        '        .author-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Approvals */\n' +
+        '        .author-pr-table th:nth-child(6),\n' +
+        '        .author-pr-table td:nth-child(6) { width: 10%; } /* Status */\n' +
         '        \n' +
         '        /* Ready to Merge table styles */\n' +
         '        .ready-table {\n' +
@@ -361,15 +385,17 @@ function generateHtmlReport(
         '            white-space: nowrap;\n' +
         '        }\n' +
         '        .ready-table th:nth-child(1),\n' +
-        '        .ready-table td:nth-child(1) { width: 40%; } /* PR title */\n' +
+        '        .ready-table td:nth-child(1) { width: 35%; } /* PR title */\n' +
         '        .ready-table th:nth-child(2),\n' +
-        '        .ready-table td:nth-child(2) { width: 15%; } /* Author */\n' +
+        '        .ready-table td:nth-child(2) { width: 12%; } /* Author */\n' +
         '        .ready-table th:nth-child(3),\n' +
-        '        .ready-table td:nth-child(3) { width: 10%; } /* Days Open */\n' +
+        '        .ready-table td:nth-child(3) { width: 8%; } /* Days Open */\n' +
         '        .ready-table th:nth-child(4),\n' +
-        '        .ready-table td:nth-child(4) { width: 10%; } /* Approvals */\n' +
+        '        .ready-table td:nth-child(4) { width: 8%; } /* Approvals */\n' +
         '        .ready-table th:nth-child(5),\n' +
-        '        .ready-table td:nth-child(5) { width: 25%; } /* Approved By */\n' +
+        '        .ready-table td:nth-child(5) { width: 20%; } /* Approved By */\n' +
+        '        .ready-table th:nth-child(6),\n' +
+        '        .ready-table td:nth-child(6) { width: 17%; } /* Jira - new column */\n' +
         '        \n' +
         '        .last-updated { font-size: 14px; font-style: italic; float: right; }\n' +
         '        .hidden { display: none; }\n' +
@@ -380,6 +406,14 @@ function generateHtmlReport(
         '            text-overflow: ellipsis;\n' +
         '            white-space: nowrap;\n' +
         '            color: #1e90ff;\n' +
+        '        }\n' +
+        '        /* Jira link styling - always blue even when visited */\n' +
+        '        a[href^="https://issues.redhat.com/browse/"] {\n' +
+        '            color: #1e90ff !important;\n' +
+        '            text-decoration: none;\n' +
+        '        }\n' +
+        '        a[href^="https://issues.redhat.com/browse/"]:visited {\n' +
+        '            color: #1e90ff !important;\n' +
         '        }\n' +
         '        /* Status colors */\n' +
         '        .needs-review { color: #ff9800; } /* Orange */\n' +
@@ -1340,6 +1374,7 @@ function generateHtmlReport(
             '                <tr>\n' +
             '                  <th title="Pull Request">Pull Request</th>\n' +
             '                  <th title="Author">Author</th>\n' +
+            '                  <th title="Jira">Jira</th>\n' +
             '                  <th title="Reviewers">Reviewers</th>\n' +
             '                  <th title="# Days Open"># Days Open</th>\n' +
             '                  <th title="# Approvals"># Approvals</th>\n' +
@@ -1400,6 +1435,7 @@ function generateHtmlReport(
                 '                  </a>\n' +
                 '              </td>\n' +
                 '              <td title="' + pr.author + '">' + pr.author + '</td>\n' +
+                '              <td title="Jira IDs">' + pr.jiraLinks + '</td>\n' +
                 '              <td title="' + pr.reviewers + '">' +
                 (pr.isDraft ? '<span class="draft-badge">DRAFT</span><br/>' : '') +
                 reviewersList + '</td>\n' +
@@ -1473,6 +1509,7 @@ function generateHtmlReport(
             '            <table class="pr-table author-pr-table">\n' +
             '                <tr>\n' +
             '                  <th title="Pull Request">Pull Request</th>\n' +
+            '                  <th title="Jira">Jira</th>\n' +
             '                  <th title="Reviewers">Reviewers</th>\n' +
             '                  <th title="# Days Open"># Days Open</th>\n' +
             '                  <th title="# Approvals"># Approvals</th>\n' +
@@ -1509,6 +1546,7 @@ function generateHtmlReport(
                 process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title +
                 '                  </a>\n' +
                 '              </td>\n' +
+                '              <td title="Jira IDs">' + pr.jiraLinks + '</td>\n' +
                 '              <td title="' + pr.reviewers + '">' +
                 (pr.isDraft ? '<span class="draft-badge">DRAFT</span><br/>' : '') +
                 pr.reviewers + '</td>\n' +
@@ -1543,6 +1581,7 @@ function generateHtmlReport(
         '            <th>Days Open</th>\n' +
         '            <th>Approvals</th>\n' +
         '            <th>Approved By</th>\n' +
+        '            <th>Jira</th>\n' +
         '        </tr>';
 
     // Sort ready to merge PRs by days open (newest first)
@@ -1558,13 +1597,14 @@ function generateHtmlReport(
             '            <td style="color: ' + pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
             '            <td>' + pr.approvals + '/' + pr.requiredApprovals + '</td>\n' +
             '            <td title="' + pr.approvedBy + '">' + pr.approvedBy + '</td>\n' +
+            '            <td title="Jira IDs">' + pr.jiraLinks + '</td>\n' +
             '        </tr>';
     });
 
     // Add message for no PRs ready to merge
     if (readyToMergePRs.length === 0) {
         htmlContent += '\n        <tr>\n' +
-            '            <td colspan="5" style="text-align: center; padding: 20px;">\n' +
+            '            <td colspan="6" style="text-align: center; padding: 20px;">\n' +
             '                No pull requests are currently ready to merge.\n' +
             '            </td>\n' +
             '        </tr>';
