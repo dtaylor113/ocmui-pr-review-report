@@ -950,6 +950,23 @@ function generateHtmlReport(
         '            });\n' +
         '            document.getElementById(view + \'-view-btn\').classList.add(\'active\');\n' +
         '            \n' +
+        '            // Show/hide the Ready to Merge elements based on the view\n' +
+        '            var readyLink = document.getElementById(\'ready-to-merge-link\');\n' +
+        '            var readySection = document.getElementById(\'ready-section\');\n' +
+        '            var readyTable = document.getElementById(\'ready-table\');\n' +
+        '            \n' +
+        '            if (view === \'authors\') {\n' +
+        '                // Show Ready to Merge elements in Authors\' view\n' +
+        '                if (readyLink) readyLink.style.display = \'inline-block\';\n' +
+        '                if (readySection) readySection.style.display = \'flex\';\n' +
+        '                if (readyTable) readyTable.style.display = \'table\';\n' +
+        '            } else {\n' +
+        '                // Hide Ready to Merge elements in Reviewers\' view\n' +
+        '                if (readyLink) readyLink.style.display = \'none\';\n' +
+        '                if (readySection) readySection.style.display = \'none\';\n' +
+        '                if (readyTable) readyTable.style.display = \'none\';\n' +
+        '            }\n' +
+        '            \n' +
         '            // Check if we\'re in chart mode\n' +
         '            var isChartMode = document.getElementById(\'show-chart\').checked;\n' +
         '            \n' +
@@ -1197,7 +1214,7 @@ function generateHtmlReport(
         '            <label><input type="radio" name="prFilter" id="show-chart" ' +
         'onClick="toggleDetails()"> Chart</label>\n' +
         '            ' + (readyToMergePRs.length > 0 ?
-            '<a href="#ready-section" class="ready-link">Ready To Merge (' +
+            '<a href="#ready-section" class="ready-link" id="ready-to-merge-link" style="display: none;">Ready To Merge (' +
             readyToMergePRs.length + ')</a>' : '') + '\n' +
         '        </div>\n' +
         '        <span class="total-prs-badge">Total # Of Open PRs: ' + totalOpenPRs + '</span>\n' +
@@ -1566,7 +1583,7 @@ function generateHtmlReport(
 
     /* READY TO MERGE SECTION */
     htmlContent += '\n    <!-- Ready to Merge PRs Section -->\n' +
-        '    <div id="ready-section" class="ready-section-header">\n' +
+        '    <div id="ready-section" class="ready-section-header" style="display: none;">\n' +
         '        <h2>Ready to Merge Pull Requests</h2>\n' +
         '        <div>\n' +
         '            <span class="ready-count">' + readyToMergePRs.length + '</span>\n' +
@@ -1574,7 +1591,7 @@ function generateHtmlReport(
         '        </div>\n' +
         '    </div>\n' +
         '    \n' +
-        '    <table class="ready-table" id="ready-table">\n' +
+        '    <table class="ready-table" id="ready-table" style="display: none;">\n' +
         '        <tr>\n' +
         '            <th>Pull Request</th>\n' +
         '            <th>Author</th>\n' +
