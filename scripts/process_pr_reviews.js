@@ -335,33 +335,33 @@ function generateHtmlReport(
         '        }\n' +
         '        /* Reviewer view PR table column widths */\n' +
         '        .reviewer-pr-table th:nth-child(1),\n' +
-        '        .reviewer-pr-table td:nth-child(1) { width: 25%; } /* PR link */\n' +
+        '        .reviewer-pr-table td:nth-child(1) { width: auto; } /* PR link - flexible */\n' +
         '        .reviewer-pr-table th:nth-child(2),\n' +
-        '        .reviewer-pr-table td:nth-child(2) { width: 9%; } /* Author */\n' +
+        '        .reviewer-pr-table td:nth-child(2) { width: 100px; } /* Author - fixed */\n' +
         '        .reviewer-pr-table th:nth-child(3),\n' +
-        '        .reviewer-pr-table td:nth-child(3) { width: 17%; } /* Jira - moved to 3rd */\n' +
+        '        .reviewer-pr-table td:nth-child(3) { width: 105px; white-space: normal !important; overflow: visible; word-break: break-word; } /* Jira - fixed with wrapping */\n' +
         '        .reviewer-pr-table th:nth-child(4),\n' +
-        '        .reviewer-pr-table td:nth-child(4) { width: 20%; } /* Reviewers */\n' +
+        '        .reviewer-pr-table td:nth-child(4) { width: auto; } /* Reviewers - flexible */\n' +
         '        .reviewer-pr-table th:nth-child(5),\n' +
-        '        .reviewer-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Days Open */\n' +
+        '        .reviewer-pr-table td:nth-child(5) { width: 60px; } /* # Days Open - fixed */\n' +
         '        .reviewer-pr-table th:nth-child(6),\n' +
-        '        .reviewer-pr-table td:nth-child(6) { width: 7%; white-space: nowrap; } /* # Approvals */\n' +
+        '        .reviewer-pr-table td:nth-child(6) { width: 60px; } /* # Approvals - fixed */\n' +
         '        .reviewer-pr-table th:nth-child(7),\n' +
-        '        .reviewer-pr-table td:nth-child(7) { width: 10%; } /* Status */\n' +
+        '        .reviewer-pr-table td:nth-child(7) { width: 120px; } /* Status - fixed */\n' +
         '        \n' +
         '        /* Author view PR table column widths */\n' +
         '        .author-pr-table th:nth-child(1),\n' +
-        '        .author-pr-table td:nth-child(1) { width: 30%; } /* PR link */\n' +
+        '        .author-pr-table td:nth-child(1) { width: auto; } /* PR link - flexible */\n' +
         '        .author-pr-table th:nth-child(2),\n' +
-        '        .author-pr-table td:nth-child(2) { width: 18%; } /* Jira - moved to 2nd */\n' +
+        '        .author-pr-table td:nth-child(2) { width: 105px; white-space: normal !important; overflow: visible; word-break: break-word; } /* Jira - fixed with wrapping */\n' +
         '        .author-pr-table th:nth-child(3),\n' +
-        '        .author-pr-table td:nth-child(3) { width: 25%; } /* Reviewers */\n' +
+        '        .author-pr-table td:nth-child(3) { width: auto; } /* Reviewers - flexible */\n' +
         '        .author-pr-table th:nth-child(4),\n' +
-        '        .author-pr-table td:nth-child(4) { width: 7%; white-space: nowrap; } /* # Days Open */\n' +
+        '        .author-pr-table td:nth-child(4) { width: 60px; } /* # Days Open - fixed */\n' +
         '        .author-pr-table th:nth-child(5),\n' +
-        '        .author-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Approvals */\n' +
+        '        .author-pr-table td:nth-child(5) { width: 60px; } /* # Approvals - fixed */\n' +
         '        .author-pr-table th:nth-child(6),\n' +
-        '        .author-pr-table td:nth-child(6) { width: 10%; } /* Status */\n' +
+        '        .author-pr-table td:nth-child(6) { width: 130px; } /* Status - fixed */\n' +
         '        \n' +
         '        /* Ready to Merge table styles */\n' +
         '        .ready-table {\n' +
@@ -407,13 +407,13 @@ function generateHtmlReport(
         '            white-space: nowrap;\n' +
         '            color: #1e90ff;\n' +
         '        }\n' +
-        '        /* Jira link styling - always blue even when visited */\n' +
+        '        /* Jira link styling - always purple even when visited */\n' +
         '        a[href^="https://issues.redhat.com/browse/"] {\n' +
-        '            color: #1e90ff !important;\n' +
+        '            color: #9370DB !important;\n' +
         '            text-decoration: none;\n' +
         '        }\n' +
         '        a[href^="https://issues.redhat.com/browse/"]:visited {\n' +
-        '            color: #1e90ff !important;\n' +
+        '            color: #9370DB !important;\n' +
         '        }\n' +
         '        /* Status colors */\n' +
         '        .needs-review { color: #ff9800; } /* Orange */\n' +
@@ -517,13 +517,13 @@ function generateHtmlReport(
         '        /* Draft PR badge */\n' +
         '        .draft-badge {\n' +
         '            display: inline-block;\n' +
-        '            background-color: #6c757d;\n' +
+        '            background-color: #1e90ff;\n' +
         '            color: white;\n' +
         '            font-size: 11px;\n' +
         '            font-weight: bold;\n' +
         '            padding: 0px 4px;\n' +
         '            border-radius: 3px;\n' +
-        '            margin-left: 5px;\n' +
+        '            margin-right: 5px;\n' +
         '            vertical-align: middle;\n' +
         '        }\n' +
         '        \n' +
@@ -1186,7 +1186,7 @@ function generateHtmlReport(
         '            <button id="reviewers-view-btn" class="view-btn active" ' +
         'data-view="reviewers">Reviewers\' View</button>\n' +
         '            <button id="authors-view-btn" class="view-btn" ' +
-        'data-view="authors">Authors\' View (beta)</button>\n' +
+        'data-view="authors">Authors\' View</button>\n' +
         '        </div>\n' +
         '    </div>\n' +
         '    \n' +
@@ -1437,7 +1437,7 @@ function generateHtmlReport(
                 '              <td title="' + pr.author + '">' + pr.author + '</td>\n' +
                 '              <td title="Jira IDs">' + pr.jiraLinks + '</td>\n' +
                 '              <td title="' + pr.reviewers + '">' +
-                (pr.isDraft ? '<span class="draft-badge">DRAFT</span><br/>' : '') +
+                (pr.isDraft ? '<div class="draft-badge">DRAFT</div>' : '') +
                 reviewersList + '</td>\n' +
                 '              <td title="' + pr.daysOpen + '" style="color: ' +
                 pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
@@ -1548,7 +1548,7 @@ function generateHtmlReport(
                 '              </td>\n' +
                 '              <td title="Jira IDs">' + pr.jiraLinks + '</td>\n' +
                 '              <td title="' + pr.reviewers + '">' +
-                (pr.isDraft ? '<span class="draft-badge">DRAFT</span><br/>' : '') +
+                (pr.isDraft ? '<div class="draft-badge">DRAFT</div>' : '') +
                 pr.reviewers + '</td>\n' +
                 '              <td title="' + pr.daysOpen + '" style="color: ' +
                 pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
@@ -1592,7 +1592,7 @@ function generateHtmlReport(
             '            <td><a title="' + pr.title + '" class="pr-link" \n' +
             '                 href="https://github.com/' + process.env.PROJECT_OWNER + '/' +
             process.env.PROJECT_NAME + '/pull/' + pr.number + '">' + pr.title +
-            (pr.isDraft ? ' <span class="draft-badge">DRAFT</span>' : '') + '</a></td>\n' +
+            (pr.isDraft ? ' <div class="draft-badge">DRAFT</div>' : '') + '</a></td>\n' +
             '            <td>' + pr.author + '</td>\n' +
             '            <td style="color: ' + pr.daysOpenColor + ';">' + pr.daysOpen + '</td>\n' +
             '            <td>' + pr.approvals + '/' + pr.requiredApprovals + '</td>\n' +

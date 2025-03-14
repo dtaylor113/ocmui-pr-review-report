@@ -44,7 +44,7 @@ runs:
         gh api graphql --method POST -f query='
           query {
             repository(owner: "${{ inputs.owner }}", name: "${{ inputs.name }}") {
-              pullRequests(first: 50, states: OPEN) {
+              pullRequests(first: 65, states: OPEN) {
                 nodes {
                   number
                   title
