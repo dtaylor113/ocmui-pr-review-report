@@ -31,29 +31,29 @@
         .reviewer-pr-table th:nth-child(2),
         .reviewer-pr-table td:nth-child(2) { width: 9%; } /* Author */
         .reviewer-pr-table th:nth-child(3),
-        .reviewer-pr-table td:nth-child(3) { width: 25%; } /* Reviewers */
+        .reviewer-pr-table td:nth-child(3) { width: 17%; } /* Jira - moved to 3rd */
         .reviewer-pr-table th:nth-child(4),
-        .reviewer-pr-table td:nth-child(4) { width: 7%; white-space: nowrap; } /* # Days Open */
+        .reviewer-pr-table td:nth-child(4) { width: 20%; } /* Reviewers */
         .reviewer-pr-table th:nth-child(5),
-        .reviewer-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Approvals */
+        .reviewer-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Days Open */
         .reviewer-pr-table th:nth-child(6),
-        .reviewer-pr-table td:nth-child(6) { width: 10%; } /* Status */
+        .reviewer-pr-table td:nth-child(6) { width: 7%; white-space: nowrap; } /* # Approvals */
         .reviewer-pr-table th:nth-child(7),
-        .reviewer-pr-table td:nth-child(7) { width: 17%; } /* Jira - new column */
+        .reviewer-pr-table td:nth-child(7) { width: 10%; } /* Status */
         
         /* Author view PR table column widths */
         .author-pr-table th:nth-child(1),
         .author-pr-table td:nth-child(1) { width: 30%; } /* PR link */
         .author-pr-table th:nth-child(2),
-        .author-pr-table td:nth-child(2) { width: 28%; } /* Reviewers */
+        .author-pr-table td:nth-child(2) { width: 18%; } /* Jira - moved to 2nd */
         .author-pr-table th:nth-child(3),
-        .author-pr-table td:nth-child(3) { width: 7%; white-space: nowrap; } /* # Days Open */
+        .author-pr-table td:nth-child(3) { width: 25%; } /* Reviewers */
         .author-pr-table th:nth-child(4),
-        .author-pr-table td:nth-child(4) { width: 7%; white-space: nowrap; } /* # Approvals */
+        .author-pr-table td:nth-child(4) { width: 7%; white-space: nowrap; } /* # Days Open */
         .author-pr-table th:nth-child(5),
-        .author-pr-table td:nth-child(5) { width: 10%; } /* Status */
+        .author-pr-table td:nth-child(5) { width: 7%; white-space: nowrap; } /* # Approvals */
         .author-pr-table th:nth-child(6),
-        .author-pr-table td:nth-child(6) { width: 18%; } /* Jira - new column */
+        .author-pr-table td:nth-child(6) { width: 10%; } /* Status */
         
         /* Ready to Merge table styles */
         .ready-table {
@@ -98,6 +98,14 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             color: #1e90ff;
+        }
+        /* Jira link styling - always blue even when visited */
+        a[href^="https://issues.redhat.com/browse/"] {
+            color: #1e90ff !important;
+            text-decoration: none;
+        }
+        a[href^="https://issues.redhat.com/browse/"]:visited {
+            color: #1e90ff !important;
         }
         /* Status colors */
         .needs-review { color: #ff9800; } /* Orange */
@@ -857,7 +865,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 14 2025 02:35:17 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Fri Mar 14 2025 02:39:08 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -1024,31 +1032,31 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5                  </a>
               </td>
               <td title="renovate">renovate</td>
+              <td title="Jira IDs"></td>
               <td title="LiorKGOW (requested), Ginxo (approved), jmekkatt (approved)">LiorKGOW (requested), Ginxo (approved), jmekkatt (approved)</td>
               <td title="65" style="color: red;">65</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
               <td title="Ginxo (requested), LiorKGOW (requested), apecha (requested)">LiorKGOW (requested), Ginxo (requested), apecha (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="Ginxo">
@@ -1062,121 +1070,121 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
               <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">Ginxo (requested changes), kelvah (commented), eliranmal (requested changes)</td>
               <td title="48" style="color: red;">48</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected                  </a>
               </td>
               <td title="LiorKGOW">LiorKGOW</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
               <td title="lizagilman (commented), Ginxo (commented)"><span class="draft-badge">DRAFT</span><br/>Ginxo (commented), lizagilman (commented)</td>
               <td title="36" style="color: red;">36</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code                  </a>
               </td>
               <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2752" target="_blank">OCMUI-2752</a></td>
               <td title="jmekkatt (requested), Ginxo (requested changes)">Ginxo (requested changes), jmekkatt (requested)</td>
               <td title="24" style="color: red;">24</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2752" target="_blank">OCMUI-2752</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available                  </a>
               </td>
               <td title="dtaylor113">dtaylor113</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
               <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">Ginxo (requested), lizagilman (requested), shivanthi-amara (requested)</td>
               <td title="22" style="color: red;">22</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2992: TS Refactor MachineTypeSelection Part 1 - Add Machine Pool Modal Part of the Bug Fix" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/224">OCMUI-2992: TS Refactor MachineTypeSelection Part 1 - Add Machine Pool Modal Part of the Bug Fix                  </a>
               </td>
               <td title="LiorKGOW">LiorKGOW</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
               <td title="Ginxo (requested)"><span class="draft-badge">DRAFT</span><br/>Ginxo (requested)</td>
               <td title="8" style="color: red;">8</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
               <td title="Ginxo (requested), LiorKGOW (requested), apecha (requested)">Ginxo (requested), LiorKGOW (requested), apecha (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="Updated check-links.mjs for better reporting" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/251">Updated check-links.mjs for better reporting                  </a>
               </td>
               <td title="dtaylor113">dtaylor113</td>
+              <td title="Jira IDs"></td>
               <td title="Ginxo (requested), davidaznaur (requested)">Ginxo (requested), davidaznaur (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5                  </a>
               </td>
               <td title="renovate">renovate</td>
+              <td title="Jira IDs"></td>
               <td title="LiorKGOW (requested), Ginxo (approved), jmekkatt (approved)">Ginxo (approved), LiorKGOW (requested), jmekkatt (approved)</td>
               <td title="65" style="color: red;">65</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14                  </a>
               </td>
               <td title="renovate">renovate</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
               <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">Ginxo (approved), jmekkatt (requested), apecha (requested)</td>
               <td title="44" style="color: red;">44</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3177: fixed htpassword long username bug" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/240">OCMUI-3177: fixed htpassword long username bug                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
               <td title="dragan000 (requested), Ginxo (approved), zherman0 (approved)">Ginxo (approved), dragan000 (requested), zherman0 (approved)</td>
               <td title="3" style="color: yellow;">3</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/250">[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases                  </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
               <td title="dragan000 (requested), kelvah (requested), Ginxo (approved)">Ginxo (approved), dragan000 (requested), kelvah (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
@@ -1190,81 +1198,81 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14                  </a>
               </td>
               <td title="renovate">renovate</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
               <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">jmekkatt (requested), apecha (requested), Ginxo (approved)</td>
               <td title="44" style="color: red;">44</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">jmekkatt (requested), davidaznaur (approved), kdoberst (approved)</td>
               <td title="40" style="color: red;">40</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard                  </a>
               </td>
               <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)</td>
               <td title="34" style="color: red;">34</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code                  </a>
               </td>
               <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2752" target="_blank">OCMUI-2752</a></td>
               <td title="jmekkatt (requested), Ginxo (requested changes)">jmekkatt (requested), Ginxo (requested changes)</td>
               <td title="24" style="color: red;">24</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2752" target="_blank">OCMUI-2752</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5                  </a>
               </td>
               <td title="renovate">renovate</td>
+              <td title="Jira IDs"></td>
               <td title="LiorKGOW (requested), Ginxo (approved), jmekkatt (approved)">jmekkatt (approved), LiorKGOW (requested), Ginxo (approved)</td>
               <td title="65" style="color: red;">65</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="[OCMUI-3182] execute CI on push event to master" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/241">[OCMUI-3182] execute CI on push event to master                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
               <td title="aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)">jmekkatt (approved), aneelac22 (requested), eliranmal (commented), kelvah (approved)</td>
               <td title="2" style="color: #d4d4d4;">2</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/246">OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run                  </a>
               </td>
               <td title="shivanthi-amara">shivanthi-amara</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
               <td title="dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)">jmekkatt (approved), dragan000 (requested), apecha (requested), jloss-redhat (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kelvah">
@@ -1278,61 +1286,61 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
               <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)</td>
               <td title="48" style="color: red;">48</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3033" target="_blank">OCMUI-3033</a></td>
               <td title="lizagilman (requested), kelvah (commented)"><span class="draft-badge">DRAFT</span><br/>kelvah (commented), lizagilman (requested)</td>
               <td title="29" style="color: red;">29</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3033" target="_blank">OCMUI-3033</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3174] deploy to production from master - with manual intervention" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/245">[OCMUI-3174] deploy to production from master - with manual intervention                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
               <td title="kelvah (requested), eliranmal (requested), aneelac22 (requested)">kelvah (requested), eliranmal (requested), aneelac22 (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/250">[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases                  </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
               <td title="dragan000 (requested), kelvah (requested), Ginxo (approved)">kelvah (requested), dragan000 (requested), Ginxo (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="[OCMUI-3182] execute CI on push event to master" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/241">[OCMUI-3182] execute CI on push event to master                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
               <td title="aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)">kelvah (approved), aneelac22 (requested), eliranmal (commented), jmekkatt (approved)</td>
               <td title="2" style="color: #d4d4d4;">2</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="eliranmal">
@@ -1346,51 +1354,51 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
               <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">eliranmal (requested changes), kelvah (commented), Ginxo (requested changes)</td>
               <td title="48" style="color: red;">48</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/223">OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
               <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">eliranmal (requested), shivanthi-amara (requested), lizagilman (approved)</td>
               <td title="9" style="color: red;">9</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3182] execute CI on push event to master" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/241">[OCMUI-3182] execute CI on push event to master                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
               <td title="aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)">eliranmal (commented), aneelac22 (requested), kelvah (approved), jmekkatt (approved)</td>
               <td title="2" style="color: #d4d4d4;">2</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3174] deploy to production from master - with manual intervention" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/245">[OCMUI-3174] deploy to production from master - with manual intervention                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
               <td title="kelvah (requested), eliranmal (requested), aneelac22 (requested)">eliranmal (requested), kelvah (requested), aneelac22 (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
@@ -1404,91 +1412,91 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2953" target="_blank">OCMUI-2953</a></td>
               <td title="davidaznaur (requested), dtaylor113 (approved)">davidaznaur (requested), dtaylor113 (approved)</td>
               <td title="48" style="color: red;">48</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2953" target="_blank">OCMUI-2953</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP                  </a>
               </td>
               <td title="DcooperRH">DcooperRH</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2967" target="_blank">OCMUI-2967</a></td>
               <td title="kdoberst (commented), davidaznaur (commented)">davidaznaur (commented), kdoberst (commented)</td>
               <td title="11" style="color: red;">11</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2967" target="_blank">OCMUI-2967</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="Updated check-links.mjs for better reporting" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/251">Updated check-links.mjs for better reporting                  </a>
               </td>
               <td title="dtaylor113">dtaylor113</td>
+              <td title="Jira IDs"></td>
               <td title="Ginxo (requested), davidaznaur (requested)">davidaznaur (requested), Ginxo (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">davidaznaur (approved), jmekkatt (requested), kdoberst (approved)</td>
               <td title="40" style="color: red;">40</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard                  </a>
               </td>
               <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">davidaznaur (approved), jmekkatt (requested), DcooperRH (approved)</td>
               <td title="34" style="color: red;">34</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
               <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1003" target="_blank">OCMUI-1003</a></td>
               <td title="davidaznaur (approved), dtaylor113 (requested changes)">davidaznaur (approved), dtaylor113 (requested changes)</td>
               <td title="10" style="color: red;">10</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1003" target="_blank">OCMUI-1003</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd                  </a>
               </td>
               <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
               <td title="DcooperRH (requested), zherman0 (approved), davidaznaur (approved)">davidaznaur (approved), DcooperRH (requested), zherman0 (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
               <td><a title="[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/234">[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
               <td title="DcooperRH (requested), davidaznaur (approved), dtaylor113 (requested changes)">davidaznaur (approved), DcooperRH (requested), dtaylor113 (requested changes)</td>
               <td title="6" style="color: orange;">6</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="dtaylor113">
@@ -1502,41 +1510,41 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1003" target="_blank">OCMUI-1003</a></td>
               <td title="davidaznaur (approved), dtaylor113 (requested changes)">dtaylor113 (requested changes), davidaznaur (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1003" target="_blank">OCMUI-1003</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/234">[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
               <td title="DcooperRH (requested), davidaznaur (approved), dtaylor113 (requested changes)">dtaylor113 (requested changes), DcooperRH (requested), davidaznaur (approved)</td>
               <td title="6" style="color: orange;">6</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2953" target="_blank">OCMUI-2953</a></td>
               <td title="davidaznaur (requested), dtaylor113 (approved)">dtaylor113 (approved), davidaznaur (requested)</td>
               <td title="48" style="color: red;">48</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2953" target="_blank">OCMUI-2953</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="apecha">
@@ -1550,51 +1558,51 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14                  </a>
               </td>
               <td title="renovate">renovate</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
               <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">apecha (requested), jmekkatt (requested), Ginxo (approved)</td>
               <td title="44" style="color: red;">44</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"                  </a>
               </td>
               <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
               <td title="lizagilman (requested), apecha (requested), zherman0 (approved)"><span class="draft-badge">DRAFT</span><br/>apecha (requested), lizagilman (requested), zherman0 (approved)</td>
               <td title="15" style="color: red;">15</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/246">OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run                  </a>
               </td>
               <td title="shivanthi-amara">shivanthi-amara</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
               <td title="dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)">apecha (requested), dragan000 (requested), jmekkatt (approved), jloss-redhat (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
               <td title="Ginxo (requested), LiorKGOW (requested), apecha (requested)">apecha (requested), Ginxo (requested), LiorKGOW (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
@@ -1608,51 +1616,51 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP                  </a>
               </td>
               <td title="DcooperRH">DcooperRH</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2967" target="_blank">OCMUI-2967</a></td>
               <td title="kdoberst (commented), davidaznaur (commented)">kdoberst (commented), davidaznaur (commented)</td>
               <td title="11" style="color: red;">11</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2967" target="_blank">OCMUI-2967</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">kdoberst (approved), jmekkatt (requested), davidaznaur (approved)</td>
               <td title="40" style="color: red;">40</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
               <td title="shivanthi-amara (requested), DcooperRH (approved), kdoberst (approved)">kdoberst (approved), shivanthi-amara (requested), DcooperRH (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
               <td title="DcooperRH (requested), dragan000 (requested), kdoberst (approved)">kdoberst (approved), DcooperRH (requested), dragan000 (requested)</td>
               <td title="8" style="color: red;">8</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="lizagilman">
@@ -1666,71 +1674,71 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected                  </a>
               </td>
               <td title="LiorKGOW">LiorKGOW</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
               <td title="lizagilman (commented), Ginxo (commented)"><span class="draft-badge">DRAFT</span><br/>lizagilman (commented), Ginxo (commented)</td>
               <td title="36" style="color: red;">36</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3033" target="_blank">OCMUI-3033</a></td>
               <td title="lizagilman (requested), kelvah (commented)"><span class="draft-badge">DRAFT</span><br/>lizagilman (requested), kelvah (commented)</td>
               <td title="29" style="color: red;">29</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3033" target="_blank">OCMUI-3033</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available                  </a>
               </td>
               <td title="dtaylor113">dtaylor113</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
               <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)</td>
               <td title="22" style="color: red;">22</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"                  </a>
               </td>
               <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
               <td title="lizagilman (requested), apecha (requested), zherman0 (approved)"><span class="draft-badge">DRAFT</span><br/>lizagilman (requested), apecha (requested), zherman0 (approved)</td>
               <td title="15" style="color: red;">15</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
             </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases                  </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
               <td title="shivanthi-amara (approved), lizagilman (approved), dragan000 (approved)">lizagilman (approved), shivanthi-amara (approved), dragan000 (approved)</td>
               <td title="13" style="color: red;">13</td>
               <td title="3">3/3</td>
               <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/223">OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
               <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">lizagilman (approved), shivanthi-amara (requested), eliranmal (requested)</td>
               <td title="9" style="color: red;">9</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="DcooperRH">
@@ -1744,61 +1752,61 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd                  </a>
               </td>
               <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
               <td title="DcooperRH (requested), zherman0 (approved), davidaznaur (approved)">DcooperRH (requested), zherman0 (approved), davidaznaur (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
               <td title="DcooperRH (requested), dragan000 (requested), kdoberst (approved)">DcooperRH (requested), dragan000 (requested), kdoberst (approved)</td>
               <td title="8" style="color: red;">8</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/234">[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
               <td title="DcooperRH (requested), davidaznaur (approved), dtaylor113 (requested changes)">DcooperRH (requested), davidaznaur (approved), dtaylor113 (requested changes)</td>
               <td title="6" style="color: orange;">6</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard                  </a>
               </td>
               <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">DcooperRH (approved), jmekkatt (requested), davidaznaur (approved)</td>
               <td title="34" style="color: red;">34</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
               <td title="shivanthi-amara (requested), DcooperRH (approved), kdoberst (approved)">DcooperRH (approved), shivanthi-amara (requested), kdoberst (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="shivanthi-amara">
@@ -1812,51 +1820,51 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available                  </a>
               </td>
               <td title="dtaylor113">dtaylor113</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
               <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">shivanthi-amara (requested), lizagilman (requested), Ginxo (requested)</td>
               <td title="22" style="color: red;">22</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
               <td title="shivanthi-amara (requested), DcooperRH (approved), kdoberst (approved)">shivanthi-amara (requested), DcooperRH (approved), kdoberst (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/223">OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ                  </a>
               </td>
               <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
               <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)</td>
               <td title="9" style="color: red;">9</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
             </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases                  </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
               <td title="shivanthi-amara (approved), lizagilman (approved), dragan000 (approved)">shivanthi-amara (approved), lizagilman (approved), dragan000 (approved)</td>
               <td title="13" style="color: red;">13</td>
               <td title="3">3/3</td>
               <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="zherman0">
@@ -1870,41 +1878,41 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"                  </a>
               </td>
               <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
               <td title="lizagilman (requested), apecha (requested), zherman0 (approved)"><span class="draft-badge">DRAFT</span><br/>zherman0 (approved), lizagilman (requested), apecha (requested)</td>
               <td title="15" style="color: red;">15</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd                  </a>
               </td>
               <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
               <td title="DcooperRH (requested), zherman0 (approved), davidaznaur (approved)">zherman0 (approved), DcooperRH (requested), davidaznaur (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3177: fixed htpassword long username bug" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/240">OCMUI-3177: fixed htpassword long username bug                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
               <td title="dragan000 (requested), Ginxo (approved), zherman0 (approved)">zherman0 (approved), dragan000 (requested), Ginxo (approved)</td>
               <td title="3" style="color: yellow;">3</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="dragan000">
@@ -1918,61 +1926,61 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
               <td title="DcooperRH (requested), dragan000 (requested), kdoberst (approved)">dragan000 (requested), DcooperRH (requested), kdoberst (approved)</td>
               <td title="8" style="color: red;">8</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3177: fixed htpassword long username bug" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/240">OCMUI-3177: fixed htpassword long username bug                  </a>
               </td>
               <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
               <td title="dragan000 (requested), Ginxo (approved), zherman0 (approved)">dragan000 (requested), Ginxo (approved), zherman0 (approved)</td>
               <td title="3" style="color: yellow;">3</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/246">OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run                  </a>
               </td>
               <td title="shivanthi-amara">shivanthi-amara</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
               <td title="dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)">dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/250">[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases                  </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
               <td title="dragan000 (requested), kelvah (requested), Ginxo (approved)">dragan000 (requested), kelvah (requested), Ginxo (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
             </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases                  </a>
               </td>
               <td title="jmekkatt">jmekkatt</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
               <td title="shivanthi-amara (approved), lizagilman (approved), dragan000 (approved)">dragan000 (approved), shivanthi-amara (approved), lizagilman (approved)</td>
               <td title="13" style="color: red;">13</td>
               <td title="3">3/3</td>
               <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="aneelac22">
@@ -1986,31 +1994,31 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3182] execute CI on push event to master" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/241">[OCMUI-3182] execute CI on push event to master                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
               <td title="aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)">aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)</td>
               <td title="2" style="color: #d4d4d4;">2</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3174] deploy to production from master - with manual intervention" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/245">[OCMUI-3174] deploy to production from master - with manual intervention                  </a>
               </td>
               <td title="Ginxo">Ginxo</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
               <td title="kelvah (requested), eliranmal (requested), aneelac22 (requested)">aneelac22 (requested), kelvah (requested), eliranmal (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jloss-redhat">
@@ -2024,21 +2032,21 @@
                 <tr>
                   <th title="Pull Request">Pull Request</th>
                   <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/246">OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run                  </a>
               </td>
               <td title="shivanthi-amara">shivanthi-amara</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
               <td title="dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)">jloss-redhat (approved), dragan000 (requested), apecha (requested), jmekkatt (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
             </tr></table>
         </td>
     </tr></table>
@@ -2092,47 +2100,47 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-2663] Suggestion to play the video from inside the drawer" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/41">[OCMUI-2663] Suggestion to play the video from inside the drawer                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2663" target="_blank">OCMUI-2663</a></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="81" style="color: red;">81</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2663" target="_blank">OCMUI-2663</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="fix(OCMUI-2992): Select instance type is required shows error even though it is selected" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/153">fix(OCMUI-2992): Select instance type is required shows error even though it is selected                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
               <td title="lizagilman (commented), Ginxo (commented)"><span class="draft-badge">DRAFT</span><br/>lizagilman (commented), Ginxo (commented)</td>
               <td title="36" style="color: red;">36</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-2904] Windows LI Add UI Implementation Hidden Behind a Feature Flag" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/164">[OCMUI-2904] Windows LI Add UI Implementation Hidden Behind a Feature Flag                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2904" target="_blank">OCMUI-2904</a></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="32" style="color: red;">32</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2904" target="_blank">OCMUI-2904</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-2992: TS Refactor MachineTypeSelection Part 1 - Add Machine Pool Modal Part of the Bug Fix" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/224">OCMUI-2992: TS Refactor MachineTypeSelection Part 1 - Add Machine Pool Modal Part of the Bug Fix                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
               <td title="Ginxo (requested)"><span class="draft-badge">DRAFT</span><br/>Ginxo (requested)</td>
               <td title="8" style="color: red;">8</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2992" target="_blank">OCMUI-2992</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="renovate">
@@ -2145,47 +2153,47 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Update linters (major)" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/47">Update linters (major)                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""></td>
               <td title="77" style="color: red;">77</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Update borales/actions-yarn action to v5" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/64">Update borales/actions-yarn action to v5                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title="LiorKGOW (requested), Ginxo (approved), jmekkatt (approved)">LiorKGOW (requested), Ginxo (approved), jmekkatt (approved)</td>
               <td title="65" style="color: red;">65</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-2990] chore(deps): update dependency cypress to v14" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/127">[OCMUI-2990] chore(deps): update dependency cypress to v14                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
               <td title="jmekkatt (requested), apecha (requested), Ginxo (approved)">jmekkatt (requested), apecha (requested), Ginxo (approved)</td>
               <td title="44" style="color: red;">44</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2990" target="_blank">OCMUI-2990</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Update patternfly packages" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/227">Update patternfly packages                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""></td>
               <td title="8" style="color: red;">8</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="Ginxo">
@@ -2198,74 +2206,74 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Tech debt dashboard refactoring" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/51">Tech debt dashboard refactoring                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="70" style="color: red;">70</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-3033] keycloak-js removed in favour of chromeAPI" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/174">[OCMUI-3033] keycloak-js removed in favour of chromeAPI                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3033" target="_blank">OCMUI-3033</a></td>
               <td title="lizagilman (requested), kelvah (commented)"><span class="draft-badge">DRAFT</span><br/>lizagilman (requested), kelvah (commented)</td>
               <td title="29" style="color: red;">29</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3033" target="_blank">OCMUI-3033</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[TEST] OCMUI-1340 Report unit test coverage after all Jest runs" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/209">[TEST] OCMUI-1340 Report unit test coverage after all Jest runs                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1340" target="_blank">OCMUI-1340</a></td>
               <td title=""></td>
               <td title="14" style="color: red;">14</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1340" target="_blank">OCMUI-1340</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested">
               <td><a title="[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/217">[OCMUI-1003] [ROSA][Day2] Introduce auto refresh or option refresh the security groups from the "Add machine pool" dialog                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1003" target="_blank">OCMUI-1003</a></td>
               <td title="davidaznaur (approved), dtaylor113 (requested changes)">davidaznaur (approved), dtaylor113 (requested changes)</td>
               <td title="10" style="color: red;">10</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1003" target="_blank">OCMUI-1003</a></td>
             </tr><tr class="pr-detail-row" data-status="changes_requested">
               <td><a title="[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/234">[OCMUI-3166][OCMUI-3055][ROSA/OSD] version.raw_id errors                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
               <td title="DcooperRH (requested), davidaznaur (approved), dtaylor113 (requested changes)">DcooperRH (requested), davidaznaur (approved), dtaylor113 (requested changes)</td>
               <td title="6" style="color: orange;">6</td>
               <td title="1">1/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3166" target="_blank">OCMUI-3166</a>, <a href="https://issues.redhat.com/browse/OCMUI-3055" target="_blank">OCMUI-3055</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-3182] execute CI on push event to master" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/241">[OCMUI-3182] execute CI on push event to master                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
               <td title="aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)">aneelac22 (requested), eliranmal (commented), kelvah (approved), jmekkatt (approved)</td>
               <td title="2" style="color: #d4d4d4;">2</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3182" target="_blank">OCMUI-3182</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-3174] deploy to production from master - with manual intervention" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/245">[OCMUI-3174] deploy to production from master - with manual intervention                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
               <td title="kelvah (requested), eliranmal (requested), aneelac22 (requested)">kelvah (requested), eliranmal (requested), aneelac22 (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3174" target="_blank">OCMUI-3174</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="ammont82">
@@ -2278,29 +2286,29 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[MGMT-17453]  Decoupling Assisted Installer UI from uhc-portal" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/79">[MGMT-17453]  Decoupling Assisted Installer UI from uhc-portal                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""></td>
               <td title="62" style="color: red;">62</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Update Assisted UI Lib to v2.38.3" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/230">Update Assisted UI Lib to v2.38.3                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="zherman0">
@@ -2313,65 +2321,65 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="changes_requested">
               <td><a title="OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/118">OCMUI-2645: VPC/PSC checkboxes are not checked when user navigates between steps with a version change                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
               <td title="kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)">kelvah (commented), Ginxo (requested changes), eliranmal (requested changes)</td>
               <td title="48" style="color: red;">48</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2645" target="_blank">OCMUI-2645</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-2953: Add fedramp deployment script" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/120">OCMUI-2953: Add fedramp deployment script                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2953" target="_blank">OCMUI-2953</a></td>
               <td title="davidaznaur (requested), dtaylor113 (approved)">davidaznaur (requested), dtaylor113 (approved)</td>
               <td title="48" style="color: red;">48</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2953" target="_blank">OCMUI-2953</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/138">OCMUI-16 [ROSA]: Cluster owner can initiate transfer of cluster                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), kdoberst (approved)">jmekkatt (requested), davidaznaur (approved), kdoberst (approved)</td>
               <td title="40" style="color: red;">40</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-16" target="_blank">OCMUI-16</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-1318: Implement transfer page for recipient" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/182">OCMUI-1318: Implement transfer page for recipient                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1318" target="_blank">OCMUI-1318</a></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="27" style="color: red;">27</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1318" target="_blank">OCMUI-1318</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/223">OCMUI-622: OSD Wizard creating non-CCS OSD cluster selects wrong AZ                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
               <td title="shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)">shivanthi-amara (requested), eliranmal (requested), lizagilman (approved)</td>
               <td title="9" style="color: red;">9</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-622" target="_blank">OCMUI-622</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-3162: Add oc download links for rhel 8 and 9" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/248">OCMUI-3162: Add oc download links for rhel 8 and 9                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
               <td title="Ginxo (requested), LiorKGOW (requested), apecha (requested)">Ginxo (requested), LiorKGOW (requested), apecha (requested)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3162" target="_blank">OCMUI-3162</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="kdoberst">
@@ -2384,29 +2392,29 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-663 Prefetch VPCs in HCP wizard" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/161">OCMUI-663 Prefetch VPCs in HCP wizard                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
               <td title="jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)">jmekkatt (requested), davidaznaur (approved), DcooperRH (approved)</td>
               <td title="34" style="color: red;">34</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-663" target="_blank">OCMUI-663</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-2969 Add user to existing htpasswd" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/218">OCMUI-2969 Add user to existing htpasswd                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
               <td title="DcooperRH (requested), zherman0 (approved), davidaznaur (approved)">DcooperRH (requested), zherman0 (approved), davidaznaur (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2969" target="_blank">OCMUI-2969</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="eliranmal">
@@ -2419,29 +2427,29 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="changes_requested">
               <td><a title="OCMUI-2752: add test coverage for root-disk-size related code" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/187">OCMUI-2752: add test coverage for root-disk-size related code                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2752" target="_blank">OCMUI-2752</a></td>
               <td title="jmekkatt (requested), Ginxo (requested changes)">jmekkatt (requested), Ginxo (requested changes)</td>
               <td title="24" style="color: red;">24</td>
               <td title="0">0/3</td>
               <td class="changes-requested" title="Changes Requested">Changes Requested</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2752" target="_blank">OCMUI-2752</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-62: add missing permissions for "edit cluster-wide proxy"" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/206">OCMUI-62: add missing permissions for "edit cluster-wide proxy"                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
               <td title="lizagilman (requested), apecha (requested), zherman0 (approved)"><span class="draft-badge">DRAFT</span><br/>lizagilman (requested), apecha (requested), zherman0 (approved)</td>
               <td title="15" style="color: red;">15</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-62" target="_blank">OCMUI-62</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="dtaylor113">
@@ -2454,29 +2462,29 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/194">Fix OCMUI-2776 [OCM-UI] The user is able to create the GCP marketplace cluster even the quota is not available                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
               <td title="lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)">lizagilman (requested), Ginxo (requested), shivanthi-amara (requested)</td>
               <td title="22" style="color: red;">22</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2776" target="_blank">OCMUI-2776</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Updated check-links.mjs for better reporting" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/251">Updated check-links.mjs for better reporting                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title="Ginxo (requested), davidaznaur (requested)">Ginxo (requested), davidaznaur (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="tlabaj">
@@ -2489,20 +2497,20 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="Migrate to PF V6" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/200">Migrate to PF V6                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="16" style="color: red;">16</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="apecha">
@@ -2515,20 +2523,20 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[WIP][OCMUI-1219] Smoke suite - OCP-38888 - Coverage in cluster creation cloud tab" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/211">[WIP][OCMUI-1219] Smoke suite - OCP-38888 - Coverage in cluster creation cloud tab                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1219" target="_blank">OCMUI-1219</a></td>
               <td title=""><span class="draft-badge">DRAFT</span><br/></td>
               <td title="14" style="color: red;">14</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-1219" target="_blank">OCMUI-1219</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="jmekkatt">
@@ -2541,29 +2549,29 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="ready_to_merge">
               <td><a title="[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/214">[OCMUI-3124][QE tests]Refactored 4.14 specific checks from ROSA,OSD validation test cases                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
               <td title="shivanthi-amara (approved), lizagilman (approved), dragan000 (approved)">shivanthi-amara (approved), lizagilman (approved), dragan000 (approved)</td>
               <td title="13" style="color: red;">13</td>
               <td title="3">3/3</td>
               <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3124" target="_blank">OCMUI-3124</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/250">[OCMUI-3208][QE CI]-randomize fix on operator role prefix from rosa classic test cases                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
               <td title="dragan000 (requested), kelvah (requested), Ginxo (approved)">dragan000 (requested), kelvah (requested), Ginxo (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3208" target="_blank">OCMUI-3208</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="DcooperRH">
@@ -2576,20 +2584,20 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-2967 - Remove a single user from a htpasswrd IDP" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/215">OCMUI-2967 - Remove a single user from a htpasswrd IDP                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2967" target="_blank">OCMUI-2967</a></td>
               <td title="kdoberst (commented), davidaznaur (commented)">kdoberst (commented), davidaznaur (commented)</td>
               <td title="11" style="color: red;">11</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2967" target="_blank">OCMUI-2967</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="davidaznaur">
@@ -2602,38 +2610,38 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-3097: fixed ca cert not being uploaded" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/219">OCMUI-3097: fixed ca cert not being uploaded                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
               <td title="shivanthi-amara (requested), DcooperRH (approved), kdoberst (approved)">shivanthi-amara (requested), DcooperRH (approved), kdoberst (approved)</td>
               <td title="10" style="color: red;">10</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3097" target="_blank">OCMUI-3097</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-2947: removed second inflighthecks query" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/226">OCMUI-2947: removed second inflighthecks query                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
               <td title="DcooperRH (requested), dragan000 (requested), kdoberst (approved)">DcooperRH (requested), dragan000 (requested), kdoberst (approved)</td>
               <td title="8" style="color: red;">8</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2947" target="_blank">OCMUI-2947</a></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-3177: fixed htpassword long username bug" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/240">OCMUI-3177: fixed htpassword long username bug                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
               <td title="dragan000 (requested), Ginxo (approved), zherman0 (approved)">dragan000 (requested), Ginxo (approved), zherman0 (approved)</td>
               <td title="3" style="color: yellow;">3</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3177" target="_blank">OCMUI-3177</a></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="casey-williams-rh">
@@ -2646,38 +2654,38 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[Snyk] Upgrade @babel/types from 7.23.9 to 7.26.9" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/236">[Snyk] Upgrade @babel/types from 7.23.9 to 7.26.9                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""></td>
               <td title="5" style="color: orange;">5</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[Snyk] Upgrade @babel/core from 7.23.9 to 7.26.9" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/237">[Snyk] Upgrade @babel/core from 7.23.9 to 7.26.9                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""></td>
               <td title="5" style="color: orange;">5</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="[Snyk] Upgrade @babel/helper-plugin-utils from 7.22.5 to 7.26.5" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/238">[Snyk] Upgrade @babel/helper-plugin-utils from 7.22.5 to 7.26.5                  </a>
               </td>
+              <td title="Jira IDs"></td>
               <td title=""></td>
               <td title="5" style="color: orange;">5</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"></td>
             </tr></table>
         </td>
     </tr><tr class="author-row" data-author="shivanthi-amara">
@@ -2690,20 +2698,20 @@
             <table class="pr-table author-pr-table">
                 <tr>
                   <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
                   <th title="Reviewers">Reviewers</th>
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                  <th title="Jira">Jira</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/246">OCMUI-3143 [QE-CI] Updated the docker image to avoid jq failures within the CI run                  </a>
               </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
               <td title="dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)">dragan000 (requested), apecha (requested), jmekkatt (approved), jloss-redhat (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3143" target="_blank">OCMUI-3143</a></td>
             </tr></table>
         </td>
     </tr></table>
