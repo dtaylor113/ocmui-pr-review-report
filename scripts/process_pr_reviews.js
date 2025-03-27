@@ -127,21 +127,9 @@ function processData() {
                 reviewerNames[review.author.login] = review.author.name;
             }
 
-            // Track the most significant state for each reviewer
-            // Priority: CHANGES_REQUESTED > APPROVED > COMMENTED > DISMISSED
-            const currentState = reviewerStatus[reviewer];
-            const newState = review.state;
-
-            if (
-                !currentState ||
-                newState === 'CHANGES_REQUESTED' ||
-                (currentState !== 'CHANGES_REQUESTED' && newState === 'APPROVED') ||
-                (currentState !== 'CHANGES_REQUESTED' &&
-                    currentState !== 'APPROVED' &&
-                    newState === 'COMMENTED')
-            ) {
-                reviewerStatus[reviewer] = newState;
-            }
+            // Always update the state - this will result in the last review being the final state
+            // Assumes the reviews array is in chronological order with newest last
+            reviewerStatus[reviewer] = review.state;
         });
 
         // Count the number of approvals
