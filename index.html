@@ -416,10 +416,10 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"kelvah","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"dtaylor113","pending":2},{"reviewer":"jmekkatt","pending":3},{"reviewer":"kdoberst","pending":2},{"reviewer":"shivanthi-amara","pending":1},{"reviewer":"meirinetta","pending":1}];
-        var authorData = {"LiorKGOW":{"count":3,"prDetails":[{"number":41,"title":"[OCMUI-2663] Suggestion to play the video from inside the drawer","daysOpen":219,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2663\" target=\"_blank\">OCMUI-2663</a>"},{"number":416,"title":"[OCMUI-2904 & OCMUI-3532] [ROSA-HCP] Windows LI Phase 1: Add UI Implementation Hidden Behind a Feature Flag","daysOpen":53,"daysOpenColor":"red","reviewers":"kelvah (requested), dragan000 (requested), eliranmal (commented), dtaylor113 (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2904\" target=\"_blank\">OCMUI-2904</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3532\" target=\"_blank\">OCMUI-3532</a>"},{"number":508,"title":"[OCMUI-3533]: Update ROSA Product Terminology","daysOpen":4,"daysOpenColor":"yellow","reviewers":"meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3533\" target=\"_blank\">OCMUI-3533</a>"}]},"renovate":{"count":1,"prDetails":[{"number":321,"title":"Update patternfly packages","daysOpen":106,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"lizagilman":{"count":1,"prDetails":[{"number":398,"title":"OCMUI-2460: ROSA and OSD wizards - Move nodes count input from dropdown select to numerical input","daysOpen":63,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), zherman0 (approved), kelvah (commented)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2460\" target=\"_blank\">OCMUI-2460</a>"}]},"Ginxo":{"count":1,"prDetails":[{"number":419,"title":"[OPEN API] update model","daysOpen":53,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"shivanthi-amara":{"count":3,"prDetails":[{"number":452,"title":"[QE-CI] OCMUI-3294 Testcases for Day2 Automation tests of Machine pools tab","daysOpen":37,"daysOpenColor":"red","reviewers":"jloss-redhat (approved), jmekkatt (commented)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3294\" target=\"_blank\">OCMUI-3294</a>"},{"number":463,"title":"[QE-CI] E2E automation for IDP - Google","daysOpen":32,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":485,"title":"[QE-CI] E2E Automation tests for GCP machine pools tab","daysOpen":17,"daysOpenColor":"red","reviewers":"jmekkatt (commented), jloss-redhat (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"davidaznaur":{"count":2,"prDetails":[{"number":491,"title":"OCMUI-3539: show uninstall when error during uninstall","daysOpen":11,"daysOpenColor":"red","reviewers":"zherman0 (requested), kdoberst (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3539\" target=\"_blank\">OCMUI-3539</a>"},{"number":497,"title":"OCMUI-3433: AWS tags on Machine pool expanded row","daysOpen":6,"daysOpenColor":"orange","reviewers":"shivanthi-amara (requested), kdoberst (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3433\" target=\"_blank\">OCMUI-3433</a>"}]},"jmekkatt":{"count":1,"prDetails":[{"number":511,"title":"[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology","daysOpen":3,"daysOpenColor":"yellow","reviewers":"dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3533\" target=\"_blank\">OCMUI-3533</a>"}]}};
-        var authorNames = {"LiorKGOW":"Lior Keren","Ginxo":"Enrique Mingorance Cano","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","davidaznaur":"David Aznaurov","jmekkatt":"Jayakrishnan Mekkattillam"};
-        var reviewerNames = {"jloss-redhat":"Jason Loss","zherman0":"Zac Herman","kelvah":"roberto emanuel","dragan000":"Denis Ragan","eliranmal":"Lyn M","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","DcooperRH":"Dylan Cooper","LiorKGOW":"Lior Keren"};
+        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":2},{"reviewer":"zherman0","pending":1},{"reviewer":"kelvah","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"shivanthi-amara","pending":1}];
+        var authorData = {"LiorKGOW":{"count":2,"prDetails":[{"number":41,"title":"[OCMUI-2663] Suggestion to play the video from inside the drawer","daysOpen":219,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2663\" target=\"_blank\">OCMUI-2663</a>"},{"number":416,"title":"[OCMUI-2904 & OCMUI-3532] [ROSA-HCP] Windows LI Phase 1: Add UI Implementation Hidden Behind a Feature Flag","daysOpen":53,"daysOpenColor":"red","reviewers":"kelvah (requested), dragan000 (requested), eliranmal (commented), dtaylor113 (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2904\" target=\"_blank\">OCMUI-2904</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3532\" target=\"_blank\">OCMUI-3532</a>"}]},"renovate":{"count":1,"prDetails":[{"number":321,"title":"Update patternfly packages","daysOpen":106,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"lizagilman":{"count":1,"prDetails":[{"number":398,"title":"OCMUI-2460: ROSA and OSD wizards - Move nodes count input from dropdown select to numerical input","daysOpen":63,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), zherman0 (approved), kelvah (commented)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2460\" target=\"_blank\">OCMUI-2460</a>"}]},"Ginxo":{"count":1,"prDetails":[{"number":419,"title":"[OPEN API] update model","daysOpen":53,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"shivanthi-amara":{"count":3,"prDetails":[{"number":452,"title":"[QE-CI] OCMUI-3294 Testcases for Day2 Automation tests of Machine pools tab","daysOpen":37,"daysOpenColor":"red","reviewers":"jloss-redhat (approved), jmekkatt (commented)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3294\" target=\"_blank\">OCMUI-3294</a>"},{"number":463,"title":"[QE-CI] E2E automation for IDP - Google","daysOpen":32,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":485,"title":"[QE-CI] E2E Automation tests for GCP machine pools tab","daysOpen":17,"daysOpenColor":"red","reviewers":"jmekkatt (commented), jloss-redhat (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"davidaznaur":{"count":2,"prDetails":[{"number":491,"title":"OCMUI-3539: show uninstall when error during uninstall","daysOpen":11,"daysOpenColor":"red","reviewers":"zherman0 (requested), kdoberst (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3539\" target=\"_blank\">OCMUI-3539</a>"},{"number":497,"title":"OCMUI-3433: AWS tags on Machine pool expanded row","daysOpen":6,"daysOpenColor":"orange","reviewers":"shivanthi-amara (requested), kdoberst (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3433\" target=\"_blank\">OCMUI-3433</a>"}]}};
+        var authorNames = {"LiorKGOW":"Lior Keren","Ginxo":"Enrique Mingorance Cano","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","davidaznaur":"David Aznaurov"};
+        var reviewerNames = {"jloss-redhat":"Jason Loss","zherman0":"Zac Herman","kelvah":"roberto emanuel","dragan000":"Denis Ragan","eliranmal":"Lyn M","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","DcooperRH":"Dylan Cooper"};
         
         // Variable to track current sort order
         var sortAscending = false;
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Tue Jul 29 2025 13:54:21 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Tue Jul 29 2025 14:02:44 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -897,9 +897,9 @@
         <div>
             <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-            <a href="#ready-section" class="ready-link" id="ready-to-merge-link" style="display: none;">Ready To Merge (1)</a>
+            
         </div>
-        <span class="total-prs-badge">Total # Of Open PRs: 12</span>
+        <span class="total-prs-badge">Total # Of Open PRs: 10</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     <!-- Empty row for spacing -->
@@ -1011,19 +1011,15 @@
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">2</span></label>
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) </label>
-    </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="meirinetta" onclick="filterTable('meirinetta')"> meirinetta <span class="pending-badge">1</span></label>
-    </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) </label>
     </td></tr></table>
         </div>
         <table class="reviewer-table">
@@ -1208,21 +1204,11 @@
               <td title="53" style="color: red;">53</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/511">[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology                  </a>
-              </td>
-              <td title="jmekkatt">jmekkatt</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)">eliranmal (approved), dtaylor113 (approved), LiorKGOW (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="dtaylor113">
         <td>Dave Taylor (dtaylor113)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">1</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="dtaylor113">
@@ -1246,31 +1232,11 @@
               <td title="53" style="color: red;">53</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="[OCMUI-3533]: Update ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/508">[OCMUI-3533]: Update ROSA Product Terminology                  </a>
-              </td>
-              <td title="LiorKGOW">LiorKGOW</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)">dtaylor113 (commented), meirinetta (requested), jmekkatt (commented), kdoberst (commented)</td>
-              <td title="4" style="color: yellow;">4</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/511">[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology                  </a>
-              </td>
-              <td title="jmekkatt">jmekkatt</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)">dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
         <td>Jayakrishnan Mekkattillam (jmekkatt)</td>
-        <td><span class="pending-count">3</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="jmekkatt">
@@ -1304,21 +1270,11 @@
               <td title="17" style="color: red;">17</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="[OCMUI-3533]: Update ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/508">[OCMUI-3533]: Update ROSA Product Terminology                  </a>
-              </td>
-              <td title="LiorKGOW">LiorKGOW</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)">jmekkatt (commented), meirinetta (requested), dtaylor113 (commented), kdoberst (commented)</td>
-              <td title="4" style="color: yellow;">4</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="kdoberst">
         <td>Kim Doberstein (kdoberst)</td>
-        <td><span class="pending-count">2</span></td>
+        <td><span class="pending-count">1</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
@@ -1340,16 +1296,6 @@
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3539" target="_blank">OCMUI-3539</a></td>
               <td title="zherman0 (requested), kdoberst (requested)"><div class="draft-badge">DRAFT</div>kdoberst (requested), zherman0 (requested)</td>
               <td title="11" style="color: red;">11</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="[OCMUI-3533]: Update ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/508">[OCMUI-3533]: Update ROSA Product Terminology                  </a>
-              </td>
-              <td title="LiorKGOW">LiorKGOW</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)">kdoberst (commented), meirinetta (requested), jmekkatt (commented), dtaylor113 (commented)</td>
-              <td title="4" style="color: yellow;">4</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
@@ -1420,69 +1366,13 @@
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
-    </tr><tr class="reviewer-row" data-reviewer="meirinetta">
-        <td>meirinetta</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="meirinetta">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="[OCMUI-3533]: Update ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/508">[OCMUI-3533]: Update ROSA Product Terminology                  </a>
-              </td>
-              <td title="LiorKGOW">LiorKGOW</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)">meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)</td>
-              <td title="4" style="color: yellow;">4</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
-        <td>Lior Keren (LiorKGOW)</td>
-        <td><span class="pending-count">0</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="LiorKGOW">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/511">[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology                  </a>
-              </td>
-              <td title="jmekkatt">jmekkatt</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)">LiorKGOW (approved), dtaylor113 (approved), eliranmal (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-            </tr></table>
-        </td>
     </tr></table>
     </div><div id="authors-view" class="hidden">
         <div class="radio-container">
             <label><input type="radio" name="authorFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
                 <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="author-badge">3</span></label>
+        <label><input type="radio" name="authorFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="author-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="renovate" onclick="filterTable('renovate')"> renovate <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -1493,8 +1383,6 @@
         <label><input type="radio" name="authorFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="author-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="author-badge">2</span></label>
-    </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="author-badge">1</span></label>
     </td></tr></table>
         </div>
         <table class="author-table">
@@ -1503,7 +1391,7 @@
                 <th># PRs Created</th>
             </tr><tr class="author-row" data-author="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
-        <td><span class="pr-count">3</span></td>
+        <td><span class="pr-count">2</span></td>
     </tr>
   
     <tr class="author-row pr-row-table" data-author="LiorKGOW">
@@ -1532,15 +1420,6 @@
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2904" target="_blank">OCMUI-2904</a>, <a href="https://issues.redhat.com/browse/OCMUI-3532" target="_blank">OCMUI-3532</a></td>
               <td title="kelvah (requested), dragan000 (requested), eliranmal (commented), dtaylor113 (commented)">kelvah (requested), dragan000 (requested), eliranmal (commented), dtaylor113 (commented)</td>
               <td title="53" style="color: red;">53</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review">
-              <td><a title="[OCMUI-3533]: Update ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/508">[OCMUI-3533]: Update ROSA Product Terminology                  </a>
-              </td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)">meirinetta (requested), jmekkatt (commented), dtaylor113 (commented), kdoberst (commented)</td>
-              <td title="4" style="color: yellow;">4</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
@@ -1702,39 +1581,13 @@
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
-    </tr><tr class="author-row" data-author="jmekkatt">
-        <td>Jayakrishnan Mekkattillam (jmekkatt)</td>
-        <td><span class="pr-count">1</span></td>
-    </tr>
-  
-    <tr class="author-row pr-row-table" data-author="jmekkatt">
-        <td colspan="2">
-            <table class="pr-table author-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="ready_to_merge">
-              <td><a title="[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/511">[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology                  </a>
-              </td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
-              <td title="dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)">dtaylor113 (approved), LiorKGOW (approved), eliranmal (approved)</td>
-              <td title="3" style="color: yellow;">3</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-            </tr></table>
-        </td>
     </tr></table>
     </div>
     <!-- Ready to Merge PRs Section -->
     <div id="ready-section" class="ready-section-header" style="display: none;">
         <h2>Ready to Merge Pull Requests</h2>
         <div>
-            <span class="ready-count">1</span>
+            <span class="ready-count">0</span>
             <a href="#top" class="back-to-top">Back to top</a>
         </div>
     </div>
@@ -1749,13 +1602,9 @@
             <th>Jira</th>
         </tr>
         <tr>
-            <td><a title="[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology" class="pr-link" 
-                 href="https://github.com/RedHatInsights/uhc-portal/pull/511">[OCMUI-3533] Updated e2e test case to align the ROSA Product Terminology</a></td>
-            <td>jmekkatt</td>
-            <td style="color: yellow;">3</td>
-            <td>3/3</td>
-            <td title="dtaylor113, LiorKGOW, eliranmal">dtaylor113, LiorKGOW, eliranmal</td>
-            <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3533" target="_blank">OCMUI-3533</a></td>
+            <td colspan="6" style="text-align: center; padding: 20px;">
+                No pull requests are currently ready to merge.
+            </td>
         </tr></table>
 </body>
 </html>
