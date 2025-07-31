@@ -416,10 +416,10 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [];
-        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":3,"title":"OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3476\" target=\"_blank\">OCMUI-3476</a>"},{"number":4,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]}};
+        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":1}];
+        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":3,"title":"OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3476\" target=\"_blank\">OCMUI-3476</a>"},{"number":4,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]}};
         var authorNames = {"eliranmal":"Lyn M"};
-        var reviewerNames = {};
+        var reviewerNames = {"jloss-redhat":"Jason Loss"};
         
         // Variable to track current sort order
         var sortAscending = false;
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 17:18:07 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 17:30:27 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -1000,13 +1000,43 @@
         <div class="radio-container">
             <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
-                <tr></tr></table>
+                <tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="jloss-redhat" onclick="filterTable('jloss-redhat')"> Jason Loss (jloss-redhat) <span class="pending-badge">1</span></label>
+    </td></tr></table>
         </div>
         <table class="reviewer-table">
             <tr>
                 <th style="width: 28%;">Reviewer</th>
                 <th># Reviews Requested (Pending)</th>
+            </tr><tr class="reviewer-row" data-reviewer="jloss-redhat">
+        <td>Jason Loss (jloss-redhat)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="jloss-redhat">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/3">OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors                  </a>
+              </td>
+              <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3476" target="_blank">OCMUI-3476</a></td>
+              <td title="jloss-redhat (requested)">jloss-redhat (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
+        </td>
+    </tr></table>
     </div><div id="authors-view" class="hidden">
         <div class="radio-container">
             <label><input type="radio" name="authorFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
@@ -1039,7 +1069,7 @@
                      href="https://github.com/RedHatInsights/uhc-portal/pull/3">OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors                  </a>
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3476" target="_blank">OCMUI-3476</a></td>
-              <td title=""></td>
+              <td title="jloss-redhat (requested)">jloss-redhat (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
