@@ -417,8 +417,8 @@
         
         // Global data for charts
         var reviewerChartData = [];
-        var authorData = {};
-        var authorNames = {};
+        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":3,"title":"OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3476\" target=\"_blank\">OCMUI-3476</a>"},{"number":4,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]}};
+        var authorNames = {"eliranmal":"Lyn M"};
         var reviewerNames = {};
         
         // Variable to track current sort order
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 16:08:31 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 16:19:45 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -899,7 +899,7 @@
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
             
         </div>
-        <span class="total-prs-badge">Total # Of Open PRs: 0</span>
+        <span class="total-prs-badge">Total # Of Open PRs: 2</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     <!-- Empty row for spacing -->
@@ -1011,13 +1011,50 @@
         <div class="radio-container">
             <label><input type="radio" name="authorFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
-                <tr></tr></table>
+                <tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="authorFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="author-badge">2</span></label>
+    </td></tr></table>
         </div>
         <table class="author-table">
             <tr>
                 <th style="width: 28%;">Author</th>
                 <th># PRs Created</th>
+            </tr><tr class="author-row" data-author="eliranmal">
+        <td>Lyn M (eliranmal)</td>
+        <td><span class="pr-count">2</span></td>
+    </tr>
+  
+    <tr class="author-row pr-row-table" data-author="eliranmal">
+        <td colspan="2">
+            <table class="pr-table author-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review">
+              <td><a title="OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/3">OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors                  </a>
+              </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3476" target="_blank">OCMUI-3476</a></td>
+              <td title=""></td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review">
+              <td><a title="OCMUI-3257: update typescript typings around VPC details card" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/4">OCMUI-3257: update typescript typings around VPC details card                  </a>
+              </td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3257" target="_blank">OCMUI-3257</a></td>
+              <td title=""></td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
+        </td>
+    </tr></table>
     </div>
     <!-- Ready to Merge PRs Section -->
     <div id="ready-section" class="ready-section-header" style="display: none;">
