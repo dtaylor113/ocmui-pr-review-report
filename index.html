@@ -416,10 +416,10 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"kelvah","pending":1},{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":1}];
-        var authorData = {"eliranmal":{"count":1,"prDetails":[{"number":2,"title":"OCMUI-2650: rename trunk references","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"kelvah (requested), dtaylor113 (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2650\" target=\"_blank\">OCMUI-2650</a>"}]}};
+        var reviewerChartData = [{"reviewer":"dtaylor113","pending":1},{"reviewer":"jmekkatt","pending":1}];
+        var authorData = {"eliranmal":{"count":1,"prDetails":[{"number":2,"title":"OCMUI-2650: rename trunk references","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), jmekkatt (requested), kelvah (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2650\" target=\"_blank\">OCMUI-2650</a>"}]}};
         var authorNames = {"eliranmal":"Lyn M"};
-        var reviewerNames = {"kelvah":"roberto emanuel","dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam"};
+        var reviewerNames = {"dtaylor113":"Dave Taylor","jmekkatt":"Jayakrishnan Mekkattillam","kelvah":"roberto emanuel"};
         
         // Variable to track current sort order
         var sortAscending = false;
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 10:35:13 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 10:46:09 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -1001,46 +1001,18 @@
             <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
                 <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="pending-badge">1</span></label>
-    </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) </label>
     </td></tr></table>
         </div>
         <table class="reviewer-table">
             <tr>
                 <th style="width: 28%;">Reviewer</th>
                 <th># Reviews Requested (Pending)</th>
-            </tr><tr class="reviewer-row" data-reviewer="kelvah">
-        <td>roberto emanuel (kelvah)</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="kelvah">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-2650: rename trunk references" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/2">OCMUI-2650: rename trunk references                  </a>
-              </td>
-              <td title="eliranmal">eliranmal</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2650" target="_blank">OCMUI-2650</a></td>
-              <td title="kelvah (requested), dtaylor113 (requested), jmekkatt (requested)">kelvah (requested), dtaylor113 (requested), jmekkatt (requested)</td>
-              <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="dtaylor113">
+            </tr><tr class="reviewer-row" data-reviewer="dtaylor113">
         <td>Dave Taylor (dtaylor113)</td>
         <td><span class="pending-count">1</span></td>
     </tr>
@@ -1062,9 +1034,9 @@
               </td>
               <td title="eliranmal">eliranmal</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2650" target="_blank">OCMUI-2650</a></td>
-              <td title="kelvah (requested), dtaylor113 (requested), jmekkatt (requested)">dtaylor113 (requested), kelvah (requested), jmekkatt (requested)</td>
+              <td title="dtaylor113 (requested), jmekkatt (requested), kelvah (approved)">dtaylor113 (requested), jmekkatt (requested), kelvah (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
@@ -1090,9 +1062,37 @@
               </td>
               <td title="eliranmal">eliranmal</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2650" target="_blank">OCMUI-2650</a></td>
-              <td title="kelvah (requested), dtaylor113 (requested), jmekkatt (requested)">jmekkatt (requested), kelvah (requested), dtaylor113 (requested)</td>
+              <td title="dtaylor113 (requested), jmekkatt (requested), kelvah (approved)">jmekkatt (requested), dtaylor113 (requested), kelvah (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="kelvah">
+        <td>roberto emanuel (kelvah)</td>
+        <td><span class="pending-count">0</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="kelvah">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="OCMUI-2650: rename trunk references" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/2">OCMUI-2650: rename trunk references                  </a>
+              </td>
+              <td title="eliranmal">eliranmal</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2650" target="_blank">OCMUI-2650</a></td>
+              <td title="dtaylor113 (requested), jmekkatt (requested), kelvah (approved)">kelvah (approved), dtaylor113 (requested), jmekkatt (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
@@ -1129,9 +1129,9 @@
                      href="https://github.com/RedHatInsights/uhc-portal/pull/2">OCMUI-2650: rename trunk references                  </a>
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2650" target="_blank">OCMUI-2650</a></td>
-              <td title="kelvah (requested), dtaylor113 (requested), jmekkatt (requested)">kelvah (requested), dtaylor113 (requested), jmekkatt (requested)</td>
+              <td title="dtaylor113 (requested), jmekkatt (requested), kelvah (approved)">dtaylor113 (requested), jmekkatt (requested), kelvah (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
