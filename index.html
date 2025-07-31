@@ -416,10 +416,10 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":1},{"reviewer":"zherman0","pending":1},{"reviewer":"DcooperRH","pending":1},{"reviewer":"davidaznaur","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"shivanthi-amara","pending":1}];
-        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":3,"title":"OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"jloss-redhat (requested), zherman0 (requested), DcooperRH (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3476\" target=\"_blank\">OCMUI-3476</a>"},{"number":4,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]},"zherman0":{"count":2,"prDetails":[{"number":5,"title":"OCMUI-3145: Refactor Upgrade code to use back end API","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"davidaznaur (requested), kdoberst (requested), shivanthi-amara (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3145\" target=\"_blank\">OCMUI-3145</a>"},{"number":6,"title":"OCMUI-845: Add claim group to the OpenID form","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-845\" target=\"_blank\">OCMUI-845</a>"}]}};
+        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":1},{"reviewer":"zherman0","pending":1},{"reviewer":"DcooperRH","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"kdoberst","pending":1},{"reviewer":"shivanthi-amara","pending":1},{"reviewer":"eliranmal","pending":1}];
+        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":3,"title":"OCMUI-3476: fix delete-cluster dialog not showing operation-ID on errors","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"jloss-redhat (requested), zherman0 (requested), DcooperRH (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3476\" target=\"_blank\">OCMUI-3476</a>"},{"number":4,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]},"zherman0":{"count":2,"prDetails":[{"number":5,"title":"OCMUI-3145: Refactor Upgrade code to use back end API","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"davidaznaur (requested), kdoberst (requested), shivanthi-amara (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3145\" target=\"_blank\">OCMUI-3145</a>"},{"number":6,"title":"OCMUI-845: Add claim group to the OpenID form","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"eliranmal (requested), davidaznaur (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-845\" target=\"_blank\">OCMUI-845</a>"}]}};
         var authorNames = {"eliranmal":"Lyn M","zherman0":"Zac Herman"};
-        var reviewerNames = {"jloss-redhat":"Jason Loss","zherman0":"Zac Herman","DcooperRH":"Dylan Cooper","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha"};
+        var reviewerNames = {"jloss-redhat":"Jason Loss","zherman0":"Zac Herman","DcooperRH":"Dylan Cooper","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","eliranmal":"Lyn M"};
         
         // Variable to track current sort order
         var sortAscending = false;
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 19:38:36 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Jul 31 2025 19:45:04 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -1007,11 +1007,13 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">1</span></label>
+        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">1</span></label>
     </td></tr></table>
         </div>
         <table class="reviewer-table">
@@ -1104,7 +1106,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
         <td>David Aznaurov (davidaznaur)</td>
-        <td><span class="pending-count">1</span></td>
+        <td><span class="pending-count">2</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="davidaznaur">
@@ -1125,6 +1127,16 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
               <td title="davidaznaur (requested), kdoberst (requested), shivanthi-amara (requested)">davidaznaur (requested), kdoberst (requested), shivanthi-amara (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-845: Add claim group to the OpenID form" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/6">OCMUI-845: Add claim group to the OpenID form                  </a>
+              </td>
+              <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-845" target="_blank">OCMUI-845</a></td>
+              <td title="eliranmal (requested), davidaznaur (requested)">davidaznaur (requested), eliranmal (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1181,6 +1193,34 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
               <td title="davidaznaur (requested), kdoberst (requested), shivanthi-amara (requested)">shivanthi-amara (requested), davidaznaur (requested), kdoberst (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="eliranmal">
+        <td>Lyn M (eliranmal)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="eliranmal">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-845: Add claim group to the OpenID form" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/6">OCMUI-845: Add claim group to the OpenID form                  </a>
+              </td>
+              <td title="zherman0">zherman0</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-845" target="_blank">OCMUI-845</a></td>
+              <td title="eliranmal (requested), davidaznaur (requested)">eliranmal (requested), davidaznaur (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
@@ -1265,7 +1305,7 @@
                      href="https://github.com/RedHatInsights/uhc-portal/pull/6">OCMUI-845: Add claim group to the OpenID form                  </a>
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-845" target="_blank">OCMUI-845</a></td>
-              <td title=""></td>
+              <td title="eliranmal (requested), davidaznaur (requested)">eliranmal (requested), davidaznaur (requested)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
