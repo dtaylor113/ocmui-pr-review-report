@@ -416,10 +416,10 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"jloss-redhat","pending":1},{"reviewer":"kdoberst","pending":1},{"reviewer":"davidaznaur","pending":1},{"reviewer":"eliranmal","pending":1},{"reviewer":"t-hendricks","pending":3},{"reviewer":"DcooperRH","pending":3},{"reviewer":"akkiangadi","pending":1},{"reviewer":"jmekkatt","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"LiorKGOW","pending":1}];
-        var authorData = {"zherman0":{"count":2,"prDetails":[{"number":5,"title":"OCMUI-3145: Refactor Upgrade code to use back end API","daysOpen":5,"daysOpenColor":"orange","reviewers":"shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3145\" target=\"_blank\">OCMUI-3145</a>"},{"number":6,"title":"OCMUI-845: Add claim group to the OpenID form","daysOpen":5,"daysOpenColor":"orange","reviewers":"eliranmal (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-845\" target=\"_blank\">OCMUI-845</a>"}]},"kdoberst":{"count":6,"prDetails":[{"number":7,"title":"OCMUI-3431 add AWS tags on new node pool","daysOpen":4,"daysOpenColor":"yellow","reviewers":"shivanthi-amara (requested), t-hendricks (approved), davidaznaur (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3431\" target=\"_blank\">OCMUI-3431</a>"},{"number":8,"title":"OCMUI-3588, OCMUI-3589 - Add  accessibility table header","daysOpen":4,"daysOpenColor":"yellow","reviewers":"DcooperRH (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3588\" target=\"_blank\">OCMUI-3588</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3589\" target=\"_blank\">OCMUI-3589</a>"},{"number":9,"title":"OCMUI-3622 Prevent input overlap on min/max nodes","daysOpen":4,"daysOpenColor":"yellow","reviewers":"akkiangadi (requested), DcooperRH (approved), jmekkatt (commented)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3622\" target=\"_blank\">OCMUI-3622</a>"},{"number":10,"title":"OCMUI-3621 GCP Wizard VPC fields alignment","daysOpen":4,"daysOpenColor":"yellow","reviewers":"DcooperRH (requested), jmekkatt (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3621\" target=\"_blank\">OCMUI-3621</a>"},{"number":11,"title":"OCMUI-3606 add mp modal to new component","daysOpen":4,"daysOpenColor":"yellow","reviewers":"shivanthi-amara (requested), DcooperRH (requested), t-hendricks (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3606\" target=\"_blank\">OCMUI-3606</a>"},{"number":12,"title":"OCMUI-3490 Fix root disk size validation","daysOpen":4,"daysOpenColor":"yellow","reviewers":"t-hendricks (requested), dragan000 (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3490\" target=\"_blank\">OCMUI-3490</a>"}]},"meirinetta":{"count":1,"prDetails":[{"number":15,"title":"OCMUI-3480: Fix 'existing VPC' tooltip text in GCP wizard","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"eliranmal (approved), LiorKGOW (approved), jmekkatt (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3480\" target=\"_blank\">OCMUI-3480</a>"}]},"davidaznaur":{"count":1,"prDetails":[{"number":16,"title":"OCMUI-3433: aws tags for node pools","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3433\" target=\"_blank\">OCMUI-3433</a>"}]},"kelvah":{"count":1,"prDetails":[{"number":17,"title":"OCMUI-3653 Double scrolling issue ","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"LiorKGOW (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3653\" target=\"_blank\">OCMUI-3653</a>"}]},"eliranmal":{"count":1,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]},"DcooperRH":{"count":1,"prDetails":[{"number":19,"title":"OCMUI-2302 - [ROSA wizard]The existing validation error removed once user face another validation error in same wizard step.","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"davidaznaur (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2302\" target=\"_blank\">OCMUI-2302</a>"}]}};
-        var authorNames = {"zherman0":"Zac Herman","kdoberst":"Kim Doberstein","davidaznaur":"David Aznaurov","kelvah":"roberto emanuel","eliranmal":"Lyn M","DcooperRH":"Dylan Cooper"};
-        var reviewerNames = {"shivanthi-amara":"Lakshmi Shivanthi Amarachintha","jloss-redhat":"Jason Loss","kdoberst":"Kim Doberstein","davidaznaur":"David Aznaurov","eliranmal":"Lyn M","t-hendricks":"Trevor Hendricks","DcooperRH":"Dylan Cooper","akkiangadi":"Sonia Akkiangadi","jmekkatt":"Jayakrishnan Mekkattillam","dragan000":"Denis Ragan","LiorKGOW":"Lior Keren"};
+        var reviewerChartData = [{"reviewer":"shivanthi-amara","pending":3},{"reviewer":"t-hendricks","pending":3},{"reviewer":"davidaznaur","pending":1},{"reviewer":"DcooperRH","pending":3},{"reviewer":"akkiangadi","pending":1},{"reviewer":"jmekkatt","pending":2},{"reviewer":"dragan000","pending":1},{"reviewer":"LiorKGOW","pending":1},{"reviewer":"kdoberst","pending":1}];
+        var authorData = {"kdoberst":{"count":6,"prDetails":[{"number":7,"title":"OCMUI-3431 add AWS tags on new node pool","daysOpen":4,"daysOpenColor":"yellow","reviewers":"shivanthi-amara (requested), t-hendricks (approved), davidaznaur (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3431\" target=\"_blank\">OCMUI-3431</a>"},{"number":8,"title":"OCMUI-3588, OCMUI-3589 - Add  accessibility table header","daysOpen":4,"daysOpenColor":"yellow","reviewers":"DcooperRH (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3588\" target=\"_blank\">OCMUI-3588</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3589\" target=\"_blank\">OCMUI-3589</a>"},{"number":9,"title":"OCMUI-3622 Prevent input overlap on min/max nodes","daysOpen":4,"daysOpenColor":"yellow","reviewers":"akkiangadi (requested), DcooperRH (approved), jmekkatt (commented)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3622\" target=\"_blank\">OCMUI-3622</a>"},{"number":10,"title":"OCMUI-3621 GCP Wizard VPC fields alignment","daysOpen":4,"daysOpenColor":"yellow","reviewers":"DcooperRH (requested), jmekkatt (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3621\" target=\"_blank\">OCMUI-3621</a>"},{"number":11,"title":"OCMUI-3606 add mp modal to new component","daysOpen":4,"daysOpenColor":"yellow","reviewers":"shivanthi-amara (requested), DcooperRH (requested), t-hendricks (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3606\" target=\"_blank\">OCMUI-3606</a>"},{"number":12,"title":"OCMUI-3490 Fix root disk size validation","daysOpen":4,"daysOpenColor":"yellow","reviewers":"t-hendricks (requested), dragan000 (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3490\" target=\"_blank\">OCMUI-3490</a>"}]},"meirinetta":{"count":1,"prDetails":[{"number":15,"title":"OCMUI-3480: Fix 'existing VPC' tooltip text in GCP wizard","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"eliranmal (approved), LiorKGOW (approved), jmekkatt (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3480\" target=\"_blank\">OCMUI-3480</a>"}]},"davidaznaur":{"count":1,"prDetails":[{"number":16,"title":"OCMUI-3433: aws tags for node pools","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3433\" target=\"_blank\">OCMUI-3433</a>"}]},"kelvah":{"count":1,"prDetails":[{"number":17,"title":"OCMUI-3653 Double scrolling issue ","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"LiorKGOW (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3653\" target=\"_blank\">OCMUI-3653</a>"}]},"eliranmal":{"count":1,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"}]},"DcooperRH":{"count":1,"prDetails":[{"number":19,"title":"OCMUI-2302 - [ROSA wizard]The existing validation error removed once user face another validation error in same wizard step.","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"davidaznaur (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2302\" target=\"_blank\">OCMUI-2302</a>"}]}};
+        var authorNames = {"kdoberst":"Kim Doberstein","davidaznaur":"David Aznaurov","kelvah":"roberto emanuel","eliranmal":"Lyn M","DcooperRH":"Dylan Cooper"};
+        var reviewerNames = {"shivanthi-amara":"Lakshmi Shivanthi Amarachintha","t-hendricks":"Trevor Hendricks","davidaznaur":"David Aznaurov","DcooperRH":"Dylan Cooper","akkiangadi":"Sonia Akkiangadi","jmekkatt":"Jayakrishnan Mekkattillam","dragan000":"Denis Ragan","eliranmal":"Lyn M","LiorKGOW":"Lior Keren","kdoberst":"Kim Doberstein"};
         
         // Variable to track current sort order
         var sortAscending = false;
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Tue Aug 05 2025 21:02:23 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Tue Aug 05 2025 21:11:11 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -899,7 +899,7 @@
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
             <a href="#ready-section" class="ready-link" id="ready-to-merge-link" style="display: none;">Ready To Merge (1)</a>
         </div>
-        <span class="total-prs-badge">Total # Of Open PRs: 13</span>
+        <span class="total-prs-badge">Total # Of Open PRs: 11</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     <!-- Empty row for spacing -->
@@ -1001,27 +1001,25 @@
             <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
                 <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">4</span></label>
-    </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="jloss-redhat" onclick="filterTable('jloss-redhat')"> Jason Loss (jloss-redhat) <span class="pending-badge">1</span></label>
-    </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
-    </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">1</span></label>
-    </td></tr><tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">1</span></label>
+        <label><input type="radio" name="reviewerFilter" value="shivanthi-amara" onclick="filterTable('shivanthi-amara')"> Lakshmi Shivanthi Amarachintha (shivanthi-amara) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="t-hendricks" onclick="filterTable('t-hendricks')"> Trevor Hendricks (t-hendricks) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">3</span></label>
+        <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="akkiangadi" onclick="filterTable('akkiangadi')"> Sonia Akkiangadi (akkiangadi) <span class="pending-badge">1</span></label>
+        <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">3</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="akkiangadi" onclick="filterTable('akkiangadi')"> Sonia Akkiangadi (akkiangadi) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="jmekkatt" onclick="filterTable('jmekkatt')"> Jayakrishnan Mekkattillam (jmekkatt) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dragan000" onclick="filterTable('dragan000')"> Denis Ragan (dragan000) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) </label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">1</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="pending-badge">1</span></label>
     </td></tr></table>
         </div>
         <table class="reviewer-table">
@@ -1030,7 +1028,7 @@
                 <th># Reviews Requested (Pending)</th>
             </tr><tr class="reviewer-row" data-reviewer="shivanthi-amara">
         <td>Lakshmi Shivanthi Amarachintha (shivanthi-amara)</td>
-        <td><span class="pending-count">4</span></td>
+        <td><span class="pending-count">3</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="shivanthi-amara">
@@ -1045,16 +1043,6 @@
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
                 </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-3145: Refactor Upgrade code to use back end API" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/5">OCMUI-3145: Refactor Upgrade code to use back end API                  </a>
-              </td>
-              <td title="zherman0">zherman0</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
-              <td title="shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)">shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="OCMUI-3431 add AWS tags on new node pool" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/7">OCMUI-3431 add AWS tags on new node pool                  </a>
               </td>
@@ -1084,198 +1072,6 @@
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="jloss-redhat">
-        <td>Jason Loss (jloss-redhat)</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="jloss-redhat">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-3145: Refactor Upgrade code to use back end API" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/5">OCMUI-3145: Refactor Upgrade code to use back end API                  </a>
-              </td>
-              <td title="zherman0">zherman0</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
-              <td title="shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)">jloss-redhat (requested), shivanthi-amara (requested), kdoberst (approved), davidaznaur (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="kdoberst">
-        <td>Kim Doberstein (kdoberst)</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-3433: aws tags for node pools" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/16">OCMUI-3433: aws tags for node pools                  </a>
-              </td>
-              <td title="davidaznaur">davidaznaur</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3433" target="_blank">OCMUI-3433</a></td>
-              <td title="kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)">kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)</td>
-              <td title="1" style="color: #d4d4d4;">1</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-3145: Refactor Upgrade code to use back end API" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/5">OCMUI-3145: Refactor Upgrade code to use back end API                  </a>
-              </td>
-              <td title="zherman0">zherman0</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
-              <td title="shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)">kdoberst (approved), shivanthi-amara (requested), jloss-redhat (requested), davidaznaur (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
-        <td>David Aznaurov (davidaznaur)</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="davidaznaur">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-2302 - [ROSA wizard]The existing validation error removed once user face another validation error in same wizard step." class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/19">OCMUI-2302 - [ROSA wizard]The existing validation error removed once user face another validation error in same wizard step.                  </a>
-              </td>
-              <td title="DcooperRH">DcooperRH</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2302" target="_blank">OCMUI-2302</a></td>
-              <td title="davidaznaur (requested), t-hendricks (requested)">davidaznaur (requested), t-hendricks (requested)</td>
-              <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-3145: Refactor Upgrade code to use back end API" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/5">OCMUI-3145: Refactor Upgrade code to use back end API                  </a>
-              </td>
-              <td title="zherman0">zherman0</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
-              <td title="shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)">davidaznaur (approved), shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-845: Add claim group to the OpenID form" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/6">OCMUI-845: Add claim group to the OpenID form                  </a>
-              </td>
-              <td title="zherman0">zherman0</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-845" target="_blank">OCMUI-845</a></td>
-              <td title="eliranmal (requested), davidaznaur (approved)">davidaznaur (approved), eliranmal (requested)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-3431 add AWS tags on new node pool" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/7">OCMUI-3431 add AWS tags on new node pool                  </a>
-              </td>
-              <td title="kdoberst">kdoberst</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3431" target="_blank">OCMUI-3431</a></td>
-              <td title="shivanthi-amara (requested), t-hendricks (approved), davidaznaur (approved)">davidaznaur (approved), shivanthi-amara (requested), t-hendricks (approved)</td>
-              <td title="4" style="color: yellow;">4</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-3621 GCP Wizard VPC fields alignment" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/10">OCMUI-3621 GCP Wizard VPC fields alignment                  </a>
-              </td>
-              <td title="kdoberst">kdoberst</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3621" target="_blank">OCMUI-3621</a></td>
-              <td title="DcooperRH (requested), jmekkatt (requested), davidaznaur (approved)">davidaznaur (approved), DcooperRH (requested), jmekkatt (requested)</td>
-              <td title="4" style="color: yellow;">4</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-3490 Fix root disk size validation" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/12">OCMUI-3490 Fix root disk size validation                  </a>
-              </td>
-              <td title="kdoberst">kdoberst</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3490" target="_blank">OCMUI-3490</a></td>
-              <td title="t-hendricks (requested), dragan000 (requested), davidaznaur (approved)">davidaznaur (approved), t-hendricks (requested), dragan000 (requested)</td>
-              <td title="4" style="color: yellow;">4</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
-              <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
-              </td>
-              <td title="kelvah">kelvah</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
-              <td title="LiorKGOW (requested), davidaznaur (approved)">davidaznaur (approved), LiorKGOW (requested)</td>
-              <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="eliranmal">
-        <td>Lyn M (eliranmal)</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="eliranmal">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-845: Add claim group to the OpenID form" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/6">OCMUI-845: Add claim group to the OpenID form                  </a>
-              </td>
-              <td title="zherman0">zherman0</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-845" target="_blank">OCMUI-845</a></td>
-              <td title="eliranmal (requested), davidaznaur (approved)">eliranmal (requested), davidaznaur (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="OCMUI-3480: Fix 'existing VPC' tooltip text in GCP wizard" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/15">OCMUI-3480: Fix 'existing VPC' tooltip text in GCP wizard                  </a>
-              </td>
-              <td title="meirinetta">meirinetta</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3480" target="_blank">OCMUI-3480</a></td>
-              <td title="eliranmal (approved), LiorKGOW (approved), jmekkatt (approved)">eliranmal (approved), LiorKGOW (approved), jmekkatt (approved)</td>
-              <td title="2" style="color: #d4d4d4;">2</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="t-hendricks">
@@ -1353,6 +1149,74 @@
               <td title="kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)">t-hendricks (approved), kdoberst (requested), shivanthi-amara (requested), DcooperRH (approved)</td>
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="2">2/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
+        <td>David Aznaurov (davidaznaur)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="davidaznaur">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-2302 - [ROSA wizard]The existing validation error removed once user face another validation error in same wizard step." class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/19">OCMUI-2302 - [ROSA wizard]The existing validation error removed once user face another validation error in same wizard step.                  </a>
+              </td>
+              <td title="DcooperRH">DcooperRH</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-2302" target="_blank">OCMUI-2302</a></td>
+              <td title="davidaznaur (requested), t-hendricks (requested)">davidaznaur (requested), t-hendricks (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="0">0/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="OCMUI-3431 add AWS tags on new node pool" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/7">OCMUI-3431 add AWS tags on new node pool                  </a>
+              </td>
+              <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3431" target="_blank">OCMUI-3431</a></td>
+              <td title="shivanthi-amara (requested), t-hendricks (approved), davidaznaur (approved)">davidaznaur (approved), shivanthi-amara (requested), t-hendricks (approved)</td>
+              <td title="4" style="color: yellow;">4</td>
+              <td title="2">2/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="OCMUI-3621 GCP Wizard VPC fields alignment" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/10">OCMUI-3621 GCP Wizard VPC fields alignment                  </a>
+              </td>
+              <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3621" target="_blank">OCMUI-3621</a></td>
+              <td title="DcooperRH (requested), jmekkatt (requested), davidaznaur (approved)">davidaznaur (approved), DcooperRH (requested), jmekkatt (requested)</td>
+              <td title="4" style="color: yellow;">4</td>
+              <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="OCMUI-3490 Fix root disk size validation" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/12">OCMUI-3490 Fix root disk size validation                  </a>
+              </td>
+              <td title="kdoberst">kdoberst</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3490" target="_blank">OCMUI-3490</a></td>
+              <td title="t-hendricks (requested), dragan000 (requested), davidaznaur (approved)">davidaznaur (approved), t-hendricks (requested), dragan000 (requested)</td>
+              <td title="4" style="color: yellow;">4</td>
+              <td title="1">1/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
+              </td>
+              <td title="kelvah">kelvah</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
+              <td title="LiorKGOW (requested), davidaznaur (approved)">davidaznaur (approved), LiorKGOW (requested)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
@@ -1528,6 +1392,34 @@
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
+    </tr><tr class="reviewer-row" data-reviewer="eliranmal">
+        <td>Lyn M (eliranmal)</td>
+        <td><span class="pending-count">0</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="eliranmal">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+              <td><a title="OCMUI-3480: Fix 'existing VPC' tooltip text in GCP wizard" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/15">OCMUI-3480: Fix 'existing VPC' tooltip text in GCP wizard                  </a>
+              </td>
+              <td title="meirinetta">meirinetta</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3480" target="_blank">OCMUI-3480</a></td>
+              <td title="eliranmal (approved), LiorKGOW (approved), jmekkatt (approved)">eliranmal (approved), LiorKGOW (approved), jmekkatt (approved)</td>
+              <td title="2" style="color: #d4d4d4;">2</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
+            </tr></table>
+        </td>
     </tr><tr class="reviewer-row" data-reviewer="LiorKGOW">
         <td>Lior Keren (LiorKGOW)</td>
         <td><span class="pending-count">1</span></td>
@@ -1566,22 +1458,48 @@
               <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
+    </tr><tr class="reviewer-row" data-reviewer="kdoberst">
+        <td>Kim Doberstein (kdoberst)</td>
+        <td><span class="pending-count">1</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="kdoberst">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+              <td><a title="OCMUI-3433: aws tags for node pools" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/16">OCMUI-3433: aws tags for node pools                  </a>
+              </td>
+              <td title="davidaznaur">davidaznaur</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3433" target="_blank">OCMUI-3433</a></td>
+              <td title="kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)">kdoberst (requested), shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)</td>
+              <td title="1" style="color: #d4d4d4;">1</td>
+              <td title="2">2/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr></table>
+        </td>
     </tr></table>
     </div><div id="authors-view" class="hidden">
         <div class="radio-container">
             <label><input type="radio" name="authorFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
                 <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="zherman0" onclick="filterTable('zherman0')"> Zac Herman (zherman0) <span class="author-badge">2</span></label>
-    </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="kdoberst" onclick="filterTable('kdoberst')"> Kim Doberstein (kdoberst) <span class="author-badge">6</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="meirinetta" onclick="filterTable('meirinetta')"> meirinetta <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="author-badge">1</span></label>
-    </td></tr><tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="authorFilter" value="kelvah" onclick="filterTable('kelvah')"> roberto emanuel (kelvah) <span class="author-badge">1</span></label>
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="author-badge">1</span></label>
@@ -1591,42 +1509,7 @@
             <tr>
                 <th style="width: 28%;">Author</th>
                 <th># PRs Created</th>
-            </tr><tr class="author-row" data-author="zherman0">
-        <td>Zac Herman (zherman0)</td>
-        <td><span class="pr-count">2</span></td>
-    </tr>
-  
-    <tr class="author-row pr-row-table" data-author="zherman0">
-        <td colspan="2">
-            <table class="pr-table author-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review">
-              <td><a title="OCMUI-3145: Refactor Upgrade code to use back end API" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/5">OCMUI-3145: Refactor Upgrade code to use back end API                  </a>
-              </td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3145" target="_blank">OCMUI-3145</a></td>
-              <td title="shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)">shivanthi-amara (requested), jloss-redhat (requested), kdoberst (approved), davidaznaur (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review">
-              <td><a title="OCMUI-845: Add claim group to the OpenID form" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/6">OCMUI-845: Add claim group to the OpenID form                  </a>
-              </td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-845" target="_blank">OCMUI-845</a></td>
-              <td title="eliranmal (requested), davidaznaur (approved)">eliranmal (requested), davidaznaur (approved)</td>
-              <td title="5" style="color: orange;">5</td>
-              <td title="1">1/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="author-row" data-author="kdoberst">
+            </tr><tr class="author-row" data-author="kdoberst">
         <td>Kim Doberstein (kdoberst)</td>
         <td><span class="pr-count">6</span></td>
     </tr>
