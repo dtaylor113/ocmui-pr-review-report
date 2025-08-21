@@ -416,10 +416,10 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"apecha","pending":1},{"reviewer":"davidaznaur","pending":2},{"reviewer":"LiorKGOW","pending":3},{"reviewer":"eliranmal","pending":4},{"reviewer":"t-hendricks","pending":6},{"reviewer":"jmekkatt","pending":8},{"reviewer":"dragan000","pending":5},{"reviewer":"dtaylor113","pending":4},{"reviewer":"zherman0","pending":1},{"reviewer":"kelvah","pending":2},{"reviewer":"akkiangadi","pending":1},{"reviewer":"kdoberst","pending":3},{"reviewer":"jloss-redhat","pending":6},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"DcooperRH","pending":3}];
-        var authorData = {"kelvah":{"count":2,"prDetails":[{"number":17,"title":"OCMUI-3653 Double scrolling issue ","daysOpen":16,"daysOpenColor":"red","reviewers":"apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3653\" target=\"_blank\">OCMUI-3653</a>"},{"number":65,"title":"OCMUI-3715: Check API pipeline is failing","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"eliranmal (requested), LiorKGOW (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3715\" target=\"_blank\">OCMUI-3715</a>"}]},"eliranmal":{"count":4,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":15,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"},{"number":58,"title":"OCMUI-3697, OCMUI-3674: konflux / migrate unit-tests & code-lint in 'push' PL","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"jloss-redhat (requested), zherman0 (approved), kdoberst (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3697\" target=\"_blank\">OCMUI-3697</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3674\" target=\"_blank\">OCMUI-3674</a>"},{"number":66,"title":"chore: switch on test-coverage for konflux pull-request PL","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"kdoberst (requested), dtaylor113 (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":67,"title":"chore: update tekton schedule in renovate config to fix dep'-updates","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"LiorKGOW (requested), dtaylor113 (requested), jmekkatt (requested), zherman0 (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"akkiangadi":{"count":1,"prDetails":[{"number":25,"title":"OCMUI1029: When adding a new machine pool, move unused subnets to the top","daysOpen":14,"daysOpenColor":"red","reviewers":"t-hendricks (approved), davidaznaur (approved), jmekkatt (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":""}]},"meirinetta":{"count":2,"prDetails":[{"number":26,"title":"OCMUI-3638: Remove duplicate rosa wizard route","daysOpen":14,"daysOpenColor":"red","reviewers":"dragan000 (requested), LiorKGOW (approved), eliranmal (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3638\" target=\"_blank\">OCMUI-3638</a>"},{"number":52,"title":"OCMUI-3102: Hide resizing alert during node scaling in ROSA HCP ","daysOpen":7,"daysOpenColor":"red","reviewers":"dragan000 (requested), LiorKGOW (commented), dtaylor113 (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3102\" target=\"_blank\">OCMUI-3102</a>"}]},"jmekkatt":{"count":4,"prDetails":[{"number":27,"title":"[OCMUI-3673] Workflow definitions and required scripts for e2e ondemand workflow","daysOpen":14,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3673\" target=\"_blank\">OCMUI-3673</a>"},{"number":34,"title":"[OCMUI-1029]Updated test case to fit the subnet reorder feature definition","daysOpen":10,"daysOpenColor":"red","reviewers":"akkiangadi (requested), dragan000 (approved), davidaznaur (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1029\" target=\"_blank\">OCMUI-1029</a>"},{"number":56,"title":"[AI HACKATHON][Assisted-by:Cursor/Claude-4-sonnet] - Cypress to Playwright Conversion","daysOpen":3,"daysOpenColor":"yellow","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":62,"title":"[OCMUI-3708]E2e tests - Updates on GCP wizard tests to follow the default authentication change(WIF)","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"DcooperRH (requested), dragan000 (requested), davidaznaur (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3708\" target=\"_blank\">OCMUI-3708</a>"}]},"LiorKGOW":{"count":1,"prDetails":[{"number":28,"title":"[OCMUI-2904 & OCMUI-3532] [ROSA-HCP] Windows LI Phase 1: Add UI Implementation Hidden Behind a Feature Flag","daysOpen":14,"daysOpenColor":"red","reviewers":"eliranmal (requested), dragan000 (requested), dtaylor113 (requested changes)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2904\" target=\"_blank\">OCMUI-2904</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3532\" target=\"_blank\">OCMUI-3532</a>"}]},"dtaylor113":{"count":1,"prDetails":[{"number":29,"title":"[OCMUI-3643] Fix for CVE-2025-7783","daysOpen":14,"daysOpenColor":"red","reviewers":"dragan000 (requested), zherman0 (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3643\" target=\"_blank\">OCMUI-3643</a>"}]},"DcooperRH":{"count":2,"prDetails":[{"number":41,"title":"OCMUI-3604, OCMUI-2836 - [OSD-GCP] Make WIF auth as the default authentication type, [OSD Wizard] WIF authorization, update Auth Type tooltip","daysOpen":9,"daysOpenColor":"red","reviewers":"kdoberst (approved), davidaznaur (approved), jmekkatt (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3604\" target=\"_blank\">OCMUI-3604</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-2836\" target=\"_blank\">OCMUI-2836</a>"},{"number":49,"title":"OCMUI-3618 - When creating a new htpasswd IDP the confirm password field is misaligned","daysOpen":7,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), davidaznaur (approved), kdoberst (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3618\" target=\"_blank\">OCMUI-3618</a>"}]},"apecha":{"count":2,"prDetails":[{"number":42,"title":"[OCMUI-3422] E2E test automation - Cloud and Datacenter providers installer pages","daysOpen":9,"daysOpenColor":"red","reviewers":"davidaznaur (requested), jloss-redhat (requested), jmekkatt (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3422\" target=\"_blank\">OCMUI-3422</a>"},{"number":61,"title":"[OCMUI-1694] E2E test automation - Roles And Access","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"shivanthi-amara (requested), jloss-redhat (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1694\" target=\"_blank\">OCMUI-1694</a>"}]},"davidaznaur":{"count":6,"prDetails":[{"number":44,"title":"OCMUI-3433: aws tags for hcp node pools","daysOpen":9,"daysOpenColor":"red","reviewers":"DcooperRH (approved), kdoberst (approved), shivanthi-amara (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3433\" target=\"_blank\">OCMUI-3433</a>"},{"number":54,"title":"OCMUI-3603: deprecated modals update","daysOpen":6,"daysOpenColor":"orange","reviewers":"jloss-redhat (requested), kdoberst (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3603\" target=\"_blank\">OCMUI-3603</a>"},{"number":59,"title":"OCMUI-3539: replaced install uninstall stepper in case of an error","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"kelvah (requested), t-hendricks (requested), kdoberst (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3539\" target=\"_blank\">OCMUI-3539</a>"},{"number":60,"title":"OCMUI-3612: fix padding on prerequisites btn","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"DcooperRH (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3612\" target=\"_blank\">OCMUI-3612</a>"},{"number":64,"title":"OCMUI-3614: added spacing between alerts","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"DcooperRH (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3614\" target=\"_blank\">OCMUI-3614</a>"},{"number":69,"title":"OCMUI-3623: fix hide reveal links on CA cert field","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"kdoberst (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3623\" target=\"_blank\">OCMUI-3623</a>"}]},"kdoberst":{"count":3,"prDetails":[{"number":47,"title":"OCMUI-3503 remove circular dependencies","daysOpen":8,"daysOpenColor":"red","reviewers":"t-hendricks (requested), dtaylor113 (requested), kelvah (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3503\" target=\"_blank\">OCMUI-3503</a>"},{"number":55,"title":"OCMUI-3619 On HCP wizard confirm, fix overlapping subnets","daysOpen":6,"daysOpenColor":"orange","reviewers":"shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3619\" target=\"_blank\">OCMUI-3619</a>"},{"number":57,"title":"OCMUI-3431 Add AWS Tags to New Node Pool (take 2 - separate AWS sections)","daysOpen":3,"daysOpenColor":"yellow","reviewers":"shivanthi-amara (requested), t-hendricks (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3431\" target=\"_blank\">OCMUI-3431</a>"}]},"jloss-redhat":{"count":1,"prDetails":[{"number":50,"title":"first pass with cursor, needs cleanup","daysOpen":7,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""}]},"zherman0":{"count":1,"prDetails":[{"number":68,"title":"OCMUI-3712: Update schedule variable to use proper type so we have access to state of upgrade","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"jmekkatt (requested), eliranmal (requested), kdoberst (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3712\" target=\"_blank\">OCMUI-3712</a>"}]}};
+        var reviewerChartData = [{"reviewer":"davidaznaur","pending":2},{"reviewer":"LiorKGOW","pending":3},{"reviewer":"eliranmal","pending":4},{"reviewer":"t-hendricks","pending":6},{"reviewer":"jmekkatt","pending":8},{"reviewer":"dragan000","pending":5},{"reviewer":"dtaylor113","pending":4},{"reviewer":"zherman0","pending":1},{"reviewer":"kelvah","pending":2},{"reviewer":"akkiangadi","pending":1},{"reviewer":"kdoberst","pending":3},{"reviewer":"jloss-redhat","pending":6},{"reviewer":"shivanthi-amara","pending":4},{"reviewer":"DcooperRH","pending":3}];
+        var authorData = {"kelvah":{"count":2,"prDetails":[{"number":17,"title":"OCMUI-3653 Double scrolling issue ","daysOpen":16,"daysOpenColor":"red","reviewers":"davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3653\" target=\"_blank\">OCMUI-3653</a>"},{"number":65,"title":"OCMUI-3715: Check API pipeline is failing","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"eliranmal (requested), LiorKGOW (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3715\" target=\"_blank\">OCMUI-3715</a>"}]},"eliranmal":{"count":4,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":15,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"},{"number":58,"title":"OCMUI-3697, OCMUI-3674: konflux / migrate unit-tests & code-lint in 'push' PL","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"jloss-redhat (requested), zherman0 (approved), kdoberst (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3697\" target=\"_blank\">OCMUI-3697</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3674\" target=\"_blank\">OCMUI-3674</a>"},{"number":66,"title":"chore: switch on test-coverage for konflux pull-request PL","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"kdoberst (requested), dtaylor113 (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":67,"title":"chore: update tekton schedule in renovate config to fix dep'-updates","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"LiorKGOW (requested), dtaylor113 (requested), jmekkatt (requested), zherman0 (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"akkiangadi":{"count":1,"prDetails":[{"number":25,"title":"OCMUI1029: When adding a new machine pool, move unused subnets to the top","daysOpen":14,"daysOpenColor":"red","reviewers":"t-hendricks (approved), davidaznaur (approved), jmekkatt (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":""}]},"meirinetta":{"count":2,"prDetails":[{"number":26,"title":"OCMUI-3638: Remove duplicate rosa wizard route","daysOpen":14,"daysOpenColor":"red","reviewers":"dragan000 (requested), LiorKGOW (approved), eliranmal (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3638\" target=\"_blank\">OCMUI-3638</a>"},{"number":52,"title":"OCMUI-3102: Hide resizing alert during node scaling in ROSA HCP ","daysOpen":7,"daysOpenColor":"red","reviewers":"dragan000 (requested), LiorKGOW (commented), dtaylor113 (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3102\" target=\"_blank\">OCMUI-3102</a>"}]},"jmekkatt":{"count":4,"prDetails":[{"number":27,"title":"[OCMUI-3673] Workflow definitions and required scripts for e2e ondemand workflow","daysOpen":14,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3673\" target=\"_blank\">OCMUI-3673</a>"},{"number":34,"title":"[OCMUI-1029]Updated test case to fit the subnet reorder feature definition","daysOpen":10,"daysOpenColor":"red","reviewers":"akkiangadi (requested), dragan000 (approved), davidaznaur (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1029\" target=\"_blank\">OCMUI-1029</a>"},{"number":56,"title":"[AI HACKATHON][Assisted-by:Cursor/Claude-4-sonnet] - Cypress to Playwright Conversion","daysOpen":3,"daysOpenColor":"yellow","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":62,"title":"[OCMUI-3708]E2e tests - Updates on GCP wizard tests to follow the default authentication change(WIF)","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"DcooperRH (requested), dragan000 (requested), davidaznaur (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3708\" target=\"_blank\">OCMUI-3708</a>"}]},"LiorKGOW":{"count":1,"prDetails":[{"number":28,"title":"[OCMUI-2904 & OCMUI-3532] [ROSA-HCP] Windows LI Phase 1: Add UI Implementation Hidden Behind a Feature Flag","daysOpen":14,"daysOpenColor":"red","reviewers":"eliranmal (requested), dragan000 (requested), dtaylor113 (requested changes)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2904\" target=\"_blank\">OCMUI-2904</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3532\" target=\"_blank\">OCMUI-3532</a>"}]},"dtaylor113":{"count":1,"prDetails":[{"number":29,"title":"[OCMUI-3643] Fix for CVE-2025-7783","daysOpen":14,"daysOpenColor":"red","reviewers":"dragan000 (requested), zherman0 (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3643\" target=\"_blank\">OCMUI-3643</a>"}]},"DcooperRH":{"count":2,"prDetails":[{"number":41,"title":"OCMUI-3604, OCMUI-2836 - [OSD-GCP] Make WIF auth as the default authentication type, [OSD Wizard] WIF authorization, update Auth Type tooltip","daysOpen":9,"daysOpenColor":"red","reviewers":"kdoberst (approved), davidaznaur (approved), jmekkatt (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3604\" target=\"_blank\">OCMUI-3604</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-2836\" target=\"_blank\">OCMUI-2836</a>"},{"number":49,"title":"OCMUI-3618 - When creating a new htpasswd IDP the confirm password field is misaligned","daysOpen":7,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), davidaznaur (approved), kdoberst (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3618\" target=\"_blank\">OCMUI-3618</a>"}]},"apecha":{"count":2,"prDetails":[{"number":42,"title":"[OCMUI-3422] E2E test automation - Cloud and Datacenter providers installer pages","daysOpen":9,"daysOpenColor":"red","reviewers":"davidaznaur (requested), jloss-redhat (requested), jmekkatt (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3422\" target=\"_blank\">OCMUI-3422</a>"},{"number":61,"title":"[OCMUI-1694] E2E test automation - Roles And Access","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"shivanthi-amara (requested), jloss-redhat (requested), jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1694\" target=\"_blank\">OCMUI-1694</a>"}]},"davidaznaur":{"count":6,"prDetails":[{"number":44,"title":"OCMUI-3433: aws tags for hcp node pools","daysOpen":9,"daysOpenColor":"red","reviewers":"DcooperRH (approved), kdoberst (approved), shivanthi-amara (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3433\" target=\"_blank\">OCMUI-3433</a>"},{"number":54,"title":"OCMUI-3603: deprecated modals update","daysOpen":6,"daysOpenColor":"orange","reviewers":"jloss-redhat (requested), kdoberst (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3603\" target=\"_blank\">OCMUI-3603</a>"},{"number":59,"title":"OCMUI-3539: replaced install uninstall stepper in case of an error","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"kelvah (requested), t-hendricks (requested), kdoberst (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3539\" target=\"_blank\">OCMUI-3539</a>"},{"number":60,"title":"OCMUI-3612: fix padding on prerequisites btn","daysOpen":2,"daysOpenColor":"#d4d4d4","reviewers":"DcooperRH (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3612\" target=\"_blank\">OCMUI-3612</a>"},{"number":64,"title":"OCMUI-3614: added spacing between alerts","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"DcooperRH (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3614\" target=\"_blank\">OCMUI-3614</a>"},{"number":69,"title":"OCMUI-3623: fix hide reveal links on CA cert field","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"kdoberst (requested), t-hendricks (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3623\" target=\"_blank\">OCMUI-3623</a>"}]},"kdoberst":{"count":3,"prDetails":[{"number":47,"title":"OCMUI-3503 remove circular dependencies","daysOpen":8,"daysOpenColor":"red","reviewers":"t-hendricks (requested), dtaylor113 (requested), kelvah (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3503\" target=\"_blank\">OCMUI-3503</a>"},{"number":55,"title":"OCMUI-3619 On HCP wizard confirm, fix overlapping subnets","daysOpen":6,"daysOpenColor":"orange","reviewers":"shivanthi-amara (requested), t-hendricks (approved), DcooperRH (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3619\" target=\"_blank\">OCMUI-3619</a>"},{"number":57,"title":"OCMUI-3431 Add AWS Tags to New Node Pool (take 2 - separate AWS sections)","daysOpen":3,"daysOpenColor":"yellow","reviewers":"shivanthi-amara (requested), t-hendricks (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3431\" target=\"_blank\">OCMUI-3431</a>"}]},"jloss-redhat":{"count":1,"prDetails":[{"number":50,"title":"first pass with cursor, needs cleanup","daysOpen":7,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""}]},"zherman0":{"count":1,"prDetails":[{"number":68,"title":"OCMUI-3712: Update schedule variable to use proper type so we have access to state of upgrade","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"jmekkatt (requested), eliranmal (requested), kdoberst (requested), davidaznaur (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3712\" target=\"_blank\">OCMUI-3712</a>"}]}};
         var authorNames = {"kelvah":"roberto emanuel","eliranmal":"Lyn M","akkiangadi":"Sonia Akkiangadi","jmekkatt":"Jayakrishnan Mekkattillam","LiorKGOW":"Lior Keren","dtaylor113":"Dave Taylor","DcooperRH":"Dylan Cooper","apecha":"Ales Pecha","davidaznaur":"David Aznaurov","kdoberst":"Kim Doberstein","jloss-redhat":"Jason Loss","zherman0":"Zac Herman"};
-        var reviewerNames = {"apecha":"Ales Pecha","davidaznaur":"David Aznaurov","LiorKGOW":"Lior Keren","eliranmal":"Lyn M","t-hendricks":"Trevor Hendricks","jmekkatt":"Jayakrishnan Mekkattillam","dragan000":"Denis Ragan","dtaylor113":"Dave Taylor","zherman0":"Zac Herman","kelvah":"roberto emanuel","akkiangadi":"Sonia Akkiangadi","kdoberst":"Kim Doberstein","jloss-redhat":"Jason Loss","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","DcooperRH":"Dylan Cooper"};
+        var reviewerNames = {"davidaznaur":"David Aznaurov","LiorKGOW":"Lior Keren","eliranmal":"Lyn M","apecha":"Ales Pecha","t-hendricks":"Trevor Hendricks","jmekkatt":"Jayakrishnan Mekkattillam","dragan000":"Denis Ragan","dtaylor113":"Dave Taylor","zherman0":"Zac Herman","kelvah":"roberto emanuel","akkiangadi":"Sonia Akkiangadi","kdoberst":"Kim Doberstein","jloss-redhat":"Jason Loss","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","DcooperRH":"Dylan Cooper"};
         
         // Variable to track current sort order
         var sortAscending = false;
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Thu Aug 21 2025 16:38:07 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Thu Aug 21 2025 17:06:24 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -897,7 +897,7 @@
         <div>
             <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-            
+            <a href="#ready-section" class="ready-link" id="ready-to-merge-link" style="display: none;">Ready To Merge (1)</a>
         </div>
         <span class="total-prs-badge">Total # Of Open PRs: 30</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
@@ -1001,13 +1001,13 @@
             <label><input type="radio" name="reviewerFilter" value="all" checked onclick="filterTable('all')"> Show all</label>
             <table style="margin-top: 8px; margin-bottom: 24px;">
                 <tr><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>
-    </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="davidaznaur" onclick="filterTable('davidaznaur')"> David Aznaurov (davidaznaur) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="LiorKGOW" onclick="filterTable('LiorKGOW')"> Lior Keren (LiorKGOW) <span class="pending-badge">3</span></label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="eliranmal" onclick="filterTable('eliranmal')"> Lyn M (eliranmal) <span class="pending-badge">4</span></label>
+    </td><td style="text-align: left; padding: 2px;">
+        <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) </label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="t-hendricks" onclick="filterTable('t-hendricks')"> Trevor Hendricks (t-hendricks) <span class="pending-badge">6</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -1036,35 +1036,7 @@
             <tr>
                 <th style="width: 28%;">Reviewer</th>
                 <th># Reviews Requested (Pending)</th>
-            </tr><tr class="reviewer-row" data-reviewer="apecha">
-        <td>Ales Pecha (apecha)</td>
-        <td><span class="pending-count">1</span></td>
-    </tr>
-  
-    <tr class="reviewer-row pr-row-table" data-reviewer="apecha">
-        <td colspan="2">
-            <table class="pr-table reviewer-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Author">Author</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
-              </td>
-              <td title="kelvah">kelvah</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
-              <td title="apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)">apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)</td>
-              <td title="16" style="color: red;">16</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr></table>
-        </td>
-    </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
+            </tr><tr class="reviewer-row" data-reviewer="davidaznaur">
         <td>David Aznaurov (davidaznaur)</td>
         <td><span class="pending-count">2</span></td>
     </tr>
@@ -1100,16 +1072,16 @@
               <td title="1" style="color: #d4d4d4;">1</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
               </td>
               <td title="kelvah">kelvah</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
-              <td title="apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)">davidaznaur (approved), apecha (requested), LiorKGOW (approved), eliranmal (commented)</td>
+              <td title="davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)">davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)</td>
               <td title="16" style="color: red;">16</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
               <td><a title="OCMUI1029: When adding a new machine pool, move unused subnets to the top" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/25">OCMUI1029: When adding a new machine pool, move unused subnets to the top                  </a>
@@ -1218,16 +1190,16 @@
               <td title="0" style="color: #d4d4d4;">0</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
               </td>
               <td title="kelvah">kelvah</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
-              <td title="apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)">LiorKGOW (approved), apecha (requested), davidaznaur (approved), eliranmal (commented)</td>
+              <td title="davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)">LiorKGOW (approved), davidaznaur (approved), eliranmal (commented), apecha (approved)</td>
               <td title="16" style="color: red;">16</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3638: Remove duplicate rosa wizard route" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/26">OCMUI-3638: Remove duplicate rosa wizard route                  </a>
@@ -1256,16 +1228,16 @@
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
+                </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="true">
               <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
               </td>
               <td title="kelvah">kelvah</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
-              <td title="apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)">eliranmal (commented), apecha (requested), davidaznaur (approved), LiorKGOW (approved)</td>
+              <td title="davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)">eliranmal (commented), davidaznaur (approved), LiorKGOW (approved), apecha (approved)</td>
               <td title="16" style="color: red;">16</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
               <td><a title="[OCMUI-2904 & OCMUI-3532] [ROSA-HCP] Windows LI Phase 1: Add UI Implementation Hidden Behind a Feature Flag" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/28">[OCMUI-2904 & OCMUI-3532] [ROSA-HCP] Windows LI Phase 1: Add UI Implementation Hidden Behind a Feature Flag                  </a>
@@ -1306,6 +1278,34 @@
               <td title="14" style="color: red;">14</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr></table>
+        </td>
+    </tr><tr class="reviewer-row" data-reviewer="apecha">
+        <td>Ales Pecha (apecha)</td>
+        <td><span class="pending-count">0</span></td>
+    </tr>
+  
+    <tr class="reviewer-row pr-row-table" data-reviewer="apecha">
+        <td colspan="2">
+            <table class="pr-table reviewer-pr-table">
+                <tr>
+                  <th title="Pull Request">Pull Request</th>
+                  <th title="Author">Author</th>
+                  <th title="Jira">Jira</th>
+                  <th title="Reviewers">Reviewers</th>
+                  <th title="# Days Open"># Days Open</th>
+                  <th title="# Approvals"># Approvals</th>
+                  <th title="Status">Status</th>
+                </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+              <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
+              </td>
+              <td title="kelvah">kelvah</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
+              <td title="davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)">apecha (approved), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)</td>
+              <td title="16" style="color: red;">16</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="t-hendricks">
@@ -2148,15 +2148,15 @@
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review">
+                </tr><tr class="pr-detail-row" data-status="ready_to_merge">
               <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue                   </a>
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
-              <td title="apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)">apecha (requested), davidaznaur (approved), LiorKGOW (approved), eliranmal (commented)</td>
+              <td title="davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)">davidaznaur (approved), LiorKGOW (approved), eliranmal (commented), apecha (approved)</td>
               <td title="16" style="color: red;">16</td>
-              <td title="2">2/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
+              <td title="3">3/3</td>
+              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
               <td><a title="OCMUI-3715: Check API pipeline is failing" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/65">OCMUI-3715: Check API pipeline is failing                  </a>
@@ -2630,7 +2630,7 @@
     <div id="ready-section" class="ready-section-header" style="display: none;">
         <h2>Ready to Merge Pull Requests</h2>
         <div>
-            <span class="ready-count">0</span>
+            <span class="ready-count">1</span>
             <a href="#top" class="back-to-top">Back to top</a>
         </div>
     </div>
@@ -2645,9 +2645,13 @@
             <th>Jira</th>
         </tr>
         <tr>
-            <td colspan="6" style="text-align: center; padding: 20px;">
-                No pull requests are currently ready to merge.
-            </td>
+            <td><a title="OCMUI-3653 Double scrolling issue " class="pr-link" 
+                 href="https://github.com/RedHatInsights/uhc-portal/pull/17">OCMUI-3653 Double scrolling issue </a></td>
+            <td>kelvah</td>
+            <td style="color: red;">16</td>
+            <td>3/3</td>
+            <td title="davidaznaur, LiorKGOW, apecha">davidaznaur, LiorKGOW, apecha</td>
+            <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3653" target="_blank">OCMUI-3653</a></td>
         </tr></table>
 </body>
 </html>
