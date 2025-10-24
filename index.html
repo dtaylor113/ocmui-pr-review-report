@@ -416,8 +416,8 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":3},{"reviewer":"jmekkatt","pending":5},{"reviewer":"shivanthi-amara","pending":7},{"reviewer":"eliranmal","pending":4},{"reviewer":"davidaznaur","pending":1},{"reviewer":"zherman0","pending":4},{"reviewer":"kdoberst","pending":1},{"reviewer":"DcooperRH","pending":1},{"reviewer":"dragan000","pending":2},{"reviewer":"dtaylor113","pending":8},{"reviewer":"t-hendricks","pending":1},{"reviewer":"apecha","pending":1},{"reviewer":"sourcery-ai","pending":10},{"reviewer":"kelvah","pending":3},{"reviewer":"LiorKGOW","pending":2}];
-        var authorData = {"eliranmal":{"count":4,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":80,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"},{"number":76,"title":"chore: add konflux integration tests for cypress e2e","daysOpen":60,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":190,"title":"chore: update deployment image registry","daysOpen":4,"daysOpenColor":"yellow","reviewers":"zherman0 (requested), sourcery-ai (commented), DcooperRH (approved), dtaylor113 (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":195,"title":"OCMUI-3766: add continuous-integration doc","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), LiorKGOW (requested), kelvah (requested), sourcery-ai (commented), DcooperRH (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3766\" target=\"_blank\">OCMUI-3766</a>"}]},"jmekkatt":{"count":3,"prDetails":[{"number":27,"title":"[OCMUI-3673] Workflow definitions and required scripts for e2e ondemand workflow","daysOpen":78,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3673\" target=\"_blank\">OCMUI-3673</a>"},{"number":56,"title":"[AI HACKATHON][Assisted-by:Cursor/Claude-4-sonnet] - Cypress to Playwright Conversion","daysOpen":67,"daysOpenColor":"red","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":182,"title":"[OCMUI-3853]playwright configuration definitions along with converted basic test cases","daysOpen":14,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), shivanthi-amara (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3853\" target=\"_blank\">OCMUI-3853</a>"}]},"apecha":{"count":2,"prDetails":[{"number":42,"title":"[OCMUI-3422] E2E test automation - Cloud and Datacenter providers installer pages","daysOpen":73,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3422\" target=\"_blank\">OCMUI-3422</a>"},{"number":61,"title":"[OCMUI-1694] E2E test automation - Roles And Access","daysOpen":65,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), jmekkatt (requested), shivanthi-amara (requested changes)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1694\" target=\"_blank\">OCMUI-1694</a>"}]},"shivanthi-amara":{"count":1,"prDetails":[{"number":90,"title":"[QE-CI] New automation testcase for machinepools OSD-AWS & ROSA Classic clusters","daysOpen":51,"daysOpenColor":"red","reviewers":"jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"jhjaggars":{"count":1,"prDetails":[{"number":94,"title":"Add CLAUDE.md for Claude Code integration","daysOpen":51,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"zherman0":{"count":4,"prDetails":[{"number":121,"title":"OCMUI-3723: Create action script to sync security-compliance with main","daysOpen":42,"daysOpenColor":"red","reviewers":"eliranmal (commented)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3723\" target=\"_blank\">OCMUI-3723</a>"},{"number":179,"title":"OCMUI-2754: Allow add ons to refresh with cluster refresh button","daysOpen":15,"daysOpenColor":"red","reviewers":"dtaylor113 (approved), shivanthi-amara (requested changes), DcooperRH (approved)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2754\" target=\"_blank\">OCMUI-2754</a>"},{"number":188,"title":"OCMUI-3864: Convert cluster list and cluster request into tabbed page","daysOpen":6,"daysOpenColor":"orange","reviewers":"dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3864\" target=\"_blank\">OCMUI-3864</a>"},{"number":197,"title":"OCMUI-3865: Add new access request table","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3865\" target=\"_blank\">OCMUI-3865</a>"}]},"LiorKGOW":{"count":1,"prDetails":[{"number":136,"title":"[OCMUI-2905] [ROSA-HCP] Connect Windows LI Field in the Create Machine Pool Modal to the Related API Queries","daysOpen":36,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2905\" target=\"_blank\">OCMUI-2905</a>"}]},"kdoberst":{"count":2,"prDetails":[{"number":142,"title":"OCMUI-3786 Convert HibernateClusterUpgradeScheduled to PF timestamp","daysOpen":35,"daysOpenColor":"red","reviewers":"davidaznaur (approved), zherman0 (approved), shivanthi-amara (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3786\" target=\"_blank\">OCMUI-3786</a>"},{"number":172,"title":"OCMUI-3805 convert last of the date formats","daysOpen":21,"daysOpenColor":"red","reviewers":"apecha (requested), dtaylor113 (approved), t-hendricks (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3805\" target=\"_blank\">OCMUI-3805</a>"}]},"kelvah":{"count":2,"prDetails":[{"number":153,"title":"Nested routes demo","daysOpen":30,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":194,"title":"[OPEN API] update model","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"jmekkatt (requested), eliranmal (requested), sourcery-ai (commented), LiorKGOW (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"davidaznaur":{"count":1,"prDetails":[{"number":159,"title":"OCMUI-3771: Channel Group edit Button","daysOpen":28,"daysOpenColor":"red","reviewers":"kdoberst (approved), DcooperRH (commented), shivanthi-amara (requested changes)","approvals":1,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3771\" target=\"_blank\">OCMUI-3771</a>"}]},"meirinetta":{"count":2,"prDetails":[{"number":162,"title":"OCMUI-3672: Disable 'Next' button during OCM roles check in ROSA Classic wizard","daysOpen":24,"daysOpenColor":"red","reviewers":"dragan000 (requested), zherman0 (commented), dtaylor113 (requested changes), davidaznaur (commented)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3672\" target=\"_blank\">OCMUI-3672</a>"},{"number":192,"title":"OCMUI-3806: Fix filters label font size","daysOpen":3,"daysOpenColor":"yellow","reviewers":"dragan000 (requested), sourcery-ai (commented), eliranmal (commented), LiorKGOW (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3806\" target=\"_blank\">OCMUI-3806</a>"}]},"DcooperRH":{"count":3,"prDetails":[{"number":169,"title":"OCMUI-3770 - Wizard(s)/day 1 - Add version Channel group dropdown - OSD","daysOpen":22,"daysOpenColor":"red","reviewers":"t-hendricks (approved), kdoberst (approved), shivanthi-amara (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3770\" target=\"_blank\">OCMUI-3770</a>"},{"number":196,"title":"OCMUI-3832 - Display Capacity Reservation ID with a Tool tip","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), zherman0 (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3832\" target=\"_blank\">OCMUI-3832</a>"},{"number":198,"title":"OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3917\" target=\"_blank\">OCMUI-3917</a>"}]},"t-hendricks":{"count":3,"prDetails":[{"number":178,"title":"OCMUI-3763: Wizard(s)/day 1 - Add version Channel group dropdown - ROSA","daysOpen":16,"daysOpenColor":"red","reviewers":"kdoberst (approved), DcooperRH (approved), shivanthi-amara (commented)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3763\" target=\"_blank\">OCMUI-3763</a>"},{"number":180,"title":"[OCMUI-3834] - Update FEC dependency package","daysOpen":15,"daysOpenColor":"red","reviewers":"jmekkatt (requested), sourcery-ai (commented), kelvah (approved), zherman0 (approved), dtaylor113 (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3834\" target=\"_blank\">OCMUI-3834</a>"},{"number":183,"title":"[OCMUI-3835] - E2e workflow update","daysOpen":10,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), zherman0 (requested), sourcery-ai (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3835\" target=\"_blank\">OCMUI-3835</a>"}]}};
+        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":3},{"reviewer":"jmekkatt","pending":5},{"reviewer":"shivanthi-amara","pending":7},{"reviewer":"eliranmal","pending":4},{"reviewer":"davidaznaur","pending":1},{"reviewer":"zherman0","pending":4},{"reviewer":"kdoberst","pending":1},{"reviewer":"DcooperRH","pending":1},{"reviewer":"dragan000","pending":2},{"reviewer":"dtaylor113","pending":8},{"reviewer":"apecha","pending":1},{"reviewer":"sourcery-ai","pending":10},{"reviewer":"kelvah","pending":3},{"reviewer":"LiorKGOW","pending":2}];
+        var authorData = {"eliranmal":{"count":4,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":80,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"},{"number":76,"title":"chore: add konflux integration tests for cypress e2e","daysOpen":60,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":190,"title":"chore: update deployment image registry","daysOpen":4,"daysOpenColor":"yellow","reviewers":"zherman0 (requested), sourcery-ai (commented), DcooperRH (approved), dtaylor113 (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":195,"title":"OCMUI-3766: add continuous-integration doc","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), LiorKGOW (requested), kelvah (requested), sourcery-ai (commented), DcooperRH (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3766\" target=\"_blank\">OCMUI-3766</a>"}]},"jmekkatt":{"count":3,"prDetails":[{"number":27,"title":"[OCMUI-3673] Workflow definitions and required scripts for e2e ondemand workflow","daysOpen":78,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3673\" target=\"_blank\">OCMUI-3673</a>"},{"number":56,"title":"[AI HACKATHON][Assisted-by:Cursor/Claude-4-sonnet] - Cypress to Playwright Conversion","daysOpen":67,"daysOpenColor":"red","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":182,"title":"[OCMUI-3853]playwright configuration definitions along with converted basic test cases","daysOpen":14,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), shivanthi-amara (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3853\" target=\"_blank\">OCMUI-3853</a>"}]},"apecha":{"count":2,"prDetails":[{"number":42,"title":"[OCMUI-3422] E2E test automation - Cloud and Datacenter providers installer pages","daysOpen":74,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3422\" target=\"_blank\">OCMUI-3422</a>"},{"number":61,"title":"[OCMUI-1694] E2E test automation - Roles And Access","daysOpen":65,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), jmekkatt (requested), shivanthi-amara (requested changes)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1694\" target=\"_blank\">OCMUI-1694</a>"}]},"shivanthi-amara":{"count":1,"prDetails":[{"number":90,"title":"[QE-CI] New automation testcase for machinepools OSD-AWS & ROSA Classic clusters","daysOpen":51,"daysOpenColor":"red","reviewers":"jmekkatt (requested)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"jhjaggars":{"count":1,"prDetails":[{"number":94,"title":"Add CLAUDE.md for Claude Code integration","daysOpen":51,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"zherman0":{"count":4,"prDetails":[{"number":121,"title":"OCMUI-3723: Create action script to sync security-compliance with main","daysOpen":42,"daysOpenColor":"red","reviewers":"eliranmal (commented)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3723\" target=\"_blank\">OCMUI-3723</a>"},{"number":179,"title":"OCMUI-2754: Allow add ons to refresh with cluster refresh button","daysOpen":15,"daysOpenColor":"red","reviewers":"dtaylor113 (approved), shivanthi-amara (requested changes), DcooperRH (approved)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2754\" target=\"_blank\">OCMUI-2754</a>"},{"number":188,"title":"OCMUI-3864: Convert cluster list and cluster request into tabbed page","daysOpen":7,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3864\" target=\"_blank\">OCMUI-3864</a>"},{"number":197,"title":"OCMUI-3865: Add new access request table","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3865\" target=\"_blank\">OCMUI-3865</a>"}]},"LiorKGOW":{"count":1,"prDetails":[{"number":136,"title":"[OCMUI-2905] [ROSA-HCP] Connect Windows LI Field in the Create Machine Pool Modal to the Related API Queries","daysOpen":36,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2905\" target=\"_blank\">OCMUI-2905</a>"}]},"kdoberst":{"count":2,"prDetails":[{"number":142,"title":"OCMUI-3786 Convert HibernateClusterUpgradeScheduled to PF timestamp","daysOpen":35,"daysOpenColor":"red","reviewers":"davidaznaur (approved), zherman0 (approved), shivanthi-amara (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3786\" target=\"_blank\">OCMUI-3786</a>"},{"number":172,"title":"OCMUI-3805 convert last of the date formats","daysOpen":21,"daysOpenColor":"red","reviewers":"apecha (requested), dtaylor113 (approved), t-hendricks (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3805\" target=\"_blank\">OCMUI-3805</a>"}]},"kelvah":{"count":2,"prDetails":[{"number":153,"title":"Nested routes demo","daysOpen":30,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":194,"title":"[OPEN API] update model","daysOpen":1,"daysOpenColor":"#d4d4d4","reviewers":"jmekkatt (requested), eliranmal (requested), sourcery-ai (commented), LiorKGOW (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"davidaznaur":{"count":1,"prDetails":[{"number":159,"title":"OCMUI-3771: Channel Group edit Button","daysOpen":28,"daysOpenColor":"red","reviewers":"kdoberst (approved), DcooperRH (commented), shivanthi-amara (requested changes)","approvals":1,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3771\" target=\"_blank\">OCMUI-3771</a>"}]},"meirinetta":{"count":2,"prDetails":[{"number":162,"title":"OCMUI-3672: Disable 'Next' button during OCM roles check in ROSA Classic wizard","daysOpen":24,"daysOpenColor":"red","reviewers":"dragan000 (requested), zherman0 (commented), dtaylor113 (requested changes), davidaznaur (commented)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3672\" target=\"_blank\">OCMUI-3672</a>"},{"number":192,"title":"OCMUI-3806: Fix filters label font size","daysOpen":3,"daysOpenColor":"yellow","reviewers":"dragan000 (requested), sourcery-ai (commented), eliranmal (commented), LiorKGOW (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3806\" target=\"_blank\">OCMUI-3806</a>"}]},"DcooperRH":{"count":3,"prDetails":[{"number":169,"title":"OCMUI-3770 - Wizard(s)/day 1 - Add version Channel group dropdown - OSD","daysOpen":22,"daysOpenColor":"red","reviewers":"t-hendricks (approved), kdoberst (approved), shivanthi-amara (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3770\" target=\"_blank\">OCMUI-3770</a>"},{"number":196,"title":"OCMUI-3832 - Display Capacity Reservation ID with a Tool tip","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), zherman0 (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3832\" target=\"_blank\">OCMUI-3832</a>"},{"number":198,"title":"OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users","daysOpen":0,"daysOpenColor":"#d4d4d4","reviewers":"dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3917\" target=\"_blank\">OCMUI-3917</a>"}]},"t-hendricks":{"count":3,"prDetails":[{"number":178,"title":"OCMUI-3763: Wizard(s)/day 1 - Add version Channel group dropdown - ROSA","daysOpen":16,"daysOpenColor":"red","reviewers":"kdoberst (approved), DcooperRH (approved), shivanthi-amara (commented)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3763\" target=\"_blank\">OCMUI-3763</a>"},{"number":180,"title":"[OCMUI-3834] - Update FEC dependency package","daysOpen":15,"daysOpenColor":"red","reviewers":"jmekkatt (requested), sourcery-ai (commented), kelvah (approved), zherman0 (approved), dtaylor113 (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3834\" target=\"_blank\">OCMUI-3834</a>"},{"number":183,"title":"[OCMUI-3835] - E2e workflow update","daysOpen":10,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), zherman0 (requested), sourcery-ai (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3835\" target=\"_blank\">OCMUI-3835</a>"}]}};
         var authorNames = {"eliranmal":"Lyn M","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","jhjaggars":"Jesse Jaggars","zherman0":"Zac Herman","LiorKGOW":"Lior Keren","kdoberst":"Kim Doberstein","kelvah":"roberto emanuel","davidaznaur":"David Aznaurov","DcooperRH":"Dylan Cooper","t-hendricks":"Trevor Hendricks"};
         var reviewerNames = {"jloss-redhat":"Jason Loss","jmekkatt":"Jayakrishnan Mekkattillam","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","eliranmal":"Lyn M","davidaznaur":"David Aznaurov","zherman0":"Zac Herman","kdoberst":"Kim Doberstein","DcooperRH":"Dylan Cooper","dragan000":"Denis Ragan","dtaylor113":"Dave Taylor","t-hendricks":"Trevor Hendricks","apecha":"Ales Pecha","kelvah":"roberto emanuel","LiorKGOW":"Lior Keren"};
         
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Fri Oct 24 2025 21:24:13 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Fri Oct 24 2025 21:31:11 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -1021,7 +1021,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="dtaylor113" onclick="filterTable('dtaylor113')"> Dave Taylor (dtaylor113) <span class="pending-badge">8</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="t-hendricks" onclick="filterTable('t-hendricks')"> Trevor Hendricks (t-hendricks) <span class="pending-badge">1</span></label>
+        <label><input type="radio" name="reviewerFilter" value="t-hendricks" onclick="filterTable('t-hendricks')"> Trevor Hendricks (t-hendricks) </label>
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">1</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
@@ -1059,7 +1059,7 @@
               <td title="apecha">apecha</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3422" target="_blank">OCMUI-3422</a></td>
               <td title="jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)">jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)</td>
-              <td title="73" style="color: red;">73</td>
+              <td title="74" style="color: red;">74</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
@@ -1107,7 +1107,7 @@
               <td title="apecha">apecha</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3422" target="_blank">OCMUI-3422</a></td>
               <td title="jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)">jmekkatt (commented), jloss-redhat (requested), shivanthi-amara (requested)</td>
-              <td title="73" style="color: red;">73</td>
+              <td title="74" style="color: red;">74</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
@@ -1175,7 +1175,7 @@
               <td title="apecha">apecha</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3422" target="_blank">OCMUI-3422</a></td>
               <td title="jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)">shivanthi-amara (requested), jloss-redhat (requested), jmekkatt (commented)</td>
-              <td title="73" style="color: red;">73</td>
+              <td title="74" style="color: red;">74</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="true">
@@ -1283,7 +1283,7 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3864" target="_blank">OCMUI-3864</a></td>
               <td title="dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)">eliranmal (commented), dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented)</td>
-              <td title="6" style="color: orange;">6</td>
+              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
@@ -1447,7 +1447,7 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3864" target="_blank">OCMUI-3864</a></td>
               <td title="dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)">kdoberst (requested), dtaylor113 (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)</td>
-              <td title="6" style="color: orange;">6</td>
+              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested" data-pending="false">
@@ -1651,7 +1651,7 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3864" target="_blank">OCMUI-3864</a></td>
               <td title="dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)">dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)</td>
-              <td title="6" style="color: orange;">6</td>
+              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
@@ -1680,9 +1680,9 @@
               </td>
               <td title="DcooperRH">DcooperRH</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3917" target="_blank">OCMUI-3917</a></td>
-              <td title="dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)">dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)</td>
+              <td title="dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)">dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
               <td><a title="OCMUI-3805 convert last of the date formats" class="pr-link" 
@@ -1718,7 +1718,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="t-hendricks">
         <td>Trevor Hendricks (t-hendricks)</td>
-        <td><span class="pending-count">1</span></td>
+        <td><span class="pending-count">0</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="t-hendricks">
@@ -1732,17 +1732,7 @@
                   <th title="# Days Open"># Days Open</th>
                   <th title="# Approvals"># Approvals</th>
                   <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
-              <td><a title="OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/198">OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users                  </a>
-              </td>
-              <td title="DcooperRH">DcooperRH</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3917" target="_blank">OCMUI-3917</a></td>
-              <td title="dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)">t-hendricks (requested), dtaylor113 (requested), sourcery-ai (commented)</td>
-              <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
-              <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
+                </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
               <td><a title="OCMUI-3770 - Wizard(s)/day 1 - Add version Channel group dropdown - OSD" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/169">OCMUI-3770 - Wizard(s)/day 1 - Add version Channel group dropdown - OSD                  </a>
               </td>
@@ -1761,6 +1751,16 @@
               <td title="apecha (requested), dtaylor113 (approved), t-hendricks (approved)">t-hendricks (approved), apecha (requested), dtaylor113 (approved)</td>
               <td title="21" style="color: red;">21</td>
               <td title="2">2/3</td>
+              <td class="needs-review" title="Needs Review">Needs Review</td>
+            </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="false">
+              <td><a title="OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users" class="pr-link" 
+                     href="https://github.com/RedHatInsights/uhc-portal/pull/198">OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users                  </a>
+              </td>
+              <td title="DcooperRH">DcooperRH</td>
+              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3917" target="_blank">OCMUI-3917</a></td>
+              <td title="dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)">t-hendricks (approved), dtaylor113 (requested), sourcery-ai (commented)</td>
+              <td title="0" style="color: #d4d4d4;">0</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
@@ -1845,7 +1845,7 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3864" target="_blank">OCMUI-3864</a></td>
               <td title="dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)">sourcery-ai (commented), dtaylor113 (requested), kdoberst (requested), kelvah (requested), eliranmal (commented)</td>
-              <td title="6" style="color: orange;">6</td>
+              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
@@ -1904,9 +1904,9 @@
               </td>
               <td title="DcooperRH">DcooperRH</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3917" target="_blank">OCMUI-3917</a></td>
-              <td title="dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)">sourcery-ai (commented), dtaylor113 (requested), t-hendricks (requested)</td>
+              <td title="dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)">sourcery-ai (commented), dtaylor113 (requested), t-hendricks (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
@@ -1943,7 +1943,7 @@
               <td title="zherman0">zherman0</td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3864" target="_blank">OCMUI-3864</a></td>
               <td title="dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)">kelvah (requested), dtaylor113 (requested), kdoberst (requested), sourcery-ai (commented), eliranmal (commented)</td>
-              <td title="6" style="color: orange;">6</td>
+              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
@@ -2171,7 +2171,7 @@
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3422" target="_blank">OCMUI-3422</a></td>
               <td title="jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)">jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)</td>
-              <td title="73" style="color: red;">73</td>
+              <td title="74" style="color: red;">74</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="changes_requested">
@@ -2276,7 +2276,7 @@
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3864" target="_blank">OCMUI-3864</a></td>
               <td title="dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)">dtaylor113 (requested), kdoberst (requested), kelvah (requested), sourcery-ai (commented), eliranmal (commented)</td>
-              <td title="6" style="color: orange;">6</td>
+              <td title="7" style="color: red;">7</td>
               <td title="0">0/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr><tr class="pr-detail-row" data-status="needs_review">
@@ -2485,9 +2485,9 @@
                      href="https://github.com/RedHatInsights/uhc-portal/pull/198">OCMUI-3917 - The wizard's version dropdown shows duplicate OCP version values, which can be confusing for users                  </a>
               </td>
               <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3917" target="_blank">OCMUI-3917</a></td>
-              <td title="dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)">dtaylor113 (requested), t-hendricks (requested), sourcery-ai (commented)</td>
+              <td title="dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)">dtaylor113 (requested), sourcery-ai (commented), t-hendricks (approved)</td>
               <td title="0" style="color: #d4d4d4;">0</td>
-              <td title="0">0/3</td>
+              <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
