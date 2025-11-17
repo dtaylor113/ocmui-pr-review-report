@@ -416,9 +416,9 @@
         var currentView = 'reviewers'; // 'reviewers' or 'authors'
         
         // Global data for charts
-        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":3},{"reviewer":"shivanthi-amara","pending":6},{"reviewer":"jmekkatt","pending":4},{"reviewer":"dtaylor113","pending":5},{"reviewer":"zherman0","pending":1},{"reviewer":"eliranmal","pending":4},{"reviewer":"apecha","pending":2},{"reviewer":"sourcery-ai","pending":14},{"reviewer":"DcooperRH","pending":1},{"reviewer":"kelvah","pending":5},{"reviewer":"jcaianirh","pending":1},{"reviewer":"dragan000","pending":2}];
-        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":103,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"},{"number":222,"title":"OCMUI-3556: use \"latest\" in OCP doc-links","daysOpen":13,"daysOpenColor":"red","reviewers":"apecha (requested), shivanthi-amara (requested), sourcery-ai (commented), zherman0 (approved), t-hendricks (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3556\" target=\"_blank\">OCMUI-3556</a>"}]},"jmekkatt":{"count":4,"prDetails":[{"number":27,"title":"[OCMUI-3673] Workflow definitions and required scripts for e2e ondemand workflow","daysOpen":102,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3673\" target=\"_blank\">OCMUI-3673</a>"},{"number":56,"title":"[AI HACKATHON][Assisted-by:Cursor/Claude-4-sonnet] - Cypress to Playwright Conversion","daysOpen":91,"daysOpenColor":"red","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":229,"title":"[OCMUI-3854]Migrated all CI tagged cypress test specs to playwright model","daysOpen":11,"daysOpenColor":"red","reviewers":"shivanthi-amara (requested), eliranmal (requested), kelvah (requested), sourcery-ai (commented), DcooperRH (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3854\" target=\"_blank\">OCMUI-3854</a>"},{"number":231,"title":"[OCMUI-3856]CI github workflow for playwright tests","daysOpen":10,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), dragan000 (requested), sourcery-ai (commented), eliranmal (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3856\" target=\"_blank\">OCMUI-3856</a>"}]},"apecha":{"count":2,"prDetails":[{"number":42,"title":"[OCMUI-3422] E2E test automation - Cloud and Datacenter providers installer pages","daysOpen":97,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3422\" target=\"_blank\">OCMUI-3422</a>"},{"number":61,"title":"[OCMUI-1694] E2E test automation - Roles And Access","daysOpen":89,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), jmekkatt (requested), shivanthi-amara (requested changes)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1694\" target=\"_blank\">OCMUI-1694</a>"}]},"shivanthi-amara":{"count":1,"prDetails":[{"number":90,"title":"[QE-CI] New automation testcase for machinepools OSD-AWS & ROSA Classic clusters","daysOpen":75,"daysOpenColor":"red","reviewers":"jmekkatt (requested), dtaylor113 (commented), zherman0 (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"jhjaggars":{"count":1,"prDetails":[{"number":94,"title":"Add CLAUDE.md for Claude Code integration","daysOpen":74,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"zherman0":{"count":5,"prDetails":[{"number":121,"title":"OCMUI-3723: Create action script to sync security-compliance with main","daysOpen":65,"daysOpenColor":"red","reviewers":"eliranmal (commented)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3723\" target=\"_blank\">OCMUI-3723</a>"},{"number":197,"title":"OCMUI-3865: Add new access request table","daysOpen":24,"daysOpenColor":"red","reviewers":"apecha (requested), sourcery-ai (commented), DcooperRH (approved), t-hendricks (approved), jmekkatt (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3865\" target=\"_blank\">OCMUI-3865</a>"},{"number":202,"title":"OCMUI-3872: Fix undefined error for MachineTypeID","daysOpen":20,"daysOpenColor":"red","reviewers":"shivanthi-amara (requested), sourcery-ai (commented), eliranmal (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3872\" target=\"_blank\">OCMUI-3872</a>"},{"number":224,"title":"OCMUI-3983: Create wizard for osd google cloud","daysOpen":12,"daysOpenColor":"red","reviewers":"jcaianirh (requested), sourcery-ai (commented), dtaylor113 (requested changes), kelvah (commented)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3983\" target=\"_blank\">OCMUI-3983</a>"},{"number":241,"title":"OCMUI-3866, OCMUI-3994: Remove request alerts on cluster list and add badge count instead","daysOpen":3,"daysOpenColor":"yellow","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3866\" target=\"_blank\">OCMUI-3866</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3994\" target=\"_blank\">OCMUI-3994</a>"}]},"LiorKGOW":{"count":2,"prDetails":[{"number":136,"title":"[OCMUI-2905] [ROSA-HCP] Connect Windows LI Field in the Create Machine Pool Modal to the Related API Queries","daysOpen":60,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2905\" target=\"_blank\">OCMUI-2905</a>"},{"number":240,"title":"fix(OCMUI-2797): Reset max-nodes-total to default when availability zone or version change on ROSA Classic & OSD Wizards","daysOpen":4,"daysOpenColor":"yellow","reviewers":"zherman0 (requested), DcooperRH (requested), dragan000 (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2797\" target=\"_blank\">OCMUI-2797</a>"}]},"kelvah":{"count":1,"prDetails":[{"number":153,"title":"Nested routes demo","daysOpen":54,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""}]},"kdoberst":{"count":3,"prDetails":[{"number":200,"title":"FCN-27 OCMUI-3966 Analytics for alerts","daysOpen":20,"daysOpenColor":"red","reviewers":"sourcery-ai (commented), edewit (approved), LiorKGOW (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3966\" target=\"_blank\">OCMUI-3966</a>"},{"number":201,"title":"FCN-28 OCMUI-3967 Add analytics on cluster details tab view","daysOpen":20,"daysOpenColor":"red","reviewers":"sourcery-ai (commented), edewit (approved), zherman0 (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3967\" target=\"_blank\">OCMUI-3967</a>"},{"number":242,"title":"OCMUI-3995 fix skipped accessibility tests","daysOpen":3,"daysOpenColor":"yellow","reviewers":"kelvah (requested), dtaylor113 (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3995\" target=\"_blank\">OCMUI-3995</a>"}]},"red-hat-konflux":{"count":10,"prDetails":[{"number":209,"title":"fix(deps): update all non-major dependencies","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":210,"title":"fix(deps): update patternfly packages","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":211,"title":"chore(deps): update dependency @chromatic-com/storybook to v4","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":212,"title":"chore(deps): update dependency @cypress/grep to v5","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":213,"title":"chore(deps): update dependency @cypress/webpack-preprocessor to v7","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":214,"title":"chore(deps): update dependency @redhat-cloud-services/types to v3","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":215,"title":"chore(deps): update dependency @storybook/addon-styling-webpack to v2","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":216,"title":"chore(deps): update dependency @storybook/addon-webpack5-compiler-swc to v4","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":217,"title":"chore(deps): update dependency babel-loader to v10","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":218,"title":"chore(deps): update dependency copy-webpack-plugin to v13","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"t-hendricks":{"count":1,"prDetails":[{"number":225,"title":"OCMUI-3599: https://console.redhat.com/openshift doesn't require a redhat account with a verified email","daysOpen":12,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), shivanthi-amara (requested), sourcery-ai (commented), DcooperRH (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3599\" target=\"_blank\">OCMUI-3599</a>"}]},"DcooperRH":{"count":1,"prDetails":[{"number":227,"title":"OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status","daysOpen":12,"daysOpenColor":"red","reviewers":"sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)","approvals":3,"status":"ready_to_merge","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3957\" target=\"_blank\">OCMUI-3957</a>"}]},"ammont82":{"count":1,"prDetails":[{"number":234,"title":"ECOPROJECT-3474: Add Dev Preview badge to \"Evaluate VMware to Openshift Migration\" Card in overview page","daysOpen":5,"daysOpenColor":"orange","reviewers":"sourcery-ai (commented), eliranmal (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"edewit":{"count":1,"prDetails":[{"number":236,"title":"initial version of the \"tag acm cluster\" action","daysOpen":5,"daysOpenColor":"orange","reviewers":"sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]}};
-        var authorNames = {"eliranmal":"Lyn M","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","jhjaggars":"Jesse Jaggars","zherman0":"Zac Herman","LiorKGOW":"Lior Keren","kelvah":"roberto emanuel","kdoberst":"Kim Doberstein","t-hendricks":"Trevor Hendricks","DcooperRH":"Dylan Cooper","ammont82":"Montse Ortega Gallart","edewit":"Erik Jan de Wit"};
+        var reviewerChartData = [{"reviewer":"jloss-redhat","pending":3},{"reviewer":"shivanthi-amara","pending":6},{"reviewer":"jmekkatt","pending":4},{"reviewer":"dtaylor113","pending":5},{"reviewer":"zherman0","pending":1},{"reviewer":"eliranmal","pending":4},{"reviewer":"apecha","pending":2},{"reviewer":"sourcery-ai","pending":13},{"reviewer":"DcooperRH","pending":1},{"reviewer":"kelvah","pending":5},{"reviewer":"jcaianirh","pending":1},{"reviewer":"dragan000","pending":2}];
+        var authorData = {"eliranmal":{"count":2,"prDetails":[{"number":18,"title":"OCMUI-3257: update typescript typings around VPC details card","daysOpen":103,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3257\" target=\"_blank\">OCMUI-3257</a>"},{"number":222,"title":"OCMUI-3556: use \"latest\" in OCP doc-links","daysOpen":13,"daysOpenColor":"red","reviewers":"apecha (requested), shivanthi-amara (requested), sourcery-ai (commented), zherman0 (approved), t-hendricks (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3556\" target=\"_blank\">OCMUI-3556</a>"}]},"jmekkatt":{"count":4,"prDetails":[{"number":27,"title":"[OCMUI-3673] Workflow definitions and required scripts for e2e ondemand workflow","daysOpen":102,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3673\" target=\"_blank\">OCMUI-3673</a>"},{"number":56,"title":"[AI HACKATHON][Assisted-by:Cursor/Claude-4-sonnet] - Cypress to Playwright Conversion","daysOpen":91,"daysOpenColor":"red","reviewers":"jloss-redhat (requested)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""},{"number":229,"title":"[OCMUI-3854]Migrated all CI tagged cypress test specs to playwright model","daysOpen":11,"daysOpenColor":"red","reviewers":"shivanthi-amara (requested), eliranmal (requested), kelvah (requested), sourcery-ai (commented), DcooperRH (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3854\" target=\"_blank\">OCMUI-3854</a>"},{"number":231,"title":"[OCMUI-3856]CI github workflow for playwright tests","daysOpen":10,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), dragan000 (requested), sourcery-ai (commented), eliranmal (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3856\" target=\"_blank\">OCMUI-3856</a>"}]},"apecha":{"count":2,"prDetails":[{"number":42,"title":"[OCMUI-3422] E2E test automation - Cloud and Datacenter providers installer pages","daysOpen":97,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), shivanthi-amara (requested), jmekkatt (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3422\" target=\"_blank\">OCMUI-3422</a>"},{"number":61,"title":"[OCMUI-1694] E2E test automation - Roles And Access","daysOpen":89,"daysOpenColor":"red","reviewers":"jloss-redhat (requested), jmekkatt (requested), shivanthi-amara (requested changes)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-1694\" target=\"_blank\">OCMUI-1694</a>"}]},"shivanthi-amara":{"count":1,"prDetails":[{"number":90,"title":"[QE-CI] New automation testcase for machinepools OSD-AWS & ROSA Classic clusters","daysOpen":75,"daysOpenColor":"red","reviewers":"jmekkatt (requested), dtaylor113 (commented), zherman0 (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"jhjaggars":{"count":1,"prDetails":[{"number":94,"title":"Add CLAUDE.md for Claude Code integration","daysOpen":74,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"zherman0":{"count":5,"prDetails":[{"number":121,"title":"OCMUI-3723: Create action script to sync security-compliance with main","daysOpen":65,"daysOpenColor":"red","reviewers":"eliranmal (commented)","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3723\" target=\"_blank\">OCMUI-3723</a>"},{"number":197,"title":"OCMUI-3865: Add new access request table","daysOpen":24,"daysOpenColor":"red","reviewers":"apecha (requested), sourcery-ai (commented), DcooperRH (approved), t-hendricks (approved), jmekkatt (requested changes)","approvals":2,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3865\" target=\"_blank\">OCMUI-3865</a>"},{"number":202,"title":"OCMUI-3872: Fix undefined error for MachineTypeID","daysOpen":20,"daysOpenColor":"red","reviewers":"shivanthi-amara (requested), sourcery-ai (commented), eliranmal (commented), kelvah (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3872\" target=\"_blank\">OCMUI-3872</a>"},{"number":224,"title":"OCMUI-3983: Create wizard for osd google cloud","daysOpen":12,"daysOpenColor":"red","reviewers":"jcaianirh (requested), sourcery-ai (commented), dtaylor113 (requested changes), kelvah (commented)","approvals":0,"status":"changes_requested","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3983\" target=\"_blank\">OCMUI-3983</a>"},{"number":241,"title":"OCMUI-3866, OCMUI-3994: Remove request alerts on cluster list and add badge count instead","daysOpen":3,"daysOpenColor":"yellow","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3866\" target=\"_blank\">OCMUI-3866</a>, <a href=\"https://issues.redhat.com/browse/OCMUI-3994\" target=\"_blank\">OCMUI-3994</a>"}]},"LiorKGOW":{"count":2,"prDetails":[{"number":136,"title":"[OCMUI-2905] [ROSA-HCP] Connect Windows LI Field in the Create Machine Pool Modal to the Related API Queries","daysOpen":60,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2905\" target=\"_blank\">OCMUI-2905</a>"},{"number":240,"title":"fix(OCMUI-2797): Reset max-nodes-total to default when availability zone or version change on ROSA Classic & OSD Wizards","daysOpen":4,"daysOpenColor":"yellow","reviewers":"zherman0 (requested), DcooperRH (requested), dragan000 (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-2797\" target=\"_blank\">OCMUI-2797</a>"}]},"kelvah":{"count":1,"prDetails":[{"number":153,"title":"Nested routes demo","daysOpen":54,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":true,"jiraLinks":""}]},"kdoberst":{"count":3,"prDetails":[{"number":200,"title":"FCN-27 OCMUI-3966 Analytics for alerts","daysOpen":20,"daysOpenColor":"red","reviewers":"sourcery-ai (commented), edewit (approved), LiorKGOW (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3966\" target=\"_blank\">OCMUI-3966</a>"},{"number":201,"title":"FCN-28 OCMUI-3967 Add analytics on cluster details tab view","daysOpen":20,"daysOpenColor":"red","reviewers":"sourcery-ai (commented), edewit (approved), zherman0 (approved)","approvals":2,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3967\" target=\"_blank\">OCMUI-3967</a>"},{"number":242,"title":"OCMUI-3995 fix skipped accessibility tests","daysOpen":3,"daysOpenColor":"yellow","reviewers":"kelvah (requested), dtaylor113 (requested), sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3995\" target=\"_blank\">OCMUI-3995</a>"}]},"red-hat-konflux":{"count":10,"prDetails":[{"number":209,"title":"fix(deps): update all non-major dependencies","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":210,"title":"fix(deps): update patternfly packages","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":211,"title":"chore(deps): update dependency @chromatic-com/storybook to v4","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":212,"title":"chore(deps): update dependency @cypress/grep to v5","daysOpen":17,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":213,"title":"chore(deps): update dependency @cypress/webpack-preprocessor to v7","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":214,"title":"chore(deps): update dependency @redhat-cloud-services/types to v3","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":215,"title":"chore(deps): update dependency @storybook/addon-styling-webpack to v2","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":216,"title":"chore(deps): update dependency @storybook/addon-webpack5-compiler-swc to v4","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":217,"title":"chore(deps): update dependency babel-loader to v10","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""},{"number":218,"title":"chore(deps): update dependency copy-webpack-plugin to v13","daysOpen":16,"daysOpenColor":"red","reviewers":"","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"t-hendricks":{"count":1,"prDetails":[{"number":225,"title":"OCMUI-3599: https://console.redhat.com/openshift doesn't require a redhat account with a verified email","daysOpen":12,"daysOpenColor":"red","reviewers":"dtaylor113 (requested), shivanthi-amara (requested), sourcery-ai (commented), DcooperRH (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":"<a href=\"https://issues.redhat.com/browse/OCMUI-3599\" target=\"_blank\">OCMUI-3599</a>"}]},"ammont82":{"count":1,"prDetails":[{"number":234,"title":"ECOPROJECT-3474: Add Dev Preview badge to \"Evaluate VMware to Openshift Migration\" Card in overview page","daysOpen":5,"daysOpenColor":"orange","reviewers":"sourcery-ai (commented), eliranmal (approved)","approvals":1,"status":"needs_review","isDraft":false,"jiraLinks":""}]},"edewit":{"count":1,"prDetails":[{"number":236,"title":"initial version of the \"tag acm cluster\" action","daysOpen":5,"daysOpenColor":"orange","reviewers":"sourcery-ai (commented)","approvals":0,"status":"needs_review","isDraft":false,"jiraLinks":""}]}};
+        var authorNames = {"eliranmal":"Lyn M","jmekkatt":"Jayakrishnan Mekkattillam","apecha":"Ales Pecha","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","jhjaggars":"Jesse Jaggars","zherman0":"Zac Herman","LiorKGOW":"Lior Keren","kelvah":"roberto emanuel","kdoberst":"Kim Doberstein","t-hendricks":"Trevor Hendricks","ammont82":"Montse Ortega Gallart","edewit":"Erik Jan de Wit"};
         var reviewerNames = {"jloss-redhat":"Jason Loss","shivanthi-amara":"Lakshmi Shivanthi Amarachintha","jmekkatt":"Jayakrishnan Mekkattillam","dtaylor113":"Dave Taylor","zherman0":"Zac Herman","eliranmal":"Lyn M","apecha":"Ales Pecha","DcooperRH":"Dylan Cooper","t-hendricks":"Trevor Hendricks","edewit":"Erik Jan de Wit","LiorKGOW":"Lior Keren","kelvah":"roberto emanuel","jcaianirh":"Joseph Caiani","dragan000":"Denis Ragan"};
         
         // Variable to track current sort order
@@ -882,7 +882,7 @@
 <body>
     <h2 id="top">
       <span class="repo-title">RedHatInsights/uhc-portal</span> Open Pull Requests
-      <span id="lastUpdated" class="last-updated" data-utc="Mon Nov 17 2025 15:04:41 GMT+0000 (Coordinated Universal Time)"></span>
+      <span id="lastUpdated" class="last-updated" data-utc="Mon Nov 17 2025 15:14:38 GMT+0000 (Coordinated Universal Time)"></span>
     </h2>
     
     <!-- View selector -->
@@ -897,9 +897,9 @@
         <div>
             <label><input type="radio" name="prFilter" id="show-all-prs" onclick="filterByStatus('all')" checked> Report</label>
             <label><input type="radio" name="prFilter" id="show-chart" onClick="toggleDetails()"> Chart</label>
-            <a href="#ready-section" class="ready-link" id="ready-to-merge-link" style="display: none;">Ready To Merge (1)</a>
+            
         </div>
-        <span class="total-prs-badge">Total # Of Open PRs: 35</span>
+        <span class="total-prs-badge">Total # Of Open PRs: 34</span>
         <button id="toggleLegendBtn" onClick="toggleLegend()" style="margin-left: 15px; background-color: #333; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Show Legend</button>
     </div>
     <!-- Empty row for spacing -->
@@ -1015,7 +1015,7 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="apecha" onclick="filterTable('apecha')"> Ales Pecha (apecha) <span class="pending-badge">2</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="reviewerFilter" value="sourcery-ai" onclick="filterTable('sourcery-ai')"> sourcery-ai <span class="pending-badge">14</span></label>
+        <label><input type="radio" name="reviewerFilter" value="sourcery-ai" onclick="filterTable('sourcery-ai')"> sourcery-ai <span class="pending-badge">13</span></label>
     </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="reviewerFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="pending-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
@@ -1160,16 +1160,6 @@
               <td title="11" style="color: red;">11</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/227">OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status                  </a>
-              </td>
-              <td title="DcooperRH">DcooperRH</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3957" target="_blank">OCMUI-3957</a></td>
-              <td title="sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)">shivanthi-amara (approved), sourcery-ai (commented), t-hendricks (approved), zherman0 (approved)</td>
-              <td title="12" style="color: red;">12</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="jmekkatt">
@@ -1354,16 +1344,6 @@
               <td title="13" style="color: red;">13</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/227">OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status                  </a>
-              </td>
-              <td title="DcooperRH">DcooperRH</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3957" target="_blank">OCMUI-3957</a></td>
-              <td title="sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)">zherman0 (approved), sourcery-ai (commented), t-hendricks (approved), shivanthi-amara (approved)</td>
-              <td title="12" style="color: red;">12</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="eliranmal">
@@ -1474,7 +1454,7 @@
         </td>
     </tr><tr class="reviewer-row" data-reviewer="sourcery-ai">
         <td>sourcery-ai</td>
-        <td><span class="pending-count">14</span></td>
+        <td><span class="pending-count">13</span></td>
     </tr>
   
     <tr class="reviewer-row pr-row-table" data-reviewer="sourcery-ai">
@@ -1558,16 +1538,6 @@
               <td title="12" style="color: red;">12</td>
               <td title="1">1/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="true">
-              <td><a title="OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/227">OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status                  </a>
-              </td>
-              <td title="DcooperRH">DcooperRH</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3957" target="_blank">OCMUI-3957</a></td>
-              <td title="sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)">sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)</td>
-              <td title="12" style="color: red;">12</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr><tr class="pr-detail-row" data-status="needs_review" data-pending="true">
               <td><a title="[OCMUI-3854]Migrated all CI tagged cypress test specs to playwright model" class="pr-link" 
                      href="https://github.com/RedHatInsights/uhc-portal/pull/229">[OCMUI-3854]Migrated all CI tagged cypress test specs to playwright model                  </a>
@@ -1724,16 +1694,6 @@
               <td title="13" style="color: red;">13</td>
               <td title="2">2/3</td>
               <td class="needs-review" title="Needs Review">Needs Review</td>
-            </tr><tr class="pr-detail-row" data-status="ready_to_merge" data-pending="false">
-              <td><a title="OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/227">OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status                  </a>
-              </td>
-              <td title="DcooperRH">DcooperRH</td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3957" target="_blank">OCMUI-3957</a></td>
-              <td title="sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)">t-hendricks (approved), sourcery-ai (commented), zherman0 (approved), shivanthi-amara (approved)</td>
-              <td title="12" style="color: red;">12</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
             </tr></table>
         </td>
     </tr><tr class="reviewer-row" data-reviewer="edewit">
@@ -1964,10 +1924,8 @@
     </td><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="t-hendricks" onclick="filterTable('t-hendricks')"> Trevor Hendricks (t-hendricks) <span class="author-badge">1</span></label>
     </td><td style="text-align: left; padding: 2px;">
-        <label><input type="radio" name="authorFilter" value="DcooperRH" onclick="filterTable('DcooperRH')"> Dylan Cooper (DcooperRH) <span class="author-badge">1</span></label>
-    </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="ammont82" onclick="filterTable('ammont82')"> Montse Ortega Gallart (ammont82) <span class="author-badge">1</span></label>
-    </td><td style="text-align: left; padding: 2px;">
+    </td></tr><tr><td style="text-align: left; padding: 2px;">
         <label><input type="radio" name="authorFilter" value="edewit" onclick="filterTable('edewit')"> Erik Jan de Wit (edewit) <span class="author-badge">1</span></label>
     </td></tr></table>
         </div>
@@ -2450,32 +2408,6 @@
               <td class="needs-review" title="Needs Review">Needs Review</td>
             </tr></table>
         </td>
-    </tr><tr class="author-row" data-author="DcooperRH">
-        <td>Dylan Cooper (DcooperRH)</td>
-        <td><span class="pr-count">1</span></td>
-    </tr>
-  
-    <tr class="author-row pr-row-table" data-author="DcooperRH">
-        <td colspan="2">
-            <table class="pr-table author-pr-table">
-                <tr>
-                  <th title="Pull Request">Pull Request</th>
-                  <th title="Jira">Jira</th>
-                  <th title="Reviewers">Reviewers</th>
-                  <th title="# Days Open"># Days Open</th>
-                  <th title="# Approvals"># Approvals</th>
-                  <th title="Status">Status</th>
-                </tr><tr class="pr-detail-row" data-status="ready_to_merge">
-              <td><a title="OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status" class="pr-link" 
-                     href="https://github.com/RedHatInsights/uhc-portal/pull/227">OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status                  </a>
-              </td>
-              <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3957" target="_blank">OCMUI-3957</a></td>
-              <td title="sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)">sourcery-ai (commented), t-hendricks (approved), zherman0 (approved), shivanthi-amara (approved)</td>
-              <td title="12" style="color: red;">12</td>
-              <td title="3">3/3</td>
-              <td class="ready-to-merge" title="Ready to Merge">Ready to Merge</td>
-            </tr></table>
-        </td>
     </tr><tr class="author-row" data-author="ammont82">
         <td>Montse Ortega Gallart (ammont82)</td>
         <td><span class="pr-count">1</span></td>
@@ -2534,7 +2466,7 @@
     <div id="ready-section" class="ready-section-header" style="display: none;">
         <h2>Ready to Merge Pull Requests</h2>
         <div>
-            <span class="ready-count">1</span>
+            <span class="ready-count">0</span>
             <a href="#top" class="back-to-top">Back to top</a>
         </div>
     </div>
@@ -2549,13 +2481,9 @@
             <th>Jira</th>
         </tr>
         <tr>
-            <td><a title="OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status" class="pr-link" 
-                 href="https://github.com/RedHatInsights/uhc-portal/pull/227">OCMUI-3957 - Disable the channel group edit icon when the cluster is in other states other than Ready status</a></td>
-            <td>DcooperRH</td>
-            <td style="color: red;">12</td>
-            <td>3/3</td>
-            <td title="t-hendricks, zherman0, shivanthi-amara">t-hendricks, zherman0, shivanthi-amara</td>
-            <td title="Jira IDs"><a href="https://issues.redhat.com/browse/OCMUI-3957" target="_blank">OCMUI-3957</a></td>
+            <td colspan="6" style="text-align: center; padding: 20px;">
+                No pull requests are currently ready to merge.
+            </td>
         </tr></table>
 </body>
 </html>
